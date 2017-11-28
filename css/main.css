@@ -14,7 +14,6 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   vertical-align: baseline; }
 
@@ -47,5 +46,59 @@ img {
 
 a:hover {
   text-decoration: none; }
+
+/* global styles */
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/SpectralSC-ExtraBold.ttf");
+  font-style: normal;
+  font-weight: normal; }
+body {
+  color: #2F3738;
+  font-family: "Spectral", Helvetica; }
+
+.centered {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+.width-min-content {
+  width: -moz-min-content;
+  width: -webkit-min-content;
+  width: min-content; }
+
+.width-max-content {
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content; }
+
+.inline {
+  display: inline; }
+
+/* header */
+.header, .main {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1600px; }
+
+.header--full-window {
+  height: 100vh;
+  background: #59D8E5; }
+
+.header__title {
+  font-size: 400%;
+  font-size: 10vmin; }
+
+/* ***************** bouncing letters ***************** */
+.bouncing-letters {
+  border-bottom: 2px solid black; }
+
+.bouncing-letter {
+  display: inline;
+  position: relative; }
 
 /*# sourceMappingURL=main.css.map */

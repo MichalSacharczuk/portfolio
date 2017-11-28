@@ -2,3 +2,63 @@
 @import 'standard-variables.scss';
 @import 'mixins.scss';
 
+// global variables:
+$main-color-1: #D5FBFF;
+$main-color-2: #9FBCBF;
+$main-color-3: #647678;
+$main-color-4: #2F3738;
+$main-color-5: #59D8E5;
+$main-font-name: "Spectral";
+
+
+/* global styles */
+@include font-face($main-font-name, 'SpectralSC-ExtraBold', '../fonts');
+
+body{
+	color: $main-color-4;
+	font-family: $main-font-name, Helvetica;
+}
+.centered{
+	position: relative;
+	top: 50%;
+	left: 50%;
+	@include transform(translate(-50%,-50%));
+}
+.width-min-content{
+	@include width-min-content;
+}
+.width-max-content{
+	@include width-max-content;
+}
+.inline{
+	display: inline;
+}
+
+
+
+/* header */
+.header, .main{
+	@include standard-div-width;
+}
+.header--full-window{
+	height: 100vh;
+	background: $main-color-5;
+
+}
+.header__title{
+	font-size: 400%;
+	font-size: 10vmin;
+}
+
+
+/* ***************** bouncing letters ***************** */
+.bouncing-letters{
+	border-bottom: 2px solid black;
+}
+.bouncing-letter{
+	display: inline;
+	position: relative;
+}
+
+
+
