@@ -1,0 +1,95 @@
+﻿@mixin standard-div-width($width: 100%, $maxwidth: 1366px){
+    margin: 0 auto;
+    width: $width;
+    max-width: $maxwidth;
+}
+$justify-content: space-between;
+@mixin display-flex{
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    -webkit-justify-content: $justify-content;
+    -moz-justify-content: $justify-content;
+    -o-justify-content: $justify-content;
+    justify-content: $justify-content;
+}
+@mixin justify-content($value){
+    -webkit-justify-content: $value;
+    -moz-justify-content: $value;
+    -o-justify-content: $value;
+    justify-content: $value;
+}
+@mixin basic-transition($value: all 500ms ease-out){
+    -webkit-transition: $value;
+    -moz-transition: $value;
+    -o-transition: $value;
+    transition: $value;
+}
+@mixin full-transform($value){
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -o-transform: $value;
+    transform: $value;
+}
+@mixin basic-scale($value: scale(1.1)){
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -o-transform: $value;
+    transform: $value;
+}
+@mixin keyframes($keyframeName){
+    @-webkit-keyframes #{$keyframeName} {
+        @content;
+    };
+    @-moz-keyframes #{$keyframeName} {
+        @content;
+    };
+    @-o-keyframes #{$keyframeName} {
+        @content;
+    };
+    @keyframes #{$keyframeName} {
+        @content;
+    };
+}
+@mixin animation($name, $time: 1s, $howmany: 1, $state: forwards){
+    -webkit-animation: $name $time $howmany $state;
+    -moz-animation: $name $time $howmany $state;
+    -o-animation: $name $time $howmany $state;
+    animation: $name $time $howmany $state;
+}
+@mixin removeBordersFromBootstrapNavbarAndAddTransision{
+    .navbar{
+        border: none !important;
+        background-color: white !important;
+        .navbar-collapse{
+            border: none !important;
+        }
+        .navbar-toggle{
+            border: none !important;
+            background-color: white !important;
+        }
+        .icon-bar{
+            @include basic-transition(all 300ms ease-out);
+        }
+        // remember to add toggleClass "open-icon-bar" to button in js file
+        .open-icon-bar{
+            .icon-bar:nth-of-type(1){
+                @include full-transform(rotate(45deg) translate(5px,4px));
+            }
+            .icon-bar:nth-of-type(2){
+                @include full-transform(scale(0));
+            }
+            .icon-bar:nth-of-type(3){
+                @include full-transform(rotate(-45deg) translate(5px,-4px));
+            }
+        }
+    }
+}
+@mixin linearGradient($dir, $from, $to){
+    background: $from; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient($dir, $from , $to); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient($dir, $from, $to); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient($dir, $from, $to); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to $dir, $from , $to); /* Standard syntax */
+}
