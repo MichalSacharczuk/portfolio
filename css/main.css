@@ -44,13 +44,15 @@ img {
   width: 100%;
   height: 100%; }
 
-a:hover {
-  text-decoration: none; }
+a, a:hover, a:visited, a:active {
+  text-decoration: none;
+  color: inherit; }
 
 /* global styles */
 @font-face {
   font-family: "Spectral";
-  src: url("../fonts/SpectralSC-ExtraBold.ttf");
+  src: url("../fonts/SpectralSC-ExtraBold.eot");
+  src: url("../fonts/SpectralSC-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../fonts/SpectralSC-ExtraBold.woff") format("woff"), url("../fonts/SpectralSC-ExtraBold.ttf") format("truetype"), url("../fonts/SpectralSC-ExtraBold.svg#08bb4ba465a902745fc23c83a5d9fdc2") format("svg");
   font-style: normal;
   font-weight: normal; }
 body {
@@ -79,26 +81,84 @@ body {
 .inline {
   display: inline; }
 
+.full-window {
+  height: 100vh; }
+
+.fixed {
+  position: fixed; }
+
 /* header */
 .header, .main {
   margin: 0 auto;
   width: 100%;
-  max-width: 1600px; }
+  max-width: 1600px;
+  position: relative; }
 
 .header--full-window {
   height: 100vh;
-  background: #59D8E5; }
+  background: #2F3738; }
 
 .header__title {
+  color: #D5FBFF;
+  text-shadow: 0 0 1px #59D8E5;
   font-size: 400%;
   font-size: 10vmin; }
 
+.header__title--scrolled {
+  color: #2F3738;
+  font-size: 100%;
+  text-shadow: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  transition: all 300ms ease-out; }
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; }
+
+.nav--default {
+  background: #D5FBFF;
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  transition: all 300ms ease-out; }
+  .nav--default ul {
+    width: -moz-max-content;
+    width: -webkit-max-content;
+    width: max-content;
+    margin: 0 0 auto auto; }
+  .nav--default li {
+    display: inline-block;
+    font-size: 130%;
+    padding: 25px;
+    -webkit-transition: all 300ms ease-out;
+    -moz-transition: all 300ms ease-out;
+    -o-transition: all 300ms ease-out;
+    transition: all 300ms ease-out;
+    cursor: pointer; }
+    .nav--default li:hover {
+      background: #9FBCBF; }
+
+.nav--scrolled {
+  box-shadow: 0 1px 10px black;
+  opacity: 0.8; }
+  .nav--scrolled li {
+    font-size: 100%;
+    padding: 20px; }
+
 /* ***************** bouncing letters ***************** */
 .bouncing-letters {
-  border-bottom: 2px solid black; }
+  opacity: 0; }
 
 .bouncing-letter {
-  display: inline;
+  display: inline-block;
   position: relative; }
 
 /*# sourceMappingURL=main.css.map */

@@ -108,8 +108,14 @@ $justify-content: space-between;
 @mixin font-face($family, $filename, $folder, $style: normal, $weight: normal){
 	@font-face{
 		font-family: $family;
-		src:url('#{$folder}/#{$filename}.ttf');
+		src: url('#{$folder}/#{$filename}.eot'); // IE9 compat
+		src: url('#{$folder}/#{$filename}.eot?#iefix') format("embedded-opentype"), // IE8 and below
+			url('#{$folder}/#{$filename}.woff') format("woff"), // standards
+			url('#{$folder}/#{$filename}.ttf') format("truetype"), // Safari, Android, iOS
+			url('#{$folder}/#{$filename}.svg#08bb4ba465a902745fc23c83a5d9fdc2') format("svg"); // legacy iOS
+
 		font-style: $style;
 		font-weight: $weight;
 	}
 }
+

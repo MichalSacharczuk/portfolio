@@ -9,6 +9,9 @@ $main-color-3: #647678;
 $main-color-4: #2F3738;
 $main-color-5: #59D8E5;
 $main-font-name: "Spectral";
+$scrolled-nav-font-size: 100%;
+$scrolled-nav-padding: 20px;
+$standard-transition: all 300ms ease-out;
 
 
 /* global styles */
@@ -33,30 +36,82 @@ body{
 .inline{
 	display: inline;
 }
+.full-window{
+	height: 100vh;
+}
+.fixed{
+	position: fixed;
+}
 
 
 
 /* header */
 .header, .main{
 	@include standard-div-width;
+	position: relative;
 }
 .header--full-window{
 	height: 100vh;
-	background: $main-color-5;
-
+	background: $main-color-4;
 }
 .header__title{
+	color: $main-color-1;
+	text-shadow: 0 0 1px $main-color-5;
 	font-size: 400%;
 	font-size: 10vmin;
+	// @include transition(top 300ms ease-out);
+}
+.header__title--scrolled{
+	color: $main-color-4;
+	font-size: $scrolled-nav-font-size;
+	text-shadow: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: $scrolled-nav-padding;
+	@include transition($standard-transition);
+}
+.nav{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.nav--default{
+	background: $main-color-1;
+	@include transition($standard-transition);
+	ul{
+		@include width-max-content;
+		margin: 0 0 auto auto;
+	}
+	li{
+		display: inline-block;
+		font-size: 130%;
+		padding: 25px;
+		@include transition($standard-transition);
+		cursor: pointer;
+		&:hover{
+			background: $main-color-2;
+		}
+	}
+}
+.nav--scrolled{
+	box-shadow: 0 1px 10px black;
+	opacity: 0.8;
+	li{
+		font-size: $scrolled-nav-font-size;
+		padding: $scrolled-nav-padding;
+	}
 }
 
 
 /* ***************** bouncing letters ***************** */
 .bouncing-letters{
-	border-bottom: 2px solid black;
+	// border-bottom: 2px solid black;
+	opacity: 0;
 }
 .bouncing-letter{
-	display: inline;
+	display: inline-block;
 	position: relative;
 }
 
