@@ -66,12 +66,12 @@ function attachLiClickToAClick(){
 
 function decreaseNavOnScroll(){
 	let headerTitle = document.querySelector('.header__title');
-	let headerTitleTop = headerTitle.getBoundingClientRect().y + headerTitle.clientHeight * 0.5;
+	let headerTitleTop = window.innerHeight / 2;
 
 	function toggleNavClasses(){
 		let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-		let windowMiddleHeight = window.innerHeight / 3;
-		if (document.body.scrollTop > windowMiddleHeight || document.documentElement.scrollTop > windowMiddleHeight){
+		let windowScrollTopToMoveTitleToNav = window.innerHeight / 3;
+		if (scrollTop > windowScrollTopToMoveTitleToNav){
 			document.querySelector('nav.nav--default').classList.add('nav--scrolled');
 			document.querySelector('.header__title').classList.add('header__title--scrolled');
 			document.querySelector('.header__title').classList.remove('centered');
@@ -90,6 +90,11 @@ function decreaseNavOnScroll(){
 	document.addEventListener('scroll', () => {
 		toggleNavClasses();
 	});
+
+	addEventListener('resize', () => {
+		headerTitleTop = window.innerHeight / 2;
+		toggleNavClasses();
+	});
 }
 
 
@@ -104,3 +109,11 @@ window.onload = () => {
 
 
 }
+
+// **************************************************************************************************
+// **************************************************************************************************
+
+// ZROBIĆ FUNKCJE ZARZĄDZAJĄCE CSSAMI W JEDNEJ DUŻEJ FUNKCJI I UŻYĆ JEJ W "window.resize"
+
+// **************************************************************************************************
+// **************************************************************************************************
