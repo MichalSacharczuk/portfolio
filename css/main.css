@@ -155,7 +155,8 @@ body {
 
 /* ***************** bouncing letters ***************** */
 .bouncing-letters {
-  opacity: 0; }
+  opacity: 0;
+  cursor: default; }
 
 .bouncing-letter {
   display: inline-block;

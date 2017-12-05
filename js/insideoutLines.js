@@ -1,23 +1,42 @@
 function insideout() {
 	var insideoutLines = document.getElementById('insideoutLines');
-	insideoutLines.width = insideoutLines.parentElement.clientWidth;
-	insideoutLines.height = insideoutLines.parentElement.clientHeight;
-	// insideoutLines.style.background = "linear-gradient(to bottom, #020210, #114)";
-	// insideoutLines.style.background = "linear-gradient(to bottom, #000, #050515)";
-	var canvasWidth = insideoutLines.width;
-	var canvasHeight = insideoutLines.height;
-	var x0 = canvasWidth / 2;
-	var y0 = canvasHeight / 2;
 
-	var c = insideoutLines.getContext('2d');
+	var canvasWidth;
+	var canvasHeight;
+	var x0;
+	var y0;
 
-	var t = 0;
+	var c;
 
-	var mouse = {angle1: 0, angle2: 0, angleChange: 0, spinFactor: 0};
-	var mouseX = [];
-	var mouseY = [];
-	var totalSpinFactor = 0;
-	var currentSpin = 0;
+	var t;
+
+	var mouse;
+	var mouseX;
+	var mouseY;
+	var totalSpinFactor;
+	var currentSpin;
+
+	function initGlobalVariables(){
+		insideoutLines.width = insideoutLines.parentElement.clientWidth;
+		insideoutLines.height = insideoutLines.parentElement.clientHeight;
+
+		canvasWidth = insideoutLines.width;
+		canvasHeight = insideoutLines.height;
+		x0 = canvasWidth / 2;
+		y0 = canvasHeight / 2;
+
+		c = insideoutLines.getContext('2d');
+
+		t = 0;
+
+		mouse = {angle1: 0, angle2: 0, angleChange: 0, spinFactor: 0};
+		mouseX = [];
+		mouseY = [];
+		totalSpinFactor = 0;
+		currentSpin = 0;
+	}
+
+	initGlobalVariables();
 
 	function sign(x){
 		if (x > 0) return 1;
@@ -53,18 +72,18 @@ function insideout() {
 			mouseX = [];
 			mouseY = [];
 
-			// totalSpinFactor += mouse.spinFactor * 0.01;
-			totalSpinFactor += mouse.spinFactor * 0.005;
+			totalSpinFactor += mouse.spinFactor * 0.01;
+			// totalSpinFactor += mouse.spinFactor * 0.005;
 		}
 	});
 
-	function logSpinData(){
-		// console.log("angle 1: " + mouse.angle1);
-		// console.log("angle 2: " + mouse.angle2);
-		// console.log("angle change: " + mouse.angleChange);
-		console.log("spin: " + mouse.spinFactor);
-		// console.log("");
-	}
+	// function logSpinData(){
+	// 	// console.log("angle 1: " + mouse.angle1);
+	// 	// console.log("angle 2: " + mouse.angle2);
+	// 	// console.log("angle change: " + mouse.angleChange);
+	// 	console.log("spin: " + mouse.spinFactor);
+	// 	// console.log("");
+	// }
 
 
 	function Circle(x, y, radius){
@@ -92,9 +111,6 @@ function insideout() {
 		];
 		this.ballColor = colors[getRandomInt(0, 3)];
 
-		// var dx = .05 * Math.cos(this.startAngle);
-		// var dy = .05 * Math.sin(this.startAngle);
-
 		var r = Math.pow((Math.pow((x - x0),2) + Math.pow((y - y0),2)), .5);
 		var dx = .05 * x / r;
 		var dy = .05 * y / r;
@@ -106,21 +122,18 @@ function insideout() {
 		this.lastXYwasSet = false;
 		this.spinFactor = 0;
 
-		// var noDrawRadius = Math.pow(canvasWidth * canvasHeight * 0.0001, 0.5)
 		this.draw = function(){
-			// if(Math.pow((this.x - x0),2) + Math.pow((this.y - y0),2) > noDrawRadius * noDrawRadius){
-				c.beginPath();
-				c.moveTo(this.lastX, this.lastY);
-				c.lineTo(this.x,this.y);
-				c.lineWidth = this.radius * 2;
-				c.fillStyle = this.ballColor;
-				c.strokeStyle = this.ballColor;
-				c.stroke();
+			c.beginPath();
+			c.moveTo(this.lastX, this.lastY);
+			c.lineTo(this.x,this.y);
+			c.lineWidth = this.radius * 2;
+			c.fillStyle = this.ballColor;
+			c.strokeStyle = this.ballColor;
+			c.stroke();
 
-				// c.arc(this.x,this.y,this.radius,0,2*Math.PI);
-				// c.fillStyle = this.ballColor;
-				// c.fill();
-			// }
+			// c.arc(this.x,this.y,this.radius,0,2*Math.PI);
+			// c.fillStyle = this.ballColor;
+			// c.fill();
 		}
 
 		this.setLastXYifNotSet = function(){
@@ -168,15 +181,13 @@ function insideout() {
 
 			var x0y0distance = Math.pow((Math.pow(this.x - x0, 2) + Math.pow(this.y - y0, 2)),0.5);
 
-			// if (x0y0distance > noDrawRadius * 0.5){
-				dx = .05 * (this.x - x0) / x0y0distance * this.dxdyPower;
-				dy = .05 * (this.y - y0) / x0y0distance * this.dxdyPower;
-				this.dx = dx;
-				this.dy = dy;
+			dx = .05 * (this.x - x0) / x0y0distance * this.dxdyPower;
+			dy = .05 * (this.y - y0) / x0y0distance * this.dxdyPower;
+			this.dx = dx;
+			this.dy = dy;
 
-				this.x = x0y0distance * Math.cos(this.t * this.spinFactor + this.startAngle) + x0;
-				this.y = x0y0distance * Math.sin(this.t * this.spinFactor + this.startAngle) + y0;
-			// }
+			this.x = x0y0distance * Math.cos(this.t * this.spinFactor + this.startAngle) + x0;
+			this.y = x0y0distance * Math.sin(this.t * this.spinFactor + this.startAngle) + y0;
 		}
 	}
 
@@ -185,6 +196,9 @@ function insideout() {
 	function animation() {
 		requestAnimationFrame(animation);
 		
+		if (t == 0)
+			circles = [];
+
 		if (t < 500){
 			var radius = .2;
 			var x = Math.random() * x0 * 2;
@@ -197,10 +211,11 @@ function insideout() {
 		c.fillStyle = 'rgba(47,55,56,.3)';
 		c.fillRect(0,0,canvasWidth,canvasHeight);
 
+		totalSpinFactor -= sign(totalSpinFactor) * 0.00001;
+		totalSpinFactor *= 0.995;
 		currentSpin += (totalSpinFactor - currentSpin) * 0.05;
 
 		for (var i = circles.length - 1; i >= 0; i--) {
-			if (t < 2) console.log(Math.floor(circles[i].x) + " " + Math.floor(circles[i].y));
 			circles[i].rotateAroundTheCenter(t);
 			circles[i].update();
 			// circles[i].changeColor(t);
@@ -212,18 +227,18 @@ function insideout() {
 
 		// if (t % 10 == 0){
 		// 	console.log("total spin: " + totalSpinFactor);
-		// 	console.log("current spin: " + currentSpin);
-		// 	console.log(" ");
+		// 	// console.log("current spin: " + currentSpin);
+		// 	// console.log(" ");
 		// }
 
-		if (t == Infinity) t = 0;
+		if (t == Infinity) 
+			t = 0;
 	}
 	animation();
+
+	addEventListener('resize', () => {
+		initGlobalVariables();
+	});
 }
-
-
-//full screen canvas:
-insideoutLines.width = window.innerWidth;
-insideoutLines.height = window.innerHeight;
 
 insideout();
