@@ -22,8 +22,14 @@ body{
 	font-family: $main-font-name, Helvetica;
 }
 .centered{
-	position: relative;
+	position: absolute;
 	top: 50%;
+	left: 50%;
+	@include transform(translate(-50%,-50%));
+}
+.centered--lower{
+	position: absolute;
+	top: 75%;
 	left: 50%;
 	@include transform(translate(-50%,-50%));
 }
@@ -56,8 +62,8 @@ body{
 }
 .header__title{
 	color: $main-color-1;
-	text-shadow: 0 0 1px $main-color-5;
-	font-size: 400%;
+	// text-shadow: 0 0 1px $main-color-5;
+	font-size: 500%;
 	font-size: 10vmin;
 	// @include transition(top 300ms ease-out);
 }
@@ -69,6 +75,12 @@ body{
 	top: 0;
 	left: 0;
 	padding: $scrolled-nav-padding;
+	@include transition($standard-transition);
+}
+.header__subtitle{
+	color: $main-color-1;
+	font-size: 250%;
+	font-size: 5vmin;
 	@include transition($standard-transition);
 }
 .nav{

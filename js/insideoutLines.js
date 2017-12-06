@@ -58,22 +58,28 @@ function insideout() {
 	}
 
 	addEventListener('mousemove', function(event) {
-		mouseX.push(event.clientX);
-		mouseY.push(event.clientY);
-		if (mouseX.length > 1){
-			mouse.angle1 = getAngleOfXYFromTheCenter(mouseX[0], mouseY[0], x0, y0);
-			mouse.angle2 = getAngleOfXYFromTheCenter(mouseX[1], mouseY[1], x0, y0);
+		// console.log(document.body.scrollTop);
+		// console.log(document.documentElement.scrollTop);
+		// console.log("");
 
-			mouse.angleChange = mouse.angle2 - mouse.angle1;
-			mouse.spinFactor = Math.sin(mouse.angleChange) ;
-			if (Math.abs(mouse.spinFactor) > 0.01) 
-				mouse.spinFactor = 0.01 * sign(mouse.spinFactor);
+		if(document.body.scrollTop == 0 && document.documentElement.scrollTop == 0){
+			mouseX.push(event.clientX);
+			mouseY.push(event.clientY);
+			if (mouseX.length > 1){
+				mouse.angle1 = getAngleOfXYFromTheCenter(mouseX[0], mouseY[0], x0, y0);
+				mouse.angle2 = getAngleOfXYFromTheCenter(mouseX[1], mouseY[1], x0, y0);
 
-			mouseX = [];
-			mouseY = [];
+				mouse.angleChange = mouse.angle2 - mouse.angle1;
+				mouse.spinFactor = Math.sin(mouse.angleChange) ;
+				if (Math.abs(mouse.spinFactor) > 0.01) 
+					mouse.spinFactor = 0.01 * sign(mouse.spinFactor);
 
-			totalSpinFactor += mouse.spinFactor * 0.01;
-			// totalSpinFactor += mouse.spinFactor * 0.005;
+				mouseX = [];
+				mouseY = [];
+
+				totalSpinFactor += mouse.spinFactor * 0.01;
+				// totalSpinFactor += mouse.spinFactor * 0.005;
+			}
 		}
 	});
 
