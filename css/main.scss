@@ -12,6 +12,7 @@ $main-font-name: "Spectral";
 $scrolled-nav-font-size: 100%;
 $scrolled-nav-padding: 20px;
 $standard-transition: all 300ms ease-out;
+$slow-transition: all 1000ms ease-in;
 
 
 /* global styles */
@@ -48,7 +49,12 @@ body{
 .fixed{
 	position: fixed;
 }
-
+.text-bulge{
+	text-shadow: 3px 3px 0px #000, -1px -1px 0px #aaa;
+}
+.opacity0{
+	opacity: 0;
+}
 
 
 /* header */
@@ -62,10 +68,8 @@ body{
 }
 .header__title{
 	color: $main-color-1;
-	// text-shadow: 0 0 1px $main-color-5;
 	font-size: 500%;
 	font-size: 10vmin;
-	// @include transition(top 300ms ease-out);
 }
 .header__title--scrolled{
 	color: $main-color-4;
@@ -76,15 +80,17 @@ body{
 	left: 0;
 	padding: $scrolled-nav-padding;
 	@include transition($standard-transition);
+	z-index: 1;
 }
 .header__subtitle{
 	color: $main-color-1;
 	font-size: 250%;
 	font-size: 5vmin;
-	@include transition($standard-transition);
+	@include transition($slow-transition);
 }
 .nav{
 	position: fixed;
+	z-index: 1;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -128,5 +134,17 @@ body{
 	position: relative;
 }
 
-
+/* ***************** perspective-text-shadow ***************** */
+.perspective-text-shadow{
+	position: relative;
+}
+@for $i from 1 through 6 {
+	.perspective-text-shadow__shadow#{$i}{
+		position: absolute;
+		// color: #0f1f21;
+		color: black;
+		transform: scaleX(1 - $i * 0.005) translateY(- $i * 1px);
+		z-index: -1;
+	}
+}
 

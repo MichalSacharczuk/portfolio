@@ -17,11 +17,6 @@ function startJumpingLetters() {
 		}
 	}
 
-	// perspective shadow effect:
-	headerTitleBouncingLetters = document.querySelectorAll('.header__title .bouncing-letter');
-	decreaseNavOnScroll();
-	//
-
 	// const startHfactor = 2;
 	let bouncingLetters = document.getElementsByClassName('bouncing-letter');
 	for (let blId = 0; blId < bouncingLetters.length; blId++) {
@@ -52,6 +47,9 @@ function startJumpingLetters() {
 			else{
 				clearInterval(makeLettersBounce);
 				// console.log("END");
+
+				// launch header__subtitle:
+				document.querySelector('.opacity0').style.opacity = 1;
 			}
 			element.h += element.dh;
 			element.style.bottom = element.h + 'px';
@@ -81,20 +79,12 @@ function decreaseNavOnScroll(){
 			document.querySelector('.header__title').classList.add('header__title--scrolled');
 			document.querySelector('.header__title').classList.remove('centered');
 			headerTitle.style.top = 0 + 'px';
-
-			// perspective shadow effect:
-			if (headerTitleBouncingLetters)
-				removePerspectiveText(headerTitleBouncingLetters);
 		}
 		else{
 			document.querySelector('nav.nav--default').classList.remove('nav--scrolled');
 			document.querySelector('.header__title').classList.remove('header__title--scrolled');
 			document.querySelector('.header__title').classList.add('centered');
 			headerTitle.style.top = headerTitleTop - scrollTop + 'px';
-			
-			// perspective shadow effect:
-			if (headerTitleBouncingLetters)
-				makePerspectiveText(headerTitleBouncingLetters, 8, '#0f1f21'); //#647678 //#0f1f21 //#0e1213
 		}
 	}
 
@@ -113,36 +103,10 @@ function decreaseNavOnScroll(){
 	});
 }
 
-function makePerspectiveText(lettersArray,maxShadowFactor,shadowColor){
-	let length = lettersArray.length;
-	let middleOfLength = (length - 1) / 2;
-	let shadowFactorMultiplier = maxShadowFactor / middleOfLength;
-	for (var i = 0; i < lettersArray.length; i++) {
-		let letter = lettersArray[i];
-		let currentShadowFactor = Math.floor((middleOfLength - i) * shadowFactorMultiplier);
-		let textShadow = "";
-		let lighter = Math.min(0, currentShadowFactor);
-		let greater = Math.max(0, currentShadowFactor);
-		for (let n = lighter; n <= greater; n++) {
-			textShadow += n + "px 0 0 " + shadowColor;
-			if (n < greater)
-				textShadow += ", ";
-		}
-		letter.style.textShadow = textShadow;
-	}
-}
-function removePerspectiveText(lettersArray){
-	for (var i = 0; i < lettersArray.length; i++) {
-		lettersArray[i].style.textShadow = 'none';
-	}
-}
 
 
 // **************************************************************************************************
 
-
-// perspective shadow effect:
-let headerTitleBouncingLetters;
 
 window.onload = () => {
 
