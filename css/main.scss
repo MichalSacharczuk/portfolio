@@ -8,19 +8,24 @@ $main-color-2: #9FBCBF;
 $main-color-3: #647678;
 $main-color-4: #2F3738;
 $main-color-5: #59D8E5;
-$main-font-name: "Spectral";
+$header-font-name: "Spectral";
+$main-font-name: "Lato";
 $scrolled-nav-font-size: 100%;
 $scrolled-nav-padding: 20px;
 $standard-transition: all 300ms ease-out;
-$slow-transition: all 1000ms ease-in;
+$slow-transition: all 1000ms ease-out;
 
 
 /* global styles */
-@include font-face($main-font-name, 'SpectralSC-ExtraBold', '../fonts');
+@include font-face($header-font-name, 'SpectralSC-Regular', '../fonts');
+@include font-face($main-font-name, 'Lato-Regular', '../fonts');
 
 body{
 	color: $main-color-4;
 	font-family: $main-font-name, Helvetica;
+}
+.box-shadow--default{
+	box-shadow: 3px 3px 5px, -3px -3px 3px white;
 }
 .centered{
 	position: absolute;
@@ -34,20 +39,15 @@ body{
 	left: 50%;
 	@include transform(translate(-50%,-50%));
 }
-.width-min-content{
-	@include width-min-content;
+.fixed{
+	position: fixed;
 }
-.width-max-content{
-	@include width-max-content;
+.full-width{
+	width: 100%;
+	max-width: none;
 }
 .inline{
 	display: inline;
-}
-.full-window{
-	height: 100vh;
-}
-.fixed{
-	position: fixed;
 }
 .text-bulge{
 	text-shadow: 3px 3px 0px #000, -1px -1px 0px #aaa;
@@ -55,15 +55,25 @@ body{
 .opacity0{
 	opacity: 0;
 }
+.viewport-height{
+	height: 100vh;
+}
+.width-min-content{
+	@include width-min-content;
+}
+.width-max-content{
+	@include width-max-content;
+}
+
 
 
 /* header */
-.header, .main{
-	@include standard-div-width;
+.header{
+	font-family: $header-font-name, Helvetica;
+	font-weight: bold;
 	position: relative;
 }
-.header--full-window{
-	height: 100vh;
+.header--colored{
 	background: $main-color-4;
 }
 .header__title{
@@ -86,7 +96,7 @@ body{
 	color: $main-color-1;
 	font-size: 250%;
 	font-size: 5vmin;
-	@include transition($slow-transition);
+	@include transition(opacity 1000ms ease-in);
 }
 .nav{
 	position: fixed;
@@ -121,7 +131,59 @@ body{
 		padding: $scrolled-nav-padding;
 	}
 }
+.main{
+	@include standard-div-width;
+	position: relative;
+}
+.section{
+	width: 80%;
+	margin: 0 auto 20px;
+}
+.section__h{
+	font-family: $header-font-name, Helvetica;
+	font-weight: bold;
+	margin-top: -7%;
+    padding: 0 30px 20px 0;
+    font-size: 2.5em;
+    font-size: 5vmin;
+    float: left;
+}
+.section__h-fill{
+	background: $main-color-1;
+	padding: 40px 60px;
+}
+.section__p{
+	// position: absolute;
+	width: 80%;
+	margin: 10% 0 auto auto;
+	padding: 3%;
+	background: $main-color-2;
+	font-size: 1.2em;
+	line-height: 1.5em;
+}
 
+
+/* ******************************************************************************************************************** */
+
+
+/* ***************** animations ***************** */
+@include keyframes(behind-to-front-animation){
+	0%		{transform: translateX(0) rotate(0);
+			 z-index: -1}
+	50%		{transform: translateX(0) rotate(0);
+			 z-index: -1}
+	75%		{transform: translateX(-100%) rotate(90deg);
+			 z-index: 0}
+	100%	{transform: translateX(0) rotate(0);
+			 z-index: 0}
+}
+.behind-to-front{
+	position: relative;
+	z-index: -1;
+}
+.behind-to-front-animation{
+	@include animation(behind-to-front-animation)
+}
 
 /* ***************** bouncing letters ***************** */
 .bouncing-letters{

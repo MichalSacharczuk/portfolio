@@ -1,3 +1,9 @@
+function foreach(array, callback){
+	for (let i = 0; i < array.length; i++) {
+		callback.call(array, array[i], i);
+	}
+}
+
 function startJumpingLetters() {
 	// jumping letters:
 	let bouncingLettersElements = document.getElementsByClassName('bouncing-letters');
@@ -41,7 +47,7 @@ function startJumpingLetters() {
 				// 	element.style.transform = 'scaleY(' + (startHfactor - (scalingH - (element.h + element.dh)) / scalingH * (startHfactor - 1)) + ')';
 				// }
 			}
-			else if (Math.abs(element.dh) > 1e-30){
+			else if (Math.abs(element.dh) > 1e-8){
 				element.dh = -element.dh * damping;
 			}
 			else{
@@ -58,14 +64,6 @@ function startJumpingLetters() {
 	},10);
 }
 
-function attachLiClickToAClick(){
-	var navLi = document.querySelectorAll('nav.nav li')
-	for (var i = navLi.length - 1; i >= 0; i--) {
-		navLi[i].onclick = function() {
-			this.children[0].click();
-		}
-	}
-}
 
 function decreaseNavOnScroll(){
 	let headerTitle = document.querySelector('.header__title');
@@ -104,6 +102,86 @@ function decreaseNavOnScroll(){
 }
 
 
+function addAnimationClass(className) {
+	this.runFunction = (className) => {
+		let argument = className;
+		let elementsArray = document.getElementsByClassName(className);
+		for (var i = elementsArray.length - 1; i >= 0; i--) {
+			let item = elementsArray[i];
+			if (item.getBoundingClientRect().y < window.innerHeight * 0.6){
+				item.classList.add(className + '-animation');
+			}
+		}
+	}
+	this.runFunction(className);
+	document.addEventListener('scroll', () => {this.runFunction(className)});
+}
+
+// function scrollToElement(y, speed){
+// 	let interval = 1;
+// 	let currentY = document.body.scrollTop || document.documentElement.scrollTop;
+// 	let distanceToScroll = y - currentY;
+// 			console.log(currentY);
+// 			console.log(distanceToScroll);
+// 	let dy = distanceToScroll / speed * interval;
+// 	// let iterator = 1;
+
+// 	let startTime = new Date().getTime();
+// 			console.log(startTime);
+
+// 	let scroll = setInterval( () => {
+// 		// if (iterator >= speed / interval)
+// 		currentY = document.body.scrollTop || document.documentElement.scrollTop;
+// 		distanceToScroll = y - currentY;
+// 		if (Math.abs(distanceToScroll) < 2){
+// 			clearInterval(scroll);
+// 			let endTime = new Date().getTime();
+// 			console.log(endTime);
+// 			console.log(endTime - startTime);
+// 			console.log("");
+// 		}
+// 		window.scrollBy(0, dy);
+// 		// iterator++;
+// 	} ,interval);
+// }
+function scrollToElement(y, speed){
+	let currentY = document.body.scrollTop || document.documentElement.scrollTop;
+	let distanceToScroll = y - currentY;
+	let interval = Math.max(10, Math.round(speed / Math.abs(distanceToScroll)));
+	let dy = distanceToScroll / speed * interval;
+	dy = Math.round(distanceToScroll / speed * interval);
+// console.log("interval: " + speed / Math.abs(distanceToScroll));
+// console.log("interval max: " + interval);
+// console.log("dy: " + dy);
+// console.log("rounded dy: " + dy);
+	let startTime = new Date().getTime();
+
+	let scroll = setInterval( () => {
+		currentY = document.body.scrollTop || document.documentElement.scrollTop;
+		//console.log(currentY);
+		distanceToScroll = y - currentY;
+		if (Math.abs(distanceToScroll) <= Math.abs(dy / 2)){
+			clearInterval(scroll);
+			let endTime = new Date().getTime();
+						
+			// console.log("y: " + currentY);
+			// console.log("time: " + (endTime - startTime));
+			// console.log("");
+		}
+		window.scrollBy(0, dy);
+	} ,interval);
+}
+
+function navigateByAnimation(speed) {
+	foreach(document.querySelectorAll('.nav li'), (item) => {
+		item.addEventListener('click', () => {
+			let href = item.getAttribute('href');
+			let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+			let destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().y + scrollTop);
+			scrollToElement(destinationElementY - 90, speed);
+		});
+	});
+}
 
 // **************************************************************************************************
 
@@ -112,9 +190,11 @@ window.onload = () => {
 
 	setTimeout(startJumpingLetters, 500);
 
-	attachLiClickToAClick();
-
 	decreaseNavOnScroll();
+
+	addAnimationClass('behind-to-front');
+
+	navigateByAnimation(300);
 
 }
 
