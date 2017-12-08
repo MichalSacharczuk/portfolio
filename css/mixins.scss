@@ -1,4 +1,43 @@
-﻿@mixin standard-div-width($width: 100%, $maxwidth: 1600px){
+﻿// media queries:
+@mixin media-md{
+	@media (max-width: 1199px){
+		@content;
+	}
+}
+@mixin media-sm{
+	@media (max-width: 991px){
+		@content;
+	}
+}
+@mixin media-xs{
+	@media screen and (max-width: 767px){
+		@content;
+	}
+}
+@mixin media-xxs{
+	@media screen and (max-width: 459px){
+		@content;
+	}
+}
+@mixin font-size($size: 14px){
+	font-size: $size;
+	$base-font-size: 10px;
+	@include media-md{
+		font-size: $base-font-size + ($size - $base-font-size) * 0.8;
+	}
+	@include media-sm{
+		font-size: $base-font-size + ($size - $base-font-size) * 0.65;
+	}
+	@include media-xs{
+		font-size: $base-font-size + ($size - $base-font-size) * 0.5;
+	}
+	@include media-xxs{
+		font-size: $base-font-size + ($size - $base-font-size) * 0.3;
+	}
+}
+
+
+@mixin standard-div-width($width: 100%, $maxwidth: 1600px){
 	margin: 0 auto;
 	width: $width;
 	max-width: $maxwidth;

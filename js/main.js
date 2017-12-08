@@ -5,47 +5,40 @@ function foreach(array, callback){
 }
 
 function startJumpingLetters() {
-	// jumping letters:
-	let bouncingLettersElements = document.getElementsByClassName('bouncing-letters');
-	for (let blId = 0; blId < bouncingLettersElements.length; blId++) {
-		bouncingLettersElements[blId].style.opacity = 1;
-		let element = bouncingLettersElements[blId];
-		let letters = element.innerHTML.split("");
+
+	// let textContents = [];
+	foreach(document.getElementsByClassName('bouncing-letters'), (element) => {
+		element.style.opacity = 1;
+		// textContents.push(element.textContent);
+		let letters = element.textContent.split("");
 		element.innerHTML = "";
 		// console.log(letters);
-		for (var i = 0; i < letters.length; i++) {
+		for (i in letters){
 			if (letters[i] == " "){
-				letters[i] = '_';
-				element.innerHTML += '<div class="bouncing-letter" style="opacity: 0;">' + letters[i] + '</div>';
+				letters[i] = '&nbsp;';
+				element.innerHTML += '<div class="bouncing-letter bouncing-letter--space">' + letters[i] + '</div>';
 			} 
-			else 
+			else
 				element.innerHTML += '<div class="bouncing-letter">' + letters[i] + '</div>';
 		}
-	}
+	});
 
-	// const startHfactor = 2;
-	let bouncingLetters = document.getElementsByClassName('bouncing-letter');
-	for (let blId = 0; blId < bouncingLetters.length; blId++) {
-		let element = bouncingLetters[blId];
+	foreach(document.getElementsByClassName('bouncing-letter'), (element) => {
 		element.style.bottom = Math.random() * 100 + window.innerHeight / 2 + 'px';
 		element.dh = 0;
 		element.h = Number(element.style.bottom.split('px')[0]);
-		// element.style.transform = 'scaleY(' + startHfactor + ')';
-	}
-		
+		// console.log(element.h);
+	});
+
 	let t = 0;
 	const a = -0.2;
 	const damping = .4;
 	const scalingH = 150;
 	let makeLettersBounce = setInterval(function(){
-		for (let blId = 0; blId < bouncingLetters.length; blId++) {
-			let element = bouncingLetters[blId];
+		foreach(document.getElementsByClassName('bouncing-letter'), (element) => {
 			// console.log(element.dh);
 			if (element.h + element.dh > 0){
 				element.dh += a;
-				// if (element.h + element.dh > 1 && element.h + element.dh < scalingH){
-				// 	element.style.transform = 'scaleY(' + (startHfactor - (scalingH - (element.h + element.dh)) / scalingH * (startHfactor - 1)) + ')';
-				// }
 			}
 			else if (Math.abs(element.dh) > 1e-8){
 				element.dh = -element.dh * damping;
@@ -54,16 +47,26 @@ function startJumpingLetters() {
 				clearInterval(makeLettersBounce);
 				// console.log("END");
 
-				// launch header__subtitle:
-				document.querySelector('.opacity0').style.opacity = 1;
+				// restoreTextContextWithoutSeparatedDivs();
+				launchHeaderSubtitle();
 			}
 			element.h += element.dh;
 			element.style.bottom = element.h + 'px';
-		}
+		});
 		t++;
 	},10);
+
+	// function restoreTextContextWithoutSeparatedDivs(){
+	// 	foreach(document.getElementsByClassName('bouncing-letters'), (element, i) => {
+	// 		element.innerHTML = textContents[i];
+	// 	});
+	// 	textContents = [];
+	// }
 }
 
+function launchHeaderSubtitle(){
+	document.querySelector('.opacity0').style.opacity = 1;
+}
 
 function decreaseNavOnScroll(){
 	let headerTitle = document.querySelector('.header__title');
@@ -108,7 +111,7 @@ function addAnimationClass(className) {
 		let elementsArray = document.getElementsByClassName(className);
 		for (var i = elementsArray.length - 1; i >= 0; i--) {
 			let item = elementsArray[i];
-			if (item.getBoundingClientRect().y < window.innerHeight * 0.6){
+			if (item.getBoundingClientRect().y < window.innerHeight * 0.7){
 				item.classList.add(className + '-animation');
 			}
 		}
@@ -117,33 +120,6 @@ function addAnimationClass(className) {
 	document.addEventListener('scroll', () => {this.runFunction(className)});
 }
 
-// function scrollToElement(y, speed){
-// 	let interval = 1;
-// 	let currentY = document.body.scrollTop || document.documentElement.scrollTop;
-// 	let distanceToScroll = y - currentY;
-// 			console.log(currentY);
-// 			console.log(distanceToScroll);
-// 	let dy = distanceToScroll / speed * interval;
-// 	// let iterator = 1;
-
-// 	let startTime = new Date().getTime();
-// 			console.log(startTime);
-
-// 	let scroll = setInterval( () => {
-// 		// if (iterator >= speed / interval)
-// 		currentY = document.body.scrollTop || document.documentElement.scrollTop;
-// 		distanceToScroll = y - currentY;
-// 		if (Math.abs(distanceToScroll) < 2){
-// 			clearInterval(scroll);
-// 			let endTime = new Date().getTime();
-// 			console.log(endTime);
-// 			console.log(endTime - startTime);
-// 			console.log("");
-// 		}
-// 		window.scrollBy(0, dy);
-// 		// iterator++;
-// 	} ,interval);
-// }
 function scrollToElement(y, speed){
 	let currentY = document.body.scrollTop || document.documentElement.scrollTop;
 	let distanceToScroll = y - currentY;
@@ -202,6 +178,17 @@ window.onload = () => {
 // **************************************************************************************************
 
 // ZROBIĆ FUNKCJE ZARZĄDZAJĄCE CSSAMI W JEDNEJ DUŻEJ FUNKCJI I UŻYĆ JEJ W "window.resize"
+
+// **************************************************************************************************
+// **************************************************************************************************
+
+
+
+
+// **************************************************************************************************
+// **************************************************************************************************
+
+// ZROBIĆ FUNKCJE OBROTU CANVASA NA SMARTFONY (mousemove z clickiem)
 
 // **************************************************************************************************
 // **************************************************************************************************
