@@ -25,7 +25,13 @@ body{
 	font-family: $main-font-name, Helvetica;
 }
 .box-shadow--default{
-	box-shadow: 3px 3px 5px, -3px -3px 3px white;
+	box-shadow: 3px 3px 5px rgba(0,0,0,0.6);
+}
+.box-shadow--emboss{
+	box-shadow: 3px 3px 5px rgba(0,0,0,0.5), -3px -3px 2px rgba(255, 255, 255, 0.5);
+}
+.box-shadow--cover{
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), -1px -1px 3px rgba(0,0,0, 0.6),  -2px -2px 2px rgba(255, 255, 255, 0.8)
 }
 .centered{
 	position: absolute;
@@ -80,7 +86,6 @@ body{
 .header__title{
 	color: $main-color-1;
 	@include font-size(80px);
-	// font-size: 10vw;
 }
 .header__title--scrolled{
 	color: $main-color-4;
@@ -96,7 +101,6 @@ body{
 .header__subtitle{
 	color: $main-color-1;
 	@include font-size(40px);
-	// font-size: 5vw;
 	@include transition(opacity 1000ms ease-in);
 }
 .nav{
@@ -138,7 +142,10 @@ body{
 }
 .section{
 	width: 80%;
-	margin: 0 auto 20px;
+	margin: 0 auto 15%;
+	&:last-of-type{
+		margin-bottom: 40px;
+	}
 }
 .section__h{
 	font-family: $header-font-name, Helvetica;
@@ -146,8 +153,11 @@ body{
 	margin-top: -7%;
     padding: 0 30px 20px 0;
 	@include font-size(40px);
-    // font-size: 5vw;
     float: left;
+}
+.section__h--reversed{
+    padding: 0 0 20px 30px;
+    float: right;
 }
 .section__h-fill{
 	background: $main-color-1;
@@ -157,7 +167,6 @@ body{
 	}
 }
 .section__p{
-	// position: absolute;
 	width: 80%;
 	margin: 10% 0 auto auto;
 	padding: 3%;
@@ -165,13 +174,15 @@ body{
 	line-height: 1.5em;
 	@include font-size(17px);
 }
-
+.section__p--reversed{
+	margin: 10% auto auto 0;
+}
 
 /* ******************************************************************************************************************** */
 
 
 /* ***************** animations ***************** */
-@include keyframes(behind-to-front-animation){
+@include keyframes(behind-to-front-left-animation){
 	0%		{transform: translateX(0) rotate(0);
 			 z-index: -1}
 	50%		{transform: translateX(0) rotate(0);
@@ -181,13 +192,27 @@ body{
 	100%	{transform: translateX(0) rotate(0);
 			 z-index: 0}
 }
+@include keyframes(behind-to-front-right-animation){
+	0%		{transform: translateX(0) rotate(0);
+			 z-index: -1}
+	50%		{transform: translateX(0) rotate(0);
+			 z-index: -1}
+	75%		{transform: translateX(100%) rotate(-90deg);
+			 z-index: 0}
+	100%	{transform: translateX(0) rotate(0);
+			 z-index: 0}
+}
 .behind-to-front{
 	position: relative;
 	z-index: -1;
 }
-.behind-to-front-animation{
-	@include animation(behind-to-front-animation)
+$sides: left right;
+@each $side in $sides{
+	.behind-to-front--#{$side}-animation{
+		@include animation(behind-to-front-#{$side}-animation)
+	}
 }
+
 
 /* ***************** bouncing letters ***************** */
 .bouncing-letters{

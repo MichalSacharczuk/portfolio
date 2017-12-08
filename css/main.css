@@ -66,7 +66,13 @@ body {
   font-family: "Lato", Helvetica; }
 
 .box-shadow--default {
-  box-shadow: 3px 3px 5px, -3px -3px 3px white; }
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6); }
+
+.box-shadow--emboss {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), -3px -3px 2px rgba(255, 255, 255, 0.5); }
+
+.box-shadow--cover {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), -1px -1px 3px rgba(0, 0, 0, 0.6), -2px -2px 2px rgba(255, 255, 255, 0.8); }
 
 .centered {
   position: absolute;
@@ -256,7 +262,9 @@ body {
 
 .section {
   width: 80%;
-  margin: 0 auto 20px; }
+  margin: 0 auto 15%; }
+  .section:last-of-type {
+    margin-bottom: 40px; }
 
 .section__h {
   font-family: "Spectral", Helvetica;
@@ -277,6 +285,10 @@ body {
   @media screen and (max-width: 459px) {
     .section__h {
       font-size: 19px; } }
+
+.section__h--reversed {
+  padding: 0 0 20px 30px;
+  float: right; }
 
 .section__h-fill {
   background: #D5FBFF;
@@ -305,9 +317,12 @@ body {
     .section__p {
       font-size: 12.1px; } }
 
+.section__p--reversed {
+  margin: 10% auto auto 0; }
+
 /* ******************************************************************************************************************** */
 /* ***************** animations ***************** */
-@-webkit-keyframes behind-to-front-animation {
+@-webkit-keyframes behind-to-front-left-animation {
   0% {
     transform: translateX(0) rotate(0);
     z-index: -1; }
@@ -320,7 +335,7 @@ body {
   100% {
     transform: translateX(0) rotate(0);
     z-index: 0; } }
-@-moz-keyframes behind-to-front-animation {
+@-moz-keyframes behind-to-front-left-animation {
   0% {
     transform: translateX(0) rotate(0);
     z-index: -1; }
@@ -333,7 +348,7 @@ body {
   100% {
     transform: translateX(0) rotate(0);
     z-index: 0; } }
-@-o-keyframes behind-to-front-animation {
+@-o-keyframes behind-to-front-left-animation {
   0% {
     transform: translateX(0) rotate(0);
     z-index: -1; }
@@ -346,7 +361,7 @@ body {
   100% {
     transform: translateX(0) rotate(0);
     z-index: 0; } }
-@keyframes behind-to-front-animation {
+@keyframes behind-to-front-left-animation {
   0% {
     transform: translateX(0) rotate(0);
     z-index: -1; }
@@ -355,6 +370,58 @@ body {
     z-index: -1; }
   75% {
     transform: translateX(-100%) rotate(90deg);
+    z-index: 0; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; } }
+@-webkit-keyframes behind-to-front-right-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
+    z-index: 0; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; } }
+@-moz-keyframes behind-to-front-right-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
+    z-index: 0; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; } }
+@-o-keyframes behind-to-front-right-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
+    z-index: 0; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; } }
+@keyframes behind-to-front-right-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
     z-index: 0; }
   100% {
     transform: translateX(0) rotate(0);
@@ -363,11 +430,17 @@ body {
   position: relative;
   z-index: -1; }
 
-.behind-to-front-animation {
-  -webkit-animation: behind-to-front-animation 1s 1 forwards;
-  -moz-animation: behind-to-front-animation 1s 1 forwards;
-  -o-animation: behind-to-front-animation 1s 1 forwards;
-  animation: behind-to-front-animation 1s 1 forwards; }
+.behind-to-front--left-animation {
+  -webkit-animation: behind-to-front-left-animation 1s 1 forwards;
+  -moz-animation: behind-to-front-left-animation 1s 1 forwards;
+  -o-animation: behind-to-front-left-animation 1s 1 forwards;
+  animation: behind-to-front-left-animation 1s 1 forwards; }
+
+.behind-to-front--right-animation {
+  -webkit-animation: behind-to-front-right-animation 1s 1 forwards;
+  -moz-animation: behind-to-front-right-animation 1s 1 forwards;
+  -o-animation: behind-to-front-right-animation 1s 1 forwards;
+  animation: behind-to-front-right-animation 1s 1 forwards; }
 
 /* ***************** bouncing letters ***************** */
 .bouncing-letters {

@@ -130,21 +130,24 @@ function scrollToElement(y, speed){
 // console.log("interval max: " + interval);
 // console.log("dy: " + dy);
 // console.log("rounded dy: " + dy);
-	let startTime = new Date().getTime();
-
+	// let startTime = new Date().getTime();
+	
+	let previousY = currentY + 1; // just different from currentY
 	let scroll = setInterval( () => {
-		currentY = document.body.scrollTop || document.documentElement.scrollTop;
-		//console.log(currentY);
 		distanceToScroll = y - currentY;
-		if (Math.abs(distanceToScroll) <= Math.abs(dy / 2)){
+		if (Math.abs(distanceToScroll) <= Math.abs(dy / 2) || previousY == currentY){
 			clearInterval(scroll);
-			let endTime = new Date().getTime();
-						
+
+			// let endTime = new Date().getTime();
 			// console.log("y: " + currentY);
 			// console.log("time: " + (endTime - startTime));
-			// console.log("");
+			console.log("");
 		}
+		previousY = currentY;
+		// console.log('prev: ',previousY);
 		window.scrollBy(0, dy);
+		currentY = document.body.scrollTop || document.documentElement.scrollTop;
+		// console.log('curr: ',currentY);
 	} ,interval);
 }
 
@@ -168,7 +171,8 @@ window.onload = () => {
 
 	decreaseNavOnScroll();
 
-	addAnimationClass('behind-to-front');
+	addAnimationClass('behind-to-front--left');
+	addAnimationClass('behind-to-front--right');
 
 	navigateByAnimation(300);
 
