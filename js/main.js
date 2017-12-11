@@ -76,13 +76,23 @@ function decreaseNavOnScroll(){
 		let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 		let windowScrollTopToMoveTitleToNav = window.innerHeight / 3;
 		if (scrollTop > windowScrollTopToMoveTitleToNav){
-			document.querySelector('nav.nav--default').classList.add('nav--scrolled');
+			foreach(document.querySelectorAll('.nav--default'), (item) => {
+				item.classList.add('nav--scrolled');
+			});
+			// foreach(document.querySelectorAll('.nav'), (item) => {
+			// 	item.classList.add('nav--shadow');
+			// });
 			document.querySelector('.header__title').classList.add('header__title--scrolled');
 			document.querySelector('.header__title').classList.remove('centered');
 			headerTitle.style.top = 0 + 'px';
 		}
 		else{
-			document.querySelector('nav.nav--default').classList.remove('nav--scrolled');
+			foreach(document.querySelectorAll('.nav--default'), (item) => {
+				item.classList.remove('nav--scrolled');
+			});
+			// foreach(document.querySelectorAll('.nav'), (item) => {
+			// 	item.classList.remove('nav--shadow');
+			// });
 			document.querySelector('.header__title').classList.remove('header__title--scrolled');
 			document.querySelector('.header__title').classList.add('centered');
 			headerTitle.style.top = headerTitleTop - scrollTop + 'px';
@@ -162,6 +172,19 @@ function navigateByAnimation(speed) {
 	});
 }
 
+function setClassViewportHeight(){
+	foreach(document.querySelectorAll('.viewport-height'), (item) => {
+		item.style.height = window.innerHeight + "px";
+	});
+}
+addEventListener('resize', setClassViewportHeight);
+
+function attachCloseEnvelope(){
+	document.querySelector('.form__button').onclick = () => {
+		document.querySelector('#envelope-top').style.transform = 'rotateX(180deg)';
+	}
+}
+
 // **************************************************************************************************
 
 
@@ -175,6 +198,10 @@ window.onload = () => {
 	addAnimationClass('behind-to-front--right');
 
 	navigateByAnimation(300);
+
+	setClassViewportHeight();
+
+	attachCloseEnvelope();
 
 }
 

@@ -22,8 +22,8 @@
 	<link href="css/main.css" rel="stylesheet">
 </head>
 
-<body>
-<header class="header header--colored viewport-height">
+<body class="overflow-x-hidden">
+<header class="header header--colored viewport-height box-shadow-bottom">
 	<canvas id="insideoutLines">Your browser do not support Canvas</canvas>
 	<nav class="nav nav--default">
 		<ul>
@@ -45,9 +45,19 @@
 	</h2>
 </header>
 <main class="main">
+	<nav class="nav nav--left viewport-height">
+		<ul class="centered-vertically">
+			<li><img src="img/mail.png" alt="e-mail"></li>
+			<li><img src="img/GitHub-Mark-120px-plus.png" alt="github"></li>
+			<li><img src="img/In-Black-128px-R.png" alt="linkedIn"></li>
+			<li><img src="img/cv-smooth.png" alt="CV"></li>
+		</ul>
+	</nav>
 	<section class="section">
-		<h1 id="o-mnie" class="section__h behind-to-front behind-to-front--left"><div class="section__h-fill box-shadow--default">O mnie</div></h1>
-		<p class="section__p box-shadow--cover">
+		<h1 id="o-mnie" class="section__h behind-to-front behind-to-front--left">
+			<div class="section__h-fill box-3d-dark">O mnie</div>
+		</h1>
+		<p class="section__p box-3d-dark">
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -57,7 +67,9 @@
 		</p>
 	</section>
 	<section class="section">
-		<h1 id="umiejetnosci" class="section__h section__h--reversed behind-to-front behind-to-front--right"><div class="section__h-fill box-shadow--default">Umiejętności</div></h1>
+		<h1 id="umiejetnosci" class="section__h section__h--reversed behind-to-front behind-to-front--right">
+			<div class="section__h-fill box-shadow--default">Umiejętności</div>
+		</h1>
 		<p class="section__p section__p--reversed box-shadow--cover">
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -67,8 +79,59 @@
 			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		</p>
 	</section>
+	<section class="section">
+		<h1 id="projekty" class="section__h behind-to-front behind-to-front--left">
+			<div class="section__h-fill box-3d-dark">Projekty</div>
+		</h1>
+		<p class="section__p box-3d-dark">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+	</section>
 </main>
+<footer class="footer">
+	<div class="standard-content">
+		<h1 id="projekty" class="heading text-centered">Kontakt</h1>
+		
+		<div class="envelope">
+			<img id="envelope-top" src="img/mail-top-light.png">
+			<img src="img/mail-open-light.png">
+		</div>
 
+		<!-- <form id="my-form" class="form form--left" action="/ajx/submit/msg" method="POST"> -->
+		<form id="my-form" class="form form--left" action="" method="POST">
+			<!-- <div class="form-group"> -->
+			<label class="form__label" for="input-name">Imię i Nazwisko</label>
+			<input type="text" class="form__input" id="input-name" placeholder="Twoje imię i nazwisko" required>
+			<!-- </div> -->
+
+			<!-- <div class="form-group"> -->
+			<label class="form__label" for="input-email">Email</label>
+			<input type="email" class="form__input" id="input-email" placeholder="Adres e-mail" required>
+			<!-- </div>		 -->
+
+			<!-- <div class="form-group"> -->
+			<label class="form__label" for="input-message">Wiadomość</label><br>
+			<textarea class="form__textarea" id="input-message" placeholder="Tutaj napisz swoją wiadomość ..." required></textarea>
+			<!-- </div> -->
+			
+			<!-- <div class="form-group"> -->
+<!-- 			<input type="checkbox" id="dataprocessing" name="dataprocessing" required="">
+			<small>
+				Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z ustawą o ochronie danych osobowych w związku z realizacją niniejszego zamówienia na bezpłatną prezentację Wirtualnej Gazetki Szkolnej. Podanie danych jest dobrowolne, ale niezbędne do przetworzenia zapytania. Zostałem /am poinformowany /a, że przysługuje mi prawo dostępu do swoich danych, możliwości ich poprawiania, żądania zaprzestania ich przetwarzania. Administratorem danych osobowych jest ODN Rewers sp. z o.o. z siedzibą ul. Szafarnia 11/F8; 80-755 Gdańsk.
+			</small> -->
+			<!-- </div> -->
+			<div class="centered-horizontally">
+				<button type="submit" class="form__button">Wyślij</button>
+			</div>
+		</form>
+	</div>
+
+</footer>
 
 
 <script src="js/main.js" type="text/javascript"></script>

@@ -46,12 +46,25 @@ body{
 	left: 50%;
 	@include transform(translate(-50%,-50%));
 }
+.centered-vertically{
+	position: absolute;
+	top: 50%;
+	@include transform(translate(0,-50%));
+}
+.centered-horizontally{
+	@include width-max-content;
+	margin: 0 auto;
+}
 .fixed{
 	position: fixed;
 }
 .full-width{
 	width: 100%;
 	max-width: none;
+}
+.heading{
+	font-family: $header-font-name, Helvetica;
+	@include font-size(30px);
 }
 .inline{
 	display: inline;
@@ -61,6 +74,58 @@ body{
 }
 .opacity0{
 	opacity: 0;
+}
+.overflow-x-hidden{
+	overflow-x: hidden;
+}
+
+
+.text-3d-light{
+	@include text-3d-light;
+}
+.text-3d-light-color{
+	$color: $main-color-1;
+	color: $color;
+	@include text-3d-light($color, 1);
+}
+.text-3d-dark{
+	@include text-3d-dark;
+}
+.text-3d-dark-color{
+	$color: $main-color-4;
+	color: $color;
+	@include text-3d-dark($color, 1);
+}
+.box-3d-light{
+	@include box-3d-light(white, 1, 1);
+}
+.box-3d-light--left{
+	@include box-3d-light(white, 1, -1);
+}
+.box-3d-light-color{
+	@include box-3d-light($main-color-1, 1, 1);
+}
+.box-3d-dark{
+	@include box-3d-dark(black, 0.5, 1);
+}
+.box-3d-dark--left{
+	@include box-3d-dark(black, 1, -1);
+}
+.box-3d-dark-color{
+	@include box-3d-dark($main-color-4, 1, 1);
+}
+.box-shadow-bottom{
+	box-shadow: 0 1px 7px 5px $main-color-4;
+}
+
+
+.standard-content{
+	width: 80%;
+	margin: 0 auto;
+	padding: 3% 0;
+}
+.text-centered{
+	text-align: center;
 }
 .viewport-height{
 	height: 100vh;
@@ -104,13 +169,14 @@ body{
 	@include transition(opacity 1000ms ease-in);
 }
 .nav{
+	font-family: $header-font-name, Helvetica;
 	position: fixed;
 	z-index: 1;
 	top: 0;
 	left: 0;
-	width: 100%;
 }
 .nav--default{
+	width: 100%;
 	background: $main-color-1;
 	@include transition($standard-transition);
 	ul{
@@ -128,8 +194,45 @@ body{
 		}
 	}
 }
+.nav--left{
+	// z-index: 0;
+	width: 5%;
+	min-width: 30px;
+	// color: $main-color-1;
+	text-align: center;
+	@include transition($standard-transition);
+	ul{
+		background: $main-color-1;
+		opacity: 0.8;
+		box-shadow: 3px 3px 3px rgba(0,0,0,0.4);
+	}
+	li{
+		margin: -1px 0;
+		padding: 25px 15px;
+		@include transition($standard-transition);
+		cursor: pointer;
+		&:hover{
+			background: $main-color-2;
+		}
+		@include media-xs{
+			padding: 25px 5px;
+		}
+	}
+}
+// .nav--bottom{
+// 	top: auto;
+// 	bottom: 0;
+// 	width: 100%;
+// 	ul{
+// 		top: 0;
+// 		transform: none;
+// 	}
+// 	li{
+// 		display: inline-block;
+// 	}
+// }
 .nav--scrolled{
-	box-shadow: 0 1px 10px black;
+	box-shadow: 0px 3px 3px rgba(0,0,0,0.4);
 	opacity: 0.8;
 	li{
 		@include font-size($scrolled-nav-font-size);
@@ -151,13 +254,13 @@ body{
 	font-family: $header-font-name, Helvetica;
 	font-weight: bold;
 	margin-top: -7%;
-    padding: 0 30px 20px 0;
-	@include font-size(40px);
-    float: left;
+	padding: 0 30px 20px 0;
+	@include font-size(30px);
+	float: left;
 }
 .section__h--reversed{
-    padding: 0 0 20px 30px;
-    float: right;
+	padding: 0 0 20px 30px;
+	float: right;
 }
 .section__h-fill{
 	background: $main-color-1;
@@ -176,6 +279,67 @@ body{
 }
 .section__p--reversed{
 	margin: 10% auto auto 0;
+}
+.footer{
+	width: 100%;
+	background: $main-color-4;
+	color: $main-color-1;
+}
+.form{
+	font-family: $main-font-name, Helvetica;
+	margin: 30px 0;
+	@include media-xs{
+		margin: 30px auto;
+	}
+}
+.form--left{
+	width: 40%;
+	min-width: 250px;
+	// min-width: min-content;
+}
+.form__input, .form__textarea{
+	$margin-left: 30px;
+	font-family: $main-font-name, Helvetica;
+	padding: 8px;
+	width: calc(100% - #{$margin-left} * 2);
+	min-width: 200px;
+	margin: 8px 0 12px $margin-left;
+	border-radius: 3px;
+	border: none;
+	display: block;
+	@include media-xs{
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+.form__label{
+	@include font-size(16px);
+}
+.form__button{
+	padding: 10px 14px;
+	margin: 0 auto;
+	background: $main-color-1;
+	color: $main-color-4;
+	border: none;
+	border-radius: 3px;
+	font-weight: bold;
+	font-size: 16px;
+	cursor: pointer;
+	&:hover{
+		background: $main-color-2;
+	}
+	&:active{
+		background: $main-color-3;
+	}
+}
+.envelope{
+	float: right;
+	width: 20%;
+	margin: 0 20% 0 0;
+}
+#envelope-top{
+	transform-origin: 0 100%;
+	@include transition;
 }
 
 /* ******************************************************************************************************************** */

@@ -36,6 +36,68 @@
 	}
 }
 
+@mixin text-3d-light($color: #fff, $size: 1, $left: 0){
+	text-shadow:
+		1px * $left * $size 1px * $size 0 darken($color, 20%),
+		2px * $left * $size 2px * $size 0 darken($color, 21.2%),
+		3px * $left * $size 3px * $size 0 darken($color, 26.7%),
+		4px * $left * $size 4px * $size 0 darken($color, 27.5%),
+		5px * $left * $size 5px * $size 0 darken($color, 33.3%),
+		6px * $left * $size 6px * $size 1px * $size rgba(0,0,0,.1),
+		0 0 5px * $size rgba(0,0,0,.1), 
+		1px * $left * $size 1px * $size 3px * $size rgba(0,0,0,.3),
+		3px * $left * $size 3px * $size 5px * $size rgba(0,0,0,.2), 
+		5px * $left * $size 5px * $size 10px * $size rgba(0,0,0,.25),
+		10px * $left * $size 10px * $size 10px * $size rgba(0,0,0,.2), 
+		20px * $left * $size 20px * $size 20px * $size rgba(0,0,0,.15);
+}
+// dark trochę słabo wygląda
+@mixin text-3d-dark($color: #000, $size: 1, $left: 0){
+	text-shadow:
+		1px * $left * $size 1px * $size 0 lighten($color, 30%),
+		2px * $left * $size 2px * $size 0 lighten($color, 35%),
+		3px * $left * $size 3px * $size 0 lighten($color, 40%),
+		4px * $left * $size 4px * $size 0 lighten($color, 45%),
+		5px * $left * $size 5px * $size 0 lighten($color, 50%),
+		6px * $left * $size 6px * $size 1px * $size rgba(0,0,0,.1),
+		0 0 5px * $size rgba(0,0,0,.1), 
+		1px * $left * $size 1px * $size 3px * $size rgba(0,0,0,.3),
+		3px * $left * $size 3px * $size 5px * $size rgba(0,0,0,.2), 
+		5px * $left * $size 5px * $size 10px * $size rgba(0,0,0,.25),
+		10px * $left * $size 10px * $size 10px * $size rgba(0,0,0,.2), 
+		20px * $left * $size 20px * $size 20px * $size rgba(0,0,0,.15);
+}
+@mixin box-3d-light($color: #fff, $size: 1, $left: 0){
+	box-shadow:
+		1px * $left * $size 1px * $size 0 darken($color, 20%),
+		2px * $left * $size 2px * $size 0 darken($color, 21.2%),
+		3px * $left * $size 3px * $size 0 darken($color, 26.7%),
+		4px * $left * $size 4px * $size 0 darken($color, 27.5%),
+		5px * $left * $size 5px * $size 0 darken($color, 33.3%),
+		6px * $left * $size 6px * $size 1px * $size rgba(0,0,0,.1),
+		0 0 5px * $size rgba(0,0,0,.1), 
+		1px * $left * $size 1px * $size 3px * $size rgba(0,0,0,.3),
+		3px * $left * $size 3px * $size 5px * $size rgba(0,0,0,.2), 
+		5px * $left * $size 5px * $size 10px * $size rgba(0,0,0,.25),
+		10px * $left * $size 10px * $size 10px * $size rgba(0,0,0,.2), 
+		20px * $left * $size 20px * $size 20px * $size rgba(0,0,0,.15);
+}
+// dark trochę słabo wygląda
+@mixin box-3d-dark($color: #000, $size: 1, $left: 0){
+	box-shadow:
+		1px * $left * $size 1px * $size 0 lighten($color, 30%),
+		2px * $left * $size 2px * $size 0 lighten($color, 32%),
+		3px * $left * $size 3px * $size 0 lighten($color, 35%),
+		4px * $left * $size 4px * $size 0 lighten($color, 37%),
+		5px * $left * $size 5px * $size 0 lighten($color, 40%),
+		6px * $left * $size 6px * $size 1px * $size rgba(0,0,0,.1),
+		0 0 5px * $size rgba(0,0,0,.1), 
+		1px * $left * $size 1px * $size 3px * $size rgba(0,0,0,.3),
+		3px * $left * $size 3px * $size 5px * $size rgba(0,0,0,.2), 
+		5px * $left * $size 5px * $size 10px * $size rgba(0,0,0,.25),
+		10px * $left * $size 10px * $size 10px * $size rgba(0,0,0,.2), 
+		20px * $left * $size 20px * $size 20px * $size rgba(0,0,0,.15);
+}
 
 @mixin standard-div-width($width: 100%, $maxwidth: 1600px){
 	margin: 0 auto;
