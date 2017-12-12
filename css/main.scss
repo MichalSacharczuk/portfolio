@@ -24,6 +24,15 @@ body{
 	color: $main-color-4;
 	font-family: $main-font-name, Helvetica;
 }
+.big-letter{
+	position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 50px;
+    transform: translate(-25%, -25%);
+    opacity: 0.9;
+    color: #39f;
+}
 .box-shadow--default{
 	box-shadow: 3px 3px 5px rgba(0,0,0,0.6);
 }
@@ -32,6 +41,9 @@ body{
 }
 .box-shadow--cover{
 	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), -1px -1px 3px rgba(0,0,0, 0.6),  -2px -2px 2px rgba(255, 255, 255, 0.8)
+}
+.box-shadow--top{
+	box-shadow: 0 -3px 6px 2px $main-color-4;
 }
 .centered{
 	position: absolute;
@@ -55,6 +67,41 @@ body{
 	@include width-max-content;
 	margin: 0 auto;
 }
+.text-bigger{
+	font-size: 1.2em;
+}
+.text-bold{
+	font-weight: bold;
+}
+.text-color-1{
+	color: $main-color-1;
+}
+.text-color-2{
+	color: $main-color-2;
+}
+.text-color-3{
+	color: $main-color-3;
+}
+.text-color-4{
+	color: $main-color-4;
+}
+.text-color-5{
+	color: $main-color-5;
+}
+.text-italic{
+	font-style: italic;
+}
+.text-uppercase{
+	text-transform: uppercase;
+}
+.first-letter-color::first-letter{
+	color: $main-color-5;
+}
+.first-letter-big-color::first-letter{
+	font-size: 200%;
+	color: $main-color-5;
+	vertical-align: sub;
+}
 .fixed{
 	position: fixed;
 }
@@ -63,14 +110,16 @@ body{
 	max-width: none;
 }
 .heading{
+	position: relative;
 	font-family: $header-font-name, Helvetica;
+	font-weight: bold;
 	@include font-size(30px);
 }
 .inline{
 	display: inline;
 }
 .text-bulge{
-	text-shadow: 3px 3px 0px #000, -1px -1px 0px #aaa;
+	text-shadow: 3px 3px 0px rgba(0,0,0,0.8), -1px -1px 0px rgba(255,255,255,0.8);
 }
 .opacity0{
 	opacity: 0;
@@ -136,7 +185,10 @@ body{
 .width-max-content{
 	@include width-max-content;
 }
-
+.z-index-1{
+	position: relative;
+	z-index: 1;
+}
 
 
 /* header */
@@ -161,7 +213,13 @@ body{
 	left: 0;
 	padding: $scrolled-nav-padding;
 	@include transition($standard-transition);
-	z-index: 1;
+	z-index: 10;
+	*{
+		cursor: pointer;
+	}
+	.bouncing-letter{
+		color: $main-color-4;
+	}
 }
 .header__subtitle{
 	color: $main-color-1;
@@ -190,7 +248,7 @@ body{
 		@include transition($standard-transition);
 		cursor: pointer;
 		&:hover{
-			background: $main-color-2;
+			background: $main-color-5;
 		}
 	}
 }
@@ -212,7 +270,7 @@ body{
 		@include transition($standard-transition);
 		cursor: pointer;
 		&:hover{
-			background: $main-color-2;
+			background: $main-color-5;
 		}
 		@include media-xs{
 			padding: 25px 5px;
@@ -269,7 +327,7 @@ body{
 		padding: 20px 40px;
 	}
 }
-.section__p{
+.section__content{
 	width: 80%;
 	margin: 10% 0 auto auto;
 	padding: 3%;
@@ -277,8 +335,20 @@ body{
 	line-height: 1.5em;
 	@include font-size(17px);
 }
-.section__p--reversed{
+.section__content--reversed{
 	margin: 10% auto auto 0;
+}
+.content__p{
+	padding: 0.4em 0 0.6em 0;
+}
+.content__p--heading{
+	font-size: 1.3em;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+.content__p--answer{
+	font-size: 1.3em;
+	// font-style: italic;
 }
 .footer{
 	width: 100%;
@@ -303,7 +373,7 @@ body{
 	padding: 8px;
 	width: calc(100% - #{$margin-left} * 2);
 	min-width: 200px;
-	margin: 8px 0 12px $margin-left;
+	margin: 8px 0 20px $margin-left;
 	border-radius: 3px;
 	border: none;
 	display: block;
@@ -335,11 +405,16 @@ body{
 .envelope{
 	float: right;
 	width: 20%;
-	margin: 0 20% 0 0;
+	margin: 0 20% 5px 0;
 }
 #envelope-top{
+	width: 96%;
+	margin: 0 2%;
 	transform-origin: 0 100%;
 	@include transition;
+}
+.closedEnvelope{
+	@include transform(rotateX(180deg));
 }
 
 /* ******************************************************************************************************************** */

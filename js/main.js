@@ -1,3 +1,11 @@
+let colors = [
+	"#D5FBFF",
+	"#9FBCBF",
+	"#647678",
+	"#2F3738",
+	"#59D8E5"
+];
+
 function foreach(array, callback){
 	for (let i = 0; i < array.length; i++) {
 		callback.call(array, array[i], i);
@@ -13,13 +21,24 @@ function startJumpingLetters() {
 		let letters = element.textContent.split("");
 		element.innerHTML = "";
 		// console.log(letters);
+		let lastLetterWasSpace = 0;
 		for (i in letters){
-			if (letters[i] == " "){
+			if (i == 0){
+				element.innerHTML += '<div class="bouncing-letter bouncing-letter--space text-color-5">' + letters[i] + '</div>';
+			}
+			else if (letters[i] == " "){
 				letters[i] = '&nbsp;';
 				element.innerHTML += '<div class="bouncing-letter bouncing-letter--space">' + letters[i] + '</div>';
+				lastLetterWasSpace = 1;
 			} 
-			else
-				element.innerHTML += '<div class="bouncing-letter">' + letters[i] + '</div>';
+			else{
+				if (lastLetterWasSpace == 1){
+					element.innerHTML += '<div class="bouncing-letter text-color-5">' + letters[i] + '</div>';
+					lastLetterWasSpace = 0;
+				}
+				else 
+					element.innerHTML += '<div class="bouncing-letter">' + letters[i] + '</div>';
+			}
 		}
 	});
 
@@ -162,7 +181,7 @@ function scrollToElement(y, speed){
 }
 
 function navigateByAnimation(speed) {
-	foreach(document.querySelectorAll('.nav li'), (item) => {
+	foreach(document.querySelectorAll('.href'), (item) => {
 		item.addEventListener('click', () => {
 			let href = item.getAttribute('href');
 			let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
@@ -179,11 +198,11 @@ function setClassViewportHeight(){
 }
 addEventListener('resize', setClassViewportHeight);
 
-function attachCloseEnvelope(){
-	document.querySelector('.form__button').onclick = () => {
-		document.querySelector('#envelope-top').style.transform = 'rotateX(180deg)';
-	}
-}
+// function attachCloseEnvelope(){
+// 	document.querySelector('.form__button').onclick = () => {
+// 		document.querySelector('#envelope-top').classList.add('closedEnvelope');
+// 	}
+// }
 
 // **************************************************************************************************
 
@@ -201,7 +220,7 @@ window.onload = () => {
 
 	setClassViewportHeight();
 
-	attachCloseEnvelope();
+	// attachCloseEnvelope();
 
 }
 
