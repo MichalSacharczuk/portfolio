@@ -348,6 +348,7 @@ body {
     display: inline-block;
     font-size: 20.8px;
     padding: 25px;
+    margin: 0 -2px;
     -webkit-transition: all 300ms ease-out;
     -moz-transition: all 300ms ease-out;
     -o-transition: all 300ms ease-out;
@@ -514,11 +515,15 @@ body {
   margin: 8px 0 20px 30px;
   border-radius: 3px;
   border: none;
+  border: 1px solid #9FBCBF;
   display: block; }
   @media screen and (max-width: 767px) {
     .form__input, .form__textarea {
       margin-left: auto;
       margin-right: auto; } }
+
+.form__textarea {
+  line-height: 1.5em; }
 
 .form__label {
   font-size: 16px; }
@@ -550,6 +555,12 @@ body {
   .form__button:active {
     background: #647678; }
 
+.form__button--disabled {
+  background: #ddd !important;
+  background: #647678 !important;
+  pointer-events: none;
+  cursor: not-allowed !important; }
+
 .envelope {
   float: right;
   width: 20%;
@@ -564,11 +575,55 @@ body {
   -o-transition: all 500ms ease-out;
   transition: all 500ms ease-out; }
 
-.closedEnvelope {
+.closed-envelope {
   -webkit-transform: rotateX(180deg);
   -moz-transform: rotateX(180deg);
   -o-transform: rotateX(180deg);
   transform: rotateX(180deg); }
+
+.thrown-envelope {
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+  -webkit-transform: scale(0) translate(50vw, 10vh);
+  -moz-transform: scale(0) translate(50vw, 10vh);
+  -o-transform: scale(0) translate(50vw, 10vh);
+  transform: scale(0) translate(50vw, 10vh); }
+
+#envelope-info {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 22px; }
+  @media (max-width: 1199px) {
+    #envelope-info {
+      font-size: 19.6px; } }
+  @media (max-width: 991px) {
+    #envelope-info {
+      font-size: 17.8px; } }
+  @media screen and (max-width: 767px) {
+    #envelope-info {
+      font-size: 16px; } }
+  @media screen and (max-width: 459px) {
+    #envelope-info {
+      font-size: 13.6px; } }
+
+.form-input-warning {
+  margin-left: 30px;
+  font-size: 14px;
+  color: #f97254; }
+  @media (max-width: 1199px) {
+    .form-input-warning {
+      font-size: 13.2px; } }
+  @media (max-width: 991px) {
+    .form-input-warning {
+      font-size: 12.6px; } }
+  @media screen and (max-width: 767px) {
+    .form-input-warning {
+      font-size: 12px; } }
+  @media screen and (max-width: 459px) {
+    .form-input-warning {
+      font-size: 11.2px; } }
 
 /* ******************************************************************************************************************** */
 /* ***************** animations ***************** */

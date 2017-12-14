@@ -65,12 +65,12 @@
 		<!-- <p class="section__p box-3d-dark"> -->
 		<div class="section__content box-shadow--default">
 			<p class="content__p content__p--heading">Przepis na <span class="text-color-1">sukces zawodowy</span>?</p>
-			<p class="content__p content__p--answer">Prawie każdy odpowie: ciężka praca i poświęcenie.</p>
+			<p class="content__p content__p--answer">Prawie każdy odpowie: &quot;ciężka praca i poświęcenie&quot;.</p>
 			<p class="content__p">Niestety, większość osób kojarzy to negatywnie - <span class="text-italic">obowiązki, ciągłe zmuszanie się i motywowanie, przymus.</span></p> 
 			<p class="content__p">Jednak praktynie każdy aspekt pracy może stać się pozytywem, kiedy spełni się pierwszy i najważniejszy warunek - <span class="text-uppercase text-bigger text-color-1">przyjemność</span> z jej wykonywania.</p>
 			<p class="content__p">Według mnie to właśnie <span class="text-color-1">przyjemność i radość z pracy</span> prowadzi do sukcesów zawodowych, dlatego cieszę się, że ten warunek jest w moim przypadku spełniony.</p>
 			<p class="content__p">Z ambicją i wielkim zacięciem uczę się nowych tajników kodowania, a także rozszerzam już posiadane umiejętności i wykorzystuję je w kolejnych projektach.</p>
-			<p class="content__p">Wierzę, że chciałbyś mieć takiego <span class="text-bold">pracownika</span> i liczę na to, że będziemy mogli <span class="text-bold">współpracować</span>, przynosząc sobie nawzajem jak najwięcej korzyści..<br>Interesuje mnie praca jak i staż z możliwością późniejszego zatrudnienia na stałe.</p>
+			<p class="content__p">Wierzę, że chciałbyś mieć takiego <span class="text-bold">pracownika</span> i liczę na to, że będziemy mogli <span class="text-bold">współpracować</span>, przynosząc sobie nawzajem jak najwięcej korzyści.<br>Interesuje mnie praca jak i staż z możliwością późniejszego zatrudnienia na stałe.</p>
 		</div>
 	</section>
 	<section class="section">
@@ -110,19 +110,22 @@
 		<h1 id="kontakt" class="heading text-centered first-letter-big-color">Kontakt</h1>
 		
 		<div class="envelope">
-			<img id="envelope-top" src="img/mail-top.png">
-			<img src="img/mail-open.png">
+			<div id="envelope-imgs">
+				<img id="envelope-top" src="img/mail-top.png">
+				<img src="img/mail-open.png">
+			</div>
+			<p id="envelope-info"></p>
 		</div>
 
 		<form id="my-form" class="form form--left" action="contact-form-handler.php" method="POST">
-			<label class="form__label" for="input-name">Imię i Nazwisko</label>
-			<input type="text" class="form__input" id="input-name" placeholder="Twoje imię i nazwisko" required>
+			<!-- <label class="form__label" for="input-name">Imię i Nazwisko</label> -->
+			<input type="text" class="form__input" id="input-name" name="input-name" placeholder="Imię i nazwisko" required>
 
-			<label class="form__label" for="input-email">Email</label>
-			<input type="email" class="form__input" id="input-email" placeholder="Adres e-mail" required>
+			<!-- <label class="form__label" for="input-email">Email</label> -->
+			<input type="email" class="form__input" id="input-email" name="input-email" placeholder="E-mail" required>
 
-			<label class="form__label" for="input-message">Wiadomość</label>
-			<textarea class="form__textarea" id="input-message" placeholder="Tutaj napisz swoją wiadomość ..." required></textarea>
+			<!-- <label class="form__label" for="input-message">Wiadomość</label> -->
+			<textarea class="form__textarea" id="input-message" name="input-message" placeholder="Treść wiadomości ..." rows="6" required></textarea>
 
 			<div class="centered-horizontally">
 				<button type="submit" class="form__button">Wyślij</button>
@@ -135,6 +138,6 @@
 
 <script src="js/main.js" type="text/javascript"></script>
 <script src="js/insideoutLines.js" type="text/javascript"></script>
-<script src="js/formValidation.js" type="text/javascript"></script>
+<script src="js/validateForm.js" type="text/javascript"></script>
 </body>
 </html>

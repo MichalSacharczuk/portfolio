@@ -1,0 +1,7 @@
+{
+    "name": "suchy/php-mailer",
+    "require": {
+        "phpmailer/phpmailer": "^6.0",
+        "html2text/html2text": "^4.1"
+    }
+}
