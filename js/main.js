@@ -6,6 +6,44 @@ let colors = [
 	"#59D8E5"
 ];
 
+
+function chechIfMailIsSent(){
+	if (sessionStorage.mailSent == "true"){
+		window.scrollTo(0, document.querySelector('#kontakt').getBoundingClientRect().y - 90);
+		
+		setTimeout(() => {
+			let mailInfo;
+			if(sessionStorage.mailSuccess == "true"){
+				document.querySelector('#envelope-top').classList.add('closed-envelope');
+				mailInfo = '<span style="color:#2d4">Wiadomość wysłana pomyślnie!</span>';
+				setTimeout(() => {
+					document.querySelector('#envelope-imgs').classList.add('thrown-envelope');
+				},500);
+			}
+			else mailInfo = '<span style="color:#d42">Nie udało się wysłać wiadomości</span>';
+
+			document.querySelector('#envelope-info').innerHTML = mailInfo;
+			setTimeout(() => {
+				document.querySelector('#envelope-info').innerHTML = '';
+			},3000);
+		},500);
+
+		sessionStorage.mailSent = false;
+	}
+}
+
+function disableClickedFormButton(){
+	foreach(document.querySelectorAll('.form__button'), (item) => { // bez sensu dla wszystkich form butonów, jesli potem validate (myForm)
+		item.addEventListener('click', () => {
+			if(validateForm('my-form', true)){
+				item.classList.add('form__button--disabled');
+				// item.setAttributeNode(document.createAttribute("disabled"));
+			}
+		});
+	});
+}
+
+
 function foreach(array, callback){
 	for (let i = 0; i < array.length; i++) {
 		callback.call(array, array[i], i);
@@ -65,8 +103,6 @@ function startJumpingLetters() {
 			else{
 				clearInterval(makeLettersBounce);
 				// console.log("END");
-
-				// restoreTextContextWithoutSeparatedDivs();
 				launchHeaderSubtitle();
 			}
 			element.h += element.dh;
@@ -74,13 +110,6 @@ function startJumpingLetters() {
 		});
 		t++;
 	},10);
-
-	// function restoreTextContextWithoutSeparatedDivs(){
-	// 	foreach(document.getElementsByClassName('bouncing-letters'), (element, i) => {
-	// 		element.innerHTML = textContents[i];
-	// 	});
-	// 	textContents = [];
-	// }
 }
 
 function launchHeaderSubtitle(){
@@ -198,16 +227,14 @@ function setClassViewportHeight(){
 }
 addEventListener('resize', setClassViewportHeight);
 
-// function attachCloseEnvelope(){
-// 	document.querySelector('.form__button').onclick = () => {
-// 		document.querySelector('#envelope-top').classList.add('closedEnvelope');
-// 	}
-// }
+
 
 // **************************************************************************************************
 
 
 window.onload = () => {
+
+	chechIfMailIsSent();
 
 	setTimeout(startJumpingLetters, 500);
 
@@ -220,8 +247,11 @@ window.onload = () => {
 
 	setClassViewportHeight();
 
-	// attachCloseEnvelope();
+	disableClickedFormButton();
 
+	validateForm('my-form', false);
+
+	
 }
 
 // **************************************************************************************************
