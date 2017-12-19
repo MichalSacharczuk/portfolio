@@ -104,11 +104,10 @@
 	width: $width;
 	max-width: $maxwidth;
 }
-$justify-content: space-between;
-@mixin display-flex{
+@mixin display-flex($align-items: unset, $justify-content: space-between){
 	display: -webkit-flex;
 	display: flex;
-	align-items: center;
+	align-items: $align-items;
 	flex-wrap: nowrap;
 	-webkit-justify-content: $justify-content;
 	-moz-justify-content: $justify-content;

@@ -6,43 +6,58 @@ let colors = [
 	"#59D8E5"
 ];
 
+function windowScrollY(){
+	return document.body.scrollTop || document.documentElement.scrollTop;
+}
 
-function chechIfMailIsSent(){
-	if (sessionStorage.mailSent == "true"){
-		window.scrollTo(0, document.querySelector('#kontakt').getBoundingClientRect().y - 90);
-		
+function doMailAnimation(){
+	let sectionContact = document.querySelector('.section--contact');
+	window.scrollTo(0, windowScrollY() + sectionContact.getBoundingClientRect().y + sectionContact.clientHeight)	
+	setTimeout(() => {
+		let mailInfo;
+		if(sessionStorage.mailSuccess == "true"){
+			document.querySelector('#envelope-top').classList.add('closed-envelope');
+			mailInfo = '<span style="color:#2cd538">Wiadomość wysłana pomyślnie!</span>';
+			setTimeout(() => {
+				document.querySelector('#envelope-imgs').classList.add('thrown-envelope');
+				setTimeout(showMailOkBox, 1000);
+			},500);
+		}
+		else mailInfo = '<span style="color:#d42">Nie udało się wysłać wiadomości</span>';
+
 		setTimeout(() => {
-			let mailInfo;
-			if(sessionStorage.mailSuccess == "true"){
-				document.querySelector('#envelope-top').classList.add('closed-envelope');
-				mailInfo = '<span style="color:#2d4">Wiadomość wysłana pomyślnie!</span>';
-				setTimeout(() => {
-					document.querySelector('#envelope-imgs').classList.add('thrown-envelope');
-				},500);
-			}
-			else mailInfo = '<span style="color:#d42">Nie udało się wysłać wiadomości</span>';
-
 			document.querySelector('#envelope-info').innerHTML = mailInfo;
 			setTimeout(() => {
 				document.querySelector('#envelope-info').innerHTML = '';
 			},3000);
-		},500);
+		},800);
+	},500);
+}
 
+function chechIfMailIsSentAndDoMailAnimation(){
+	if (sessionStorage.mailSent == "true"){
+		doMailAnimation();
 		sessionStorage.mailSent = false;
 	}
 }
 
-function disableClickedFormButton(){
-	foreach(document.querySelectorAll('.form__button'), (item) => { // bez sensu dla wszystkich form butonów, jesli potem validate (myForm)
-		item.addEventListener('click', () => {
-			if(validateForm('my-form', true)){
-				item.classList.add('form__button--disabled');
-				// item.setAttributeNode(document.createAttribute("disabled"));
-			}
-		});
+// do testowania:
+// document.querySelector('.centered-vertically li:first-of-type').onclick = doMailAnimation;
+
+function disableClickedFormButtonAndSubmitForm(formId){
+	let item = document.querySelector('#' + formId + ' .form__button');
+	item.addEventListener('click', () => {
+		if(validateForm('my-form', true)){
+			item.classList.add('form__button--disabled');
+			item.setAttributeNode(document.createAttribute("disabled"));
+			document.getElementById(formId).submit();
+		}
 	});
 }
 
+function showMailOkBox(){
+	document.querySelector('.mail-ok-box').classList.add('no-transform');
+}
 
 function foreach(array, callback){
 	for (let i = 0; i < array.length; i++) {
@@ -62,7 +77,7 @@ function startJumpingLetters() {
 		let lastLetterWasSpace = 0;
 		for (i in letters){
 			if (i == 0){
-				element.innerHTML += '<div class="bouncing-letter bouncing-letter--space text-color-5">' + letters[i] + '</div>';
+				element.innerHTML += '<div class="bouncing-letter text-color-5">' + letters[i] + '</div>';
 			}
 			else if (letters[i] == " "){
 				letters[i] = '&nbsp;';
@@ -121,7 +136,7 @@ function decreaseNavOnScroll(){
 	let headerTitleTop = window.innerHeight / 2;
 
 	function toggleNavClasses(){
-		let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+		let scrollTop = windowScrollY();
 		let windowScrollTopToMoveTitleToNav = window.innerHeight / 3;
 		if (scrollTop > windowScrollTopToMoveTitleToNav){
 			foreach(document.querySelectorAll('.nav--default'), (item) => {
@@ -151,7 +166,7 @@ function decreaseNavOnScroll(){
 
 	document.addEventListener('scroll', () => {
 		toggleNavClasses();
-		// console.log(document.body.scrollTop || document.documentElement.scrollTop);
+		// console.log(windowScrollY());
 		// console.log(document.querySelector('body').getBoundingClientRect().y);
 		// console.log("");
 	});
@@ -178,8 +193,8 @@ function addAnimationClass(className) {
 	document.addEventListener('scroll', () => {this.runFunction(className)});
 }
 
-function scrollToElement(y, speed){
-	let currentY = document.body.scrollTop || document.documentElement.scrollTop;
+function scrollToY(y, speed){
+	let currentY = windowScrollY();
 	let distanceToScroll = y - currentY;
 	let interval = Math.max(10, Math.round(speed / Math.abs(distanceToScroll)));
 	let dy = distanceToScroll / speed * interval;
@@ -204,7 +219,7 @@ function scrollToElement(y, speed){
 		previousY = currentY;
 		// console.log('prev: ',previousY);
 		window.scrollBy(0, dy);
-		currentY = document.body.scrollTop || document.documentElement.scrollTop;
+		currentY = windowScrollY();
 		// console.log('curr: ',currentY);
 	} ,interval);
 }
@@ -213,9 +228,8 @@ function navigateByAnimation(speed) {
 	foreach(document.querySelectorAll('.href'), (item) => {
 		item.addEventListener('click', () => {
 			let href = item.getAttribute('href');
-			let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-			let destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().y + scrollTop);
-			scrollToElement(destinationElementY - 90, speed);
+			let destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().y + windowScrollY());
+			scrollToY(destinationElementY - 90, speed);
 		});
 	});
 }
@@ -227,14 +241,38 @@ function setClassViewportHeight(){
 }
 addEventListener('resize', setClassViewportHeight);
 
-
+function toggleNav(){
+	let btn = document.querySelector('.nav__button');
+	btn.addEventListener('click', () => {
+		let parent = btn.parentElement;
+		let ul = parent.querySelector('ul');
+		// console.log(ul);
+		let ulItems = ul.querySelectorAll('li');
+		let ulHeight = 0;
+		foreach(ulItems, (item) => {
+			ulHeight += item.offsetHeight;
+			item.addEventListener('click', () => {
+				ul.style.height = 0;
+				btn.classList.remove('nav__button--unwrapped');
+			});
+		});
+		if (ul.offsetHeight == 0) {
+			ul.style.height = ulHeight;
+			btn.classList.add('nav__button--unwrapped');
+		}
+		else {
+			ul.style.height = 0;
+			btn.classList.remove('nav__button--unwrapped');
+		}
+	});
+}
 
 // **************************************************************************************************
 
 
 window.onload = () => {
 
-	chechIfMailIsSent();
+	chechIfMailIsSentAndDoMailAnimation();
 
 	setTimeout(startJumpingLetters, 500);
 
@@ -247,11 +285,11 @@ window.onload = () => {
 
 	setClassViewportHeight();
 
-	disableClickedFormButton();
+	disableClickedFormButtonAndSubmitForm('my-form');
 
 	validateForm('my-form', false);
 
-	
+	toggleNav();
 }
 
 // **************************************************************************************************

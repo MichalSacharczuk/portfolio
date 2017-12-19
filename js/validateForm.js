@@ -65,8 +65,8 @@ function validateForm(formId, validateNow){
 	let form = document.getElementById(formId);
 	let allFormInputs = [];
 	// console.log(form.getElementsByTagName('*'));
-	let formInputs = form.getElementsByTagName('input');
-	let formTextareas = form.getElementsByTagName('textarea');
+	let formInputs = form.querySelectorAll('input[required]');
+	let formTextareas = form.querySelectorAll('textarea[required]');
 	for (var i = 0; i < formInputs.length; i++) {
 		allFormInputs.push(formInputs[i]);
 	}
