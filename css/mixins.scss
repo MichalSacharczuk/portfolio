@@ -19,20 +19,19 @@
 		@content;
 	}
 }
-@mixin font-size($size: 14px){
+@mixin font-size($size: 14px, $min-size: 12px){
 	font-size: $size;
-	$base-font-size: 10px;
 	@include media-md{
-		font-size: $base-font-size + ($size - $base-font-size) * 0.8;
+		font-size: $min-size + ($size - $min-size) * 0.75;
 	}
 	@include media-sm{
-		font-size: $base-font-size + ($size - $base-font-size) * 0.65;
+		font-size: $min-size + ($size - $min-size) * 0.5;
 	}
 	@include media-xs{
-		font-size: $base-font-size + ($size - $base-font-size) * 0.5;
+		font-size: $min-size + ($size - $min-size) * 0.25;
 	}
 	@include media-xxs{
-		font-size: $base-font-size + ($size - $base-font-size) * 0.3;
+		font-size: $min-size + ($size - $min-size) * 0;
 	}
 }
 

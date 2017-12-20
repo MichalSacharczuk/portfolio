@@ -199,7 +199,11 @@ function insideout() {
 
 	var circles = [];
 
+	let paused = false;
+
 	function animation() {
+		if (paused) return;
+
 		requestAnimationFrame(animation);
 		
 		if (t == 0)
@@ -240,7 +244,37 @@ function insideout() {
 		if (t == Infinity) 
 			t = 0;
 	}
-	animation();
+	// animation();
+	
+	let animationWorking;
+	let animationWasWorking;
+
+	function startStopAnimation() {
+		if (document.body.scrollTop > insideoutLines.height || document.documentElement.scrollTop > insideoutLines.height) {
+			animationWorking = false;
+			if (animationWorking !== animationWasWorking) {
+				paused = true;
+				console.log('stopped');
+				animationWasWorking = animationWorking;
+			}
+		}
+		else {
+			animationWorking = true;
+			if (animationWorking !== animationWasWorking) {
+				paused = false;
+				animation();
+				console.log('working');
+				animationWasWorking = animationWorking;
+			}
+		}
+	}
+
+	startStopAnimation();
+
+	document.addEventListener('scroll', () => {
+		startStopAnimation();
+	});
+
 
 	addEventListener('resize', () => {
 		initGlobalVariables();
