@@ -204,25 +204,46 @@ body {
 
 .heading {
   position: relative;
-  font-family: "Spectral", Helvetica;
-  font-weight: bold;
-  font-size: 30px;
-  margin-bottom: 60px; }
+  font-size: 22px;
+  margin-bottom: 15px; }
   @media (max-width: 1199px) {
     .heading {
-      font-size: 27px; } }
+      font-size: 20.5px; } }
   @media (max-width: 991px) {
     .heading {
-      font-size: 24px; } }
+      font-size: 19px; } }
   @media screen and (max-width: 767px) {
     .heading {
-      font-size: 21px; } }
+      font-size: 17.5px; } }
   @media screen and (max-width: 459px) {
     .heading {
+      font-size: 16px; } }
+
+.heading--main {
+  font-family: "Spectral", Helvetica;
+  font-weight: bold;
+  font-size: 30px; }
+  @media (max-width: 1199px) {
+    .heading--main {
+      font-size: 27px; } }
+  @media (max-width: 991px) {
+    .heading--main {
+      font-size: 24px; } }
+  @media screen and (max-width: 767px) {
+    .heading--main {
+      font-size: 21px; } }
+  @media screen and (max-width: 459px) {
+    .heading--main {
       font-size: 18px; } }
   @media screen and (max-width: 767px) {
-    .heading {
+    .heading--main {
       margin-bottom: 20px; } }
+
+.heading--date {
+  font-weight: bold; }
+
+.heading--additional {
+  font-style: italic; }
 
 .img-container {
   width: 50%;
@@ -232,6 +253,20 @@ body {
 
 .inline {
   display: inline; }
+
+.left-margin-text {
+  margin: 10px 0 10px 50px; }
+
+.list-pointed li {
+  margin: 7px 0;
+  text-indent: -18px; }
+.list-pointed li::before {
+  content: '';
+  border: 5px solid #59D8E5;
+  border-radius: 10px;
+  font-size: 0px;
+  vertical-align: bottom;
+  margin-right: 8px; }
 
 .no-transform {
   -webkit-transform: none !important;
@@ -284,10 +319,10 @@ body {
 .standard-content {
   width: 80%;
   margin: 0 auto;
-  padding: 100px 0; }
+  padding: 50px 0; }
   @media screen and (max-width: 767px) {
     .standard-content {
-      padding: 50px 0 20px; } }
+      padding-bottom: 20px; } }
 
 .text-centered {
   text-align: center; }
@@ -372,6 +407,9 @@ body {
     cursor: pointer; }
   .header__title--scrolled .bouncing-letter {
     color: #2F3738; }
+  .header__title--scrolled:hover {
+    letter-spacing: 1px;
+    left: -6px; }
 
 .header__subtitle {
   color: #D5FBFF;
@@ -445,6 +483,10 @@ body {
         font-size: 14px; } }
     .nav--default li:hover {
       background: #59D8E5; }
+    @media (max-width: 991px) {
+      .nav--default li {
+        padding-left: 10px !important;
+        padding-right: 10px !important; } }
     @media screen and (max-width: 767px) {
       .nav--default li {
         display: block;
@@ -558,7 +600,7 @@ body {
 
 .section {
   width: 80%;
-  margin: 0 auto 15%; }
+  margin: 15% auto 15%; }
 
 .section--last {
   margin-bottom: 40px; }
