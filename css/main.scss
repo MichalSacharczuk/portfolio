@@ -4,10 +4,18 @@
 
 // global variables:
 $main-color-1: #D5FBFF;
-$main-color-2: #9FBCBF; // może lepszy ten: #cbe7ea???
+// $main-color-2: #9FBCBF; // może lepszy ten: #cbe7ea???
+$main-color-2: #cbe7ea; // może lepszy ten: #cbe7ea???
 $main-color-3: #647678;
 $main-color-4: #2F3738;
 $main-color-5: #59D8E5;
+
+// $main-color-1: #2F2D2F;
+// $main-color-2: #BEDBCB;
+// $main-color-3: #94A89D;
+// $main-color-4: #8B7E5B;
+// $main-color-5: #F1EFEA;
+
 $header-font-name: "Spectral";
 $main-font-name: "Lato";
 $scrolled-nav-font-size: 16px;
@@ -25,6 +33,17 @@ body{
 	color: $main-color-4;
 	font-family: $main-font-name, Helvetica;
 }
+.background-body{
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: -1;
+	opacity: 0.4;
+	filter: hue-rotate(-30deg);
+	img{
+		height: 100%;
+	}
+}
 .big-letter{
 	position: absolute;
 	top: 0;
@@ -33,6 +52,14 @@ body{
 	transform: translate(-25%, -25%);
 	opacity: 0.9;
 	color: #39f;
+}
+@include keyframes(pulsing){
+	0% {@include transform(scale(1))}
+	50% {@include transform(scale(1.05))}
+	100% {@include transform(scale(1))}
+}
+.box-pulsing{
+	@include animation(pulsing, 15s, infinite, none);
 }
 .box-3d-light{
 	@include box-3d-light(white, 1, 1);
@@ -74,6 +101,9 @@ body{
 	@include width-max-content;
 	margin: 0 auto;
 }
+.display-inline-block{
+	display: inline-block;
+}
 .display-flex{
 	@include display-flex;
 	flex-flow: row wrap;
@@ -101,6 +131,9 @@ body{
 .fixed{
 	position: fixed;
 }
+.font-l{
+	@include font-size(22px, 16px);
+}
 .full-width{
 	width: 100%;
 	max-width: none;
@@ -123,6 +156,10 @@ body{
 }
 .heading--additional{
 	font-style: italic;
+}
+.heading--font{
+	font-family: $header-font-name, Helvetica;
+	font-weight: bold;
 }
 .img-container{
 	// position: absolute;
@@ -322,6 +359,7 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	// z-index: 0;
 	width: 5%;
 	min-width: 50px;
+	max-width: 60px;
 	// color: $main-color-1;
 	text-align: center;
 	@include transition($standard-transition);
@@ -373,6 +411,9 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	margin: 4px 0;
 	@include transition($nav-toggle-transition);
 }
+.li-big{
+	margin-top: 15px;
+}
 .nav__button--unwrapped{
 	.hamburger-bar:first-of-type{
 		@include transform(rotate(-135deg) translate(-4.24px, -4.24px));
@@ -418,7 +459,8 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	width: 80%;
 	margin: 10% 0 auto auto;
 	padding: 3%;
-	background: $main-color-2;
+	background: $main-color-4;
+	color: $main-color-1;
 	line-height: 1.5em;
 	@include font-size(17px);
 }
@@ -430,6 +472,13 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	width: 100%;
 	background: $main-color-4;
 	color: $main-color-1;
+}
+.h-over-content{
+	margin-bottom: -70px;
+}
+.content-below-h{
+	clear: both;
+    padding-top: 70px;
 }
 .content__p{
 	padding: 0.4em 0 0.6em 0;
@@ -631,3 +680,87 @@ $sides: left right;
 	}
 }
 
+// ******************************************************************************
+// ******************************************************************************
+// ******************************************************************************
+
+@function pow($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  }
+  @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+@function fact($number) {
+  $value: 1;
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $value: $value * $i;
+    }
+  }
+  @return $value;
+}
+
+@function pi() {
+	@return 3.14159265359;
+}
+
+@function rad($angle) {
+	$unit: unit($angle);
+	$unitless: $angle / ($angle * 0 + 1);
+	// If the angle has 'deg' as unit, convert to radians.
+	@if $unit == deg {
+		$unitless: $unitless / 180 * pi();
+	}
+	@return $unitless;
+}
+
+@function sin($angle) {
+	$sin: 0;
+	$angle: rad($angle);
+	// Iterate a bunch of times.
+	@for $i from 0 through 10 {
+		$sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+	}
+	@return $sin;
+}
+
+@function cos($angle) {
+	$cos: 0;
+	$angle: rad($angle);
+	// Iterate a bunch of times.
+	@for $i from 0 through 10 {
+		$cos: $cos + pow(-1, $i) * pow($angle, 2 * $i) / fact(2 * $i);
+	}
+	@return $cos;
+}
+
+@function tan($angle) {
+	@return sin($angle) / cos($angle);
+}
+
+@function translateXWithAngle($x, $angle){
+	$x1: $x * cos($angle);
+	$y1: -$x * sin($angle);
+	@return translate($x1, $y1);
+}
+
+@function translateYWithAngle($y, $angle){
+	$x1: $y * sin($angle);
+	$y1: $y * cos($angle);
+	@return translate($x1, $y1);
+}
+
+@function translateWithAngle($x, $y, $angle){
+	$x1:  $x * cos($angle) + $y * sin($angle);
+	$y1: -$x * sin($angle) + $y * cos($angle);
+	@return translate($x1, $y1);
+}

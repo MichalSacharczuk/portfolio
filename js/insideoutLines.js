@@ -254,7 +254,7 @@ function insideout() {
 			animationWorking = false;
 			if (animationWorking !== animationWasWorking) {
 				paused = true;
-				console.log('stopped');
+				// console.log('stopped');
 				animationWasWorking = animationWorking;
 			}
 		}
@@ -263,7 +263,7 @@ function insideout() {
 			if (animationWorking !== animationWasWorking) {
 				paused = false;
 				animation();
-				console.log('working');
+				// console.log('working');
 				animationWasWorking = animationWorking;
 			}
 		}
