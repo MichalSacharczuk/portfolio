@@ -120,6 +120,14 @@ body{
 		}
 	}
 }
+.flex-item--margin{
+	margin-top: 30px !important;
+	margin-bottom: 30px !important;
+	@include media-xs{
+		margin-top: 10px !important;
+		margin-bottom: 10px !important;
+	}
+}
 .first-letter-color::first-letter{
 	color: $main-color-5;
 }
@@ -142,6 +150,15 @@ body{
 	position: relative;
 	@include font-size(22px, 16px);
 	margin-bottom: 15px;
+}
+.heading--lg{
+	@include font-size(30px, 20px);
+}
+.heading--md{
+	@include font-size(22px, 14px);
+}
+.heading--sm{
+	@include font-size(18px, 12px);
 }
 .heading--main{
 	font-family: $header-font-name, Helvetica;
@@ -456,7 +473,7 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	}
 }
 .section__content{
-	width: 80%;
+	width: 87%;
 	margin: 10% 0 auto auto;
 	padding: 3%;
 	background: $main-color-4;
@@ -495,11 +512,11 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 $form-content-margin-left: 60px;
 .form{
 	font-family: $main-font-name, Helvetica;
-	margin: 30px auto;
+	margin: 0 auto;
 	max-width: 500px;
-	@include media-xs{
-		margin: 10px auto;
-	}
+	// @include media-xs{
+	// 	margin: 10px auto;
+	// }
 }
 .form--left{
 	width: 50%;
@@ -551,11 +568,11 @@ $form-content-margin-left: 60px;
 }
 .envelope{
 	position: relative;
-	margin: 30px 20%;
+	margin: 0 30%;
 	width: 40%;
 	max-width: 150px;
 	@include media-xs{
-		margin: 10px auto;
+		margin: 0 auto;
 	}
 }
 #envelope-top{

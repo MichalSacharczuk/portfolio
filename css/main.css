@@ -15,7 +15,8 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font: inherit;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+  box-sizing: border-box; }
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -270,6 +271,14 @@ body {
   .flex-item-xs-4 {
     flex-basis: 25%; } }
 
+.flex-item--margin {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important; }
+  @media screen and (max-width: 767px) {
+    .flex-item--margin {
+      margin-top: 10px !important;
+      margin-bottom: 10px !important; } }
+
 .first-letter-color::first-letter {
   color: #59D8E5; }
 
@@ -316,6 +325,51 @@ body {
   @media screen and (max-width: 459px) {
     .heading {
       font-size: 16px; } }
+
+.heading--lg {
+  font-size: 30px; }
+  @media (max-width: 1199px) {
+    .heading--lg {
+      font-size: 27.5px; } }
+  @media (max-width: 991px) {
+    .heading--lg {
+      font-size: 25px; } }
+  @media screen and (max-width: 767px) {
+    .heading--lg {
+      font-size: 22.5px; } }
+  @media screen and (max-width: 459px) {
+    .heading--lg {
+      font-size: 20px; } }
+
+.heading--md {
+  font-size: 22px; }
+  @media (max-width: 1199px) {
+    .heading--md {
+      font-size: 20px; } }
+  @media (max-width: 991px) {
+    .heading--md {
+      font-size: 18px; } }
+  @media screen and (max-width: 767px) {
+    .heading--md {
+      font-size: 16px; } }
+  @media screen and (max-width: 459px) {
+    .heading--md {
+      font-size: 14px; } }
+
+.heading--sm {
+  font-size: 18px; }
+  @media (max-width: 1199px) {
+    .heading--sm {
+      font-size: 16.5px; } }
+  @media (max-width: 991px) {
+    .heading--sm {
+      font-size: 15px; } }
+  @media screen and (max-width: 767px) {
+    .heading--sm {
+      font-size: 13.5px; } }
+  @media screen and (max-width: 459px) {
+    .heading--sm {
+      font-size: 12px; } }
 
 .heading--main {
   font-family: "Spectral", Helvetica;
@@ -743,7 +797,7 @@ body {
       padding: 20px 40px; } }
 
 .section__content {
-  width: 80%;
+  width: 87%;
   margin: 10% 0 auto auto;
   padding: 3%;
   background: #2F3738;
@@ -792,11 +846,8 @@ body {
 
 .form {
   font-family: "Lato", Helvetica;
-  margin: 30px auto;
+  margin: 0 auto;
   max-width: 500px; }
-  @media screen and (max-width: 767px) {
-    .form {
-      margin: 10px auto; } }
 
 .form--left {
   width: 50%;
@@ -855,12 +906,12 @@ body {
 
 .envelope {
   position: relative;
-  margin: 30px 20%;
+  margin: 0 30%;
   width: 40%;
   max-width: 150px; }
   @media screen and (max-width: 767px) {
     .envelope {
-      margin: 10px auto; } }
+      margin: 0 auto; } }
 
 #envelope-top {
   width: 96%;
