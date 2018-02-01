@@ -23,6 +23,7 @@ $scrolled-nav-min-font-size: 14px;
 $scrolled-nav-padding: 20px;
 $standard-transition: all 300ms ease-out;
 $slow-transition: all 1000ms ease-out;
+$standard-btn-color: darken($main-color-5, 30%);
 
 
 /* global styles */
@@ -36,7 +37,7 @@ body{
 .background-body{
 	position: fixed;
 	height: 100%;
-	width: 100%;
+	width: max-content;
 	z-index: -1;
 	opacity: 0.4;
 	filter: hue-rotate(-30deg);
@@ -66,6 +67,9 @@ body{
 }
 .box-shadow--default{
 	box-shadow: 3px 3px 5px rgba(0,0,0,0.6);
+}
+.box-shadow--around{
+	box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.3);
 }
 .box-shadow--emboss{
 	box-shadow: 3px 3px 5px rgba(0,0,0,0.5), -3px -3px 2px rgba(255, 255, 255, 0.5);
@@ -107,6 +111,10 @@ body{
 .display-flex{
 	@include display-flex;
 	flex-flow: row wrap;
+}
+.display-flex--center{
+	justify-content: center;
+	align-items: center;
 }
 @for $i from 1 through 12 {
 	.flex-item-#{$i}{
@@ -289,6 +297,19 @@ $list-before-margin: 8px;
 	font: inherit;
 	outline: none;
 	cursor: pointer;
+}
+.button--standard{
+	background: $standard-btn-color;
+	//color: $main-color-4;
+	// font-weight: bold;
+    margin: 0 10px;
+    cursor: pointer;
+    &:hover{
+		background: darken($standard-btn-color, 5%);
+    }
+    &:active{
+		background: darken($standard-btn-color, 10%);
+    }
 }
 .header{
 	font-family: $header-font-name, Helvetica;
@@ -509,7 +530,51 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	font-size: 1.3em;
 	// font-style: italic;
 }
-$form-content-margin-left: 60px;
+.project{
+	width: 100%;
+	margin: 40px auto;
+	// margin: 20px 0 20px auto;
+}
+.project--reversed{
+	flex-direction: row-reverse;
+}
+.project__heading{
+	@include font-size(24px, 14px);
+	color: $main-color-5;
+	font-style: italic;
+	font-weight: bold;
+	letter-spacing: 1px;
+	margin: 20px 0;
+	@include media-xs{
+		margin: 10px 0;
+	}
+}
+.project__subheading{
+	@extend .project__heading;
+	font-weight: normal;
+	letter-spacing: 0px;
+	@include font-size(20px, 13px);
+}
+.project__photo{
+	width: 40%;
+	filter: saturate(0.5);
+	cursor: pointer;
+	@include transition($standard-transition);
+	&:hover{
+		filter: saturate(1);
+		@include transform(scale(1.1));
+		box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.3);
+	}
+	&:active{
+		@include transform(scale(1.05));
+	}
+	@include media-xs{
+		width: 100%;
+	}
+}
+.project__content{
+	margin: 0 20px;
+}
 .form{
 	font-family: $main-font-name, Helvetica;
 	margin: 0 auto;
@@ -526,17 +591,14 @@ $form-content-margin-left: 60px;
 .form__input{
 	font-family: $main-font-name, Helvetica;
 	padding: 8px;
-	width: calc(100% - #{$form-content-margin-left} * 2);
+	width: 100%;
 	min-width: 200px;
-	margin: 8px 0 20px $form-content-margin-left;
+	max-width: 400px;
+	margin: 8px auto 20px;
 	border-radius: 3px;
 	border: none;
 	border: 1px solid $main-color-2;
 	display: block;
-	@include media-xs{
-		margin-left: auto;
-		margin-right: auto;
-	}
 }
 .form__textarea{
 	@extend .form__input;
@@ -602,7 +664,6 @@ $form-content-margin-left: 60px;
 	}
 }
 .form-input-warning{
-	margin-left: $form-content-margin-left;
 	@include font-size(14px);
 	color: #f97254;
 	@include media-xs{

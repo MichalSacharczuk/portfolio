@@ -12,11 +12,15 @@ function sendEmail($config){
 		// $mail->SMTPDebug = 3;                                 // Enable verbose debug output
 		$mail->isSMTP();                                      // Set mailer to use SMTP
 		$mail->Host = 'mailtrap.io';  // Specify main and backup SMTP servers
+		// $mail->Host = 'poczta.o2.pl';  // Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
 		$mail->Username = '87ad9968ae1160';                 // SMTP username
+		// $mail->Username = 'michal_sachar@o2.pl';                 // SMTP username
 		$mail->Password = '4a31abf3ba91f5';                           // SMTP password
+		// $mail->Password = 'mojehaslo';                           // SMTP password
 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 25;                                    // TCP port to connect to
+		// $mail->Port = 587;  
 
 		//Recipients
 		$mail->setFrom('michal_sachar@o2.pl', 'Michał Sacharczuk');

@@ -74,9 +74,9 @@
 <main class="main">
 	<section class="section">
 		<h1 id="o-mnie" class="section__h behind-to-front behind-to-front--left first-letter-big-color">
-			<div class="section__h-fill box-shadow--default">O mnie</div>
+			<div class="section__h-fill box-shadow--around">O mnie</div>
 		</h1>
-		<div class="section__content box-shadow--default">
+		<div class="section__content box-shadow--around">
 			<p class="content__p content__p--heading">Przepis na <span class="text-color-5">sukces zawodowy</span>?</p>
 			<p class="content__p content__p--answer">Prawie każdy odpowie: &quot;ciężka praca i poświęcenie&quot;.</p>
 			<p class="content__p">Niestety, większość osób kojarzy to negatywnie - <span class="text-italic">obowiązki, ciągłe zmuszanie się i motywowanie, przymus.</span></p> 
@@ -88,9 +88,9 @@
 	</section>
 	<section class="section">
 		<h1 id="doswiadczenie" class="section__h section__h--reversed behind-to-front behind-to-front--right first-letter-big-color">
-			<div class="section__h-fill box-shadow--default">Doświadczenie</div>
+			<div class="section__h-fill box-shadow--around">Doświadczenie</div>
 		</h1>
-		<div class="section__content section__content--reversed box-shadow--default">
+		<div class="section__content section__content--reversed box-shadow--around">
 			<h2 class="heading heading--date">04.2017 - 10.2017</h2>
 			<h3 class="heading heading--additional">Staż w firmie dimundi (dimundi.pl)</h3>
 			<ul class="list-pointed left-margin-text">
@@ -103,9 +103,9 @@
 	</section>
 	<section class="section">
 		<h1 id="umiejetnosci" class="section__h h-over-content behind-to-front behind-to-front--left first-letter-big-color">
-			<div class="section__h-fill box-shadow--default">Umiejętności</div>
+			<div class="section__h-fill box-shadow--around">Umiejętności</div>
 		</h1>
-		<div class="section__content box-shadow--default content-below-h">
+		<div class="section__content box-shadow--around content-below-h">
 			<ul>
 				<li class="font-l li-big">
 					<span class="heading heading--font display-inline-block text-color-5">HTML 5</span>
@@ -121,7 +121,7 @@
 				</li>
 				<li class="font-l li-big">
 					<span class="heading heading--font display-inline-block text-color-5">C#</span>
-					 - podstawy asp.net
+					 - podstawy asp.net, WPF
 				</li>
 				<li class="font-l li-big">
 					<span class="heading heading--font display-inline-block text-color-5">Python</span>
@@ -129,7 +129,7 @@
 				</li>
 				<li class="font-l li-big">
 					<span class="heading heading--font display-inline-block text-color-5">Gimp</span>
-					 - podstawowy obróbki zdjęć i obrazów
+					 - podstawy obróbki zdjęć i obrazów
 				</li>
 				<li class="font-l li-big">
 					<span class="heading heading--font display-inline-block text-color-5">Git</span>
@@ -140,16 +140,66 @@
 	</section>
 	<section class="section section--last">
 		<h1 id="projekty" class="section__h section__h--reversed behind-to-front behind-to-front--right first-letter-big-color">
-			<div class="section__h-fill box-shadow--default">Projekty</div>
+			<div class="section__h-fill box-shadow--around">Projekty</div>
 		</h1>
-		<p class="section__content section__content--reversed box-shadow--default">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+		<div class="section__content section__content--reversed box-shadow--around">
+			<div class="project display-flex display-flex--center">
+				<div class="project__photo flex-item-xs-1">
+					<a href="https://ekranywszkole.pl" target="blank">
+						<img src="img/ekranywszkole.png" alt="ekranywszkole">
+					</a>
+				</div>
+				<div class="project__content flex-item-xs-1">
+					<h2 class="project__heading text-centered">ekranywszkole.pl</h2>
+					<h3 class="project__subheading text-centered">(współtworzenie aplikacji)</h3>
+					<div class="display-flex display-flex--center">
+						<!-- <a class="button button--standard">Github</a> -->
+						<a href="https://ekranywszkole.pl" target="blank" class="button button--standard">Live</a>
+					</div>
+				</div>
+			</div>
+			<div class="project project--reversed display-flex display-flex--center">
+				<div class="project__photo flex-item-xs-1">
+					<a href="http://serdynka.pl" target="blank">
+						<img src="img/serdynka.png" alt="serdynka">
+					</a>
+				</div>
+				<div class="project__content flex-item-xs-1">
+					<h2 class="project__heading text-centered">serdynka.pl</h2>
+					<h3 class="project__subheading text-centered">(na githubie wersja przed wydaniem klientowi)</h3>
+					<div class="display-flex display-flex--center">
+						<a class="button button--standard">Github</a>
+						<a href="http://serdynka.pl" target="blank" class="button button--standard">Live</a>
+					</div>
+				</div>
+			</div>
+<!-- 			<div class="project display-flex display-flex--center">
+				<div class="project__photo flex-item-xs-1">
+					<img src="img/wedo.png" alt="wedo">
+				</div>
+				<div class="project__content flex-item-xs-1">
+					<h2 class="project__heading text-centered">wedo.pl</h2>
+					<div class="display-flex display-flex--center">
+						<a class="button button--standard">Github</a>
+						<a class="button button--standard">Live</a>
+					</div>
+				</div>
+			</div> -->
+			<div class="project display-flex display-flex--center">
+				<div class="project__photo flex-item-xs-1">
+					<a href="https://github.com/MichalSacharczuk/sudoku_Csharp-WPF" target="blank">
+						<img src="img/sudoku.png" alt="sudoku">
+					</a>
+				</div>
+				<div class="project__content flex-item-xs-1">
+					<h2 class="project__heading text-centered">sudoku</h2>
+					<h3 class="project__subheading text-centered">(wfp)</h3>
+					<div class="display-flex display-flex--center">
+						<a class="button button--standard" href="https://github.com/MichalSacharczuk/sudoku_Csharp-WPF" target="blank">Github</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	<section class="section--contact">
 		<div class="standard-content">
@@ -183,9 +233,6 @@
 					<p class="heading heading--md text-centered">tel. 501 949 635</p>
 				</div>
 			</div>
-			<!-- <div class="img-container">
-				<img src="" alt="">
-			</div> -->
 		</div>
 		<footer class="footer">
 			

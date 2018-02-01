@@ -113,9 +113,10 @@ function insideout() {
 			'#D5FBFF',
 			'#9FBCBF',
 			'#647678',
+			'#59D8E5',
 			// '#2F3738'
 		];
-		this.ballColor = colors[getRandomInt(0, 3)];
+		this.ballColor = colors[getRandomInt(0, colors.length)];
 
 		var r = Math.pow((Math.pow((x - x0),2) + Math.pow((y - y0),2)), .5);
 		var dx = .05 * x / r;
@@ -201,6 +202,11 @@ function insideout() {
 
 	let paused = false;
 
+	var bckgr = {};
+	bckgr.r = 12;
+	bckgr.g = 16;
+	bckgr.b = 16;
+
 	function animation() {
 		if (paused) return;
 
@@ -210,7 +216,7 @@ function insideout() {
 			circles = [];
 
 		if (t < 500){
-			var radius = .2;
+			var radius = .2 + Math.random() * .2;
 			var x = Math.random() * x0 * 2;
 			var y = Math.random() * y0 * 2;
 			circles.push(new Circle(x, y, radius));
@@ -218,8 +224,13 @@ function insideout() {
 
 		// c.fillStyle = 'rgba(0,0,15,.3)';
 		// c.fillStyle = 'rgba(89,216,229,.3)';
-		c.fillStyle = 'rgba(47,55,56,.3)';
+		// c.fillStyle = 'rgba(47,55,56,.3)';
+		// c.fillStyle = 'rgba(47,55,56,.5)';
+		c.fillStyle = 'rgba(' + bckgr.r + ',' + bckgr.g + ',' + bckgr.b + ',.5)';
 		c.fillRect(0,0,canvasWidth,canvasHeight);
+
+		// the same color as header background:
+		document.querySelector('.header--colored').style.background = 'rgb(' + bckgr.r + ',' + bckgr.g + ',' + bckgr.b + ')';
 
 		totalSpinFactor -= sign(totalSpinFactor) * 0.00001;
 		totalSpinFactor *= 0.995;
