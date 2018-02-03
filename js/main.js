@@ -180,14 +180,18 @@ function decreaseNavOnScroll(){
 
 function addAnimationClass(className) {
 	this.runFunction = (className) => {
-		let argument = className;
 		let elementsArray = document.getElementsByClassName(className);
-		for (var i = elementsArray.length - 1; i >= 0; i--) {
-			let item = elementsArray[i];
-			if (item.getBoundingClientRect().y < window.innerHeight * 0.7){
+		foreach(elementsArray, (item) => {
+			if (item.getBoundingClientRect().y < window.innerHeight * 0.7 &&
+			item.getBoundingClientRect().y > 50){
 				item.classList.add(className + '-animation');
+				item.classList.remove(className + '-reverse-animation');
 			}
-		}
+			else{
+				item.classList.add(className + '-reverse-animation');
+				item.classList.remove(className + '-animation');
+			}
+		});
 	}
 	this.runFunction(className);
 	document.addEventListener('scroll', () => {this.runFunction(className)});
@@ -229,7 +233,7 @@ function navigateByAnimation(speed) {
 		item.addEventListener('click', () => {
 			let href = item.getAttribute('href');
 			let destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().y + windowScrollY());
-			scrollToY(destinationElementY - 90, speed);
+			scrollToY(destinationElementY - 150, speed);
 		});
 	});
 }
@@ -294,6 +298,16 @@ function toggleNav(){
 // 	});
 // }
 
+
+function setBackgroundHeightToDocumentsHeight() {
+	document.querySelector('.background-document').style.height = document.body.scrollHeight;
+}
+
+window.addEventListener('resize', () => {
+	setBackgroundHeightToDocumentsHeight();
+});
+
+
 // **************************************************************************************************
 
 
@@ -317,6 +331,8 @@ window.onload = () => {
 	validateForm('my-form', false);
 
 	toggleNav();
+
+	setBackgroundHeightToDocumentsHeight();
 }
 
 // **************************************************************************************************

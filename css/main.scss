@@ -8,6 +8,7 @@ $main-color-1: #D5FBFF;
 $main-color-2: #cbe7ea; // może lepszy ten: #cbe7ea???
 $main-color-3: #647678;
 $main-color-4: #2F3738;
+// $main-color-4: rgb(12,16,16);
 $main-color-5: #59D8E5;
 
 // $main-color-1: #2F2D2F;
@@ -41,6 +42,15 @@ body{
 	z-index: -1;
 	opacity: 0.4;
 	filter: hue-rotate(-30deg);
+	img{
+		height: 100%;
+	}
+}
+.background-document{
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+	opacity: 0.6;
 	img{
 		height: 100%;
 	}
@@ -201,6 +211,9 @@ body{
 .left-margin-text{
 	margin: 10px 0 10px 50px;
 }
+.letter-spacing-1{
+	letter-spacing: 1px;
+}
 $list-before-border-width: 5px;
 $list-before-margin: 8px;
 .list-pointed{
@@ -315,6 +328,9 @@ $list-before-margin: 8px;
 	font-family: $header-font-name, Helvetica;
 	font-weight: bold;
 	position: relative;
+}
+.header--bottom-shadow{
+	box-shadow: 0 0px 10px 10px rgb(12,16,16);
 }
 .header--colored{
 	background: $main-color-4;
@@ -557,7 +573,7 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 }
 .project__photo{
 	width: 40%;
-	filter: saturate(0.5);
+	filter: saturate(0.4);
 	cursor: pointer;
 	@include transition($standard-transition);
 	&:hover{
@@ -709,6 +725,26 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	100%	{transform: translateX(0) rotate(0);
 			 z-index: 0}
 }
+@include keyframes(behind-to-front-left-reverse-animation){
+	0%		{transform: translateX(0) rotate(0);
+			 z-index: 0}
+	50%		{transform: translateX(0) rotate(0);
+			 z-index: 0}
+	75%		{transform: translateX(-100%) rotate(90deg);
+			 z-index: -1}
+	100%	{transform: translateX(0) rotate(0);
+			 z-index: -1}
+}
+@include keyframes(behind-to-front-right-reverse-animation){
+	0%		{transform: translateX(0) rotate(0);
+			 z-index: 0}
+	50%		{transform: translateX(0) rotate(0);
+			 z-index: 0}
+	75%		{transform: translateX(100%) rotate(-90deg);
+			 z-index: -1}
+	100%	{transform: translateX(0) rotate(0);
+			 z-index: -1}
+}
 .behind-to-front{
 	position: relative;
 	z-index: -1;
@@ -717,6 +753,9 @@ $sides: left right;
 @each $side in $sides{
 	.behind-to-front--#{$side}-animation{
 		@include animation(behind-to-front-#{$side}-animation)
+	}
+	.behind-to-front--#{$side}-reverse-animation{
+		@include animation(behind-to-front-#{$side}-reverse-animation)
 	}
 }
 

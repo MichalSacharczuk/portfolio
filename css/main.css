@@ -75,6 +75,14 @@ body {
   .background-body img {
     height: 100%; }
 
+.background-document {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.6; }
+  .background-document img {
+    height: 100%; }
+
 .big-letter {
   position: absolute;
   top: 0;
@@ -420,6 +428,9 @@ body {
 .left-margin-text {
   margin: 10px 0 10px 50px; }
 
+.letter-spacing-1 {
+  letter-spacing: 1px; }
+
 .list-pointed li {
   margin: 7px 0;
   text-indent: -18px; }
@@ -530,6 +541,9 @@ body {
   font-family: "Spectral", Helvetica;
   font-weight: bold;
   position: relative; }
+
+.header--bottom-shadow {
+  box-shadow: 0 0px 10px 10px #0c1010; }
 
 .header--colored {
   background: #2F3738; }
@@ -909,7 +923,7 @@ body {
 
 .project__photo {
   width: 40%;
-  filter: saturate(0.5);
+  filter: saturate(0.4);
   cursor: pointer;
   -webkit-transition: all 300ms ease-out;
   -moz-transition: all 300ms ease-out;
@@ -1188,6 +1202,110 @@ body {
   100% {
     transform: translateX(0) rotate(0);
     z-index: 0; } }
+@-webkit-keyframes behind-to-front-left-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(-100%) rotate(90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
+@-moz-keyframes behind-to-front-left-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(-100%) rotate(90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
+@-o-keyframes behind-to-front-left-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(-100%) rotate(90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
+@keyframes behind-to-front-left-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(-100%) rotate(90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
+@-webkit-keyframes behind-to-front-right-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
+@-moz-keyframes behind-to-front-right-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
+@-o-keyframes behind-to-front-right-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
+@keyframes behind-to-front-right-reverse-animation {
+  0% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  50% {
+    transform: translateX(0) rotate(0);
+    z-index: 0; }
+  75% {
+    transform: translateX(100%) rotate(-90deg);
+    z-index: -1; }
+  100% {
+    transform: translateX(0) rotate(0);
+    z-index: -1; } }
 .behind-to-front {
   position: relative;
   z-index: -1; }
@@ -1198,11 +1316,23 @@ body {
   -o-animation: behind-to-front-left-animation 1s 1 forwards;
   animation: behind-to-front-left-animation 1s 1 forwards; }
 
+.behind-to-front--left-reverse-animation {
+  -webkit-animation: behind-to-front-left-reverse-animation 1s 1 forwards;
+  -moz-animation: behind-to-front-left-reverse-animation 1s 1 forwards;
+  -o-animation: behind-to-front-left-reverse-animation 1s 1 forwards;
+  animation: behind-to-front-left-reverse-animation 1s 1 forwards; }
+
 .behind-to-front--right-animation {
   -webkit-animation: behind-to-front-right-animation 1s 1 forwards;
   -moz-animation: behind-to-front-right-animation 1s 1 forwards;
   -o-animation: behind-to-front-right-animation 1s 1 forwards;
   animation: behind-to-front-right-animation 1s 1 forwards; }
+
+.behind-to-front--right-reverse-animation {
+  -webkit-animation: behind-to-front-right-reverse-animation 1s 1 forwards;
+  -moz-animation: behind-to-front-right-reverse-animation 1s 1 forwards;
+  -o-animation: behind-to-front-right-reverse-animation 1s 1 forwards;
+  animation: behind-to-front-right-reverse-animation 1s 1 forwards; }
 
 /* ***************** bouncing letters ***************** */
 .bouncing-letters {
