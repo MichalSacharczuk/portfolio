@@ -49,21 +49,10 @@ a, a:hover, a:visited, a:active {
   color: inherit; }
 
 /* global styles */
-@font-face {
-  font-family: "Spectral";
-  src: url("../fonts/SpectralSC-Regular.eot");
-  src: url("../fonts/SpectralSC-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/SpectralSC-Regular.woff") format("woff"), url("../fonts/SpectralSC-Regular.ttf") format("truetype"), url("../fonts/SpectralSC-Regular.svg#08bb4ba465a902745fc23c83a5d9fdc2") format("svg");
-  font-style: normal;
-  font-weight: normal; }
-@font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato-Regular.eot");
-  src: url("../fonts/Lato-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato-Regular.woff") format("woff"), url("../fonts/Lato-Regular.ttf") format("truetype"), url("../fonts/Lato-Regular.svg#08bb4ba465a902745fc23c83a5d9fdc2") format("svg");
-  font-style: normal;
-  font-weight: normal; }
+/* ... */
 body {
   color: #2F3738;
-  font-family: "Lato", Helvetica; }
+  font-family: "Lato", sans-serif, Helvetica; }
 
 .background-body {
   position: fixed;
@@ -79,9 +68,23 @@ body {
   position: absolute;
   width: 100%;
   z-index: -1;
-  opacity: 0.6; }
+  background: #9FBCBF;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(bottom, #9FBCBF, #647678);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom, #9FBCBF, #647678);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom, #9FBCBF, #647678);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom, #9FBCBF, #647678);
+  /* Standard syntax */
+  background: #647678;
+  background: #9FBCBF; }
   .background-document img {
-    height: 100%; }
+    height: 100%;
+    opacity: 0.6; }
+  .background-document canvas {
+    opacity: 0.8; }
 
 .big-letter {
   position: absolute;
@@ -170,6 +173,9 @@ body {
 
 .box-shadow--around {
   box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.3); }
+
+.box-shadow--around-and-inset {
+  box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.3), inset 0px 0px 300px rgba(0, 0, 0, 0.6); }
 
 .box-shadow--emboss {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), -3px -3px 2px rgba(255, 255, 255, 0.5); }
@@ -387,7 +393,7 @@ body {
       font-size: 12px; } }
 
 .heading--main {
-  font-family: "Spectral", Helvetica;
+  font-family: "Spectral SC", serif, Helvetica;
   font-weight: bold;
   font-size: 30px; }
   @media (max-width: 1199px) {
@@ -413,7 +419,7 @@ body {
   font-style: italic; }
 
 .heading--font {
-  font-family: "Spectral", Helvetica;
+  font-family: "Spectral SC", serif, Helvetica;
   font-weight: bold; }
 
 .img-container {
@@ -518,7 +524,17 @@ body {
   position: relative;
   z-index: 1; }
 
-/* *************************************************************************** */
+/* ********************************************************************************************* */
+/* ********************************************************************************************* */
+/* ********************************************************************************************* */
+.bottom-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  box-shadow: 0px 0px 60px 20px black; }
+
 .button {
   padding: 10px 14px;
   background: none;
@@ -538,12 +554,12 @@ body {
     background: #0f5b63; }
 
 .header {
-  font-family: "Spectral", Helvetica;
+  font-family: "Spectral SC", serif, Helvetica;
   font-weight: bold;
   position: relative; }
 
-.header--bottom-shadow {
-  box-shadow: 0 0px 10px 10px #0c1010; }
+.header--overflow-y {
+  overflow-y: hidden; }
 
 .header--colored {
   background: #2F3738; }
@@ -576,7 +592,8 @@ body {
   -moz-transition: all 300ms ease-out;
   -o-transition: all 300ms ease-out;
   transition: all 300ms ease-out;
-  z-index: 10; }
+  z-index: 10;
+  cursor: pointer; }
   @media (max-width: 1199px) {
     .header__title--scrolled {
       font-size: 15.5px; } }
@@ -618,7 +635,7 @@ body {
       font-size: 20px; } }
 
 .nav {
-  font-family: "Spectral", Helvetica;
+  font-family: "Spectral SC", serif, Helvetica;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -796,7 +813,7 @@ body {
   margin-bottom: 40px; }
 
 .section__h {
-  font-family: "Spectral", Helvetica;
+  font-family: "Spectral SC", serif, Helvetica;
   font-weight: bold;
   margin-top: -7%;
   padding: 0 30px 20px 0;
@@ -855,6 +872,9 @@ body {
   width: 100%;
   background: #2F3738;
   color: #D5FBFF; }
+
+.section--top-inset-shadow {
+  box-shadow: inset 0px 40px 60px -20px rgba(0, 0, 0, 0.6); }
 
 .h-over-content {
   margin-bottom: -70px; }
@@ -949,7 +969,7 @@ body {
   margin: 0 20px; }
 
 .form {
-  font-family: "Lato", Helvetica;
+  font-family: "Lato", sans-serif, Helvetica;
   margin: 0 auto;
   max-width: 500px; }
 
@@ -958,7 +978,7 @@ body {
   min-width: 250px; }
 
 .form__input, .form__textarea {
-  font-family: "Lato", Helvetica;
+  font-family: "Lato", sans-serif, Helvetica;
   padding: 8px;
   width: 100%;
   min-width: 200px;

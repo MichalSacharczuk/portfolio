@@ -185,7 +185,7 @@
 //         }
 //     }
 // }
-@mixin linearGradient($dir, $from, $to){
+@mixin linear-gradient($dir, $from, $to){
 	background: $from; /* For browsers that do not support gradients */
 	background: -webkit-linear-gradient($dir, $from , $to); /* For Safari 5.1 to 6.0 */
 	background: -o-linear-gradient($dir, $from, $to); /* For Opera 11.1 to 12.0 */

@@ -10,6 +10,7 @@ $main-color-3: #647678;
 $main-color-4: #2F3738;
 // $main-color-4: rgb(12,16,16);
 $main-color-5: #59D8E5;
+$main-color-6: #9FBCBF;
 
 // $main-color-1: #2F2D2F;
 // $main-color-2: #BEDBCB;
@@ -17,8 +18,8 @@ $main-color-5: #59D8E5;
 // $main-color-4: #8B7E5B;
 // $main-color-5: #F1EFEA;
 
-$header-font-name: "Spectral";
-$main-font-name: "Lato";
+$header-font-name: 'Spectral SC', serif;
+$main-font-name: 'Lato', sans-serif;
 $scrolled-nav-font-size: 16px;
 $scrolled-nav-min-font-size: 14px;
 $scrolled-nav-padding: 20px;
@@ -26,10 +27,9 @@ $standard-transition: all 300ms ease-out;
 $slow-transition: all 1000ms ease-out;
 $standard-btn-color: darken($main-color-5, 30%);
 
-
 /* global styles */
-@include font-face($header-font-name, 'SpectralSC-Regular', '../fonts');
-@include font-face($main-font-name, 'Lato-Regular', '../fonts');
+/* ... */
+
 
 body{
 	color: $main-color-4;
@@ -50,9 +50,15 @@ body{
 	position: absolute;
 	width: 100%;
 	z-index: -1;
-	opacity: 0.6;
+	@include linear-gradient(bottom, $main-color-6, $main-color-3);
+	background: $main-color-3;
+	background: $main-color-6;
 	img{
 		height: 100%;
+		opacity: 0.6;
+	}
+	canvas{
+		opacity: 0.8;
 	}
 }
 .big-letter{
@@ -80,6 +86,9 @@ body{
 }
 .box-shadow--around{
 	box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.3);
+}
+.box-shadow--around-and-inset{
+	box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.3), inset 0px 0px 300px rgba(0,0,0,0.6);
 }
 .box-shadow--emboss{
 	box-shadow: 3px 3px 5px rgba(0,0,0,0.5), -3px -3px 2px rgba(255, 255, 255, 0.5);
@@ -300,8 +309,18 @@ $list-before-margin: 8px;
 	z-index: 1;
 }
 
-/* *************************************************************************** */
+/* ********************************************************************************************* */
+/* ********************************************************************************************* */
+/* ********************************************************************************************* */
 
+.bottom-shadow{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    box-shadow: 0px 0px 60px 20px rgba(0, 0, 0, 1);
+}
 .button{
 	padding: 10px 14px;
 	background: none;
@@ -329,8 +348,8 @@ $list-before-margin: 8px;
 	font-weight: bold;
 	position: relative;
 }
-.header--bottom-shadow{
-	box-shadow: 0 0px 10px 10px rgb(12,16,16);
+.header--overflow-y{
+	overflow-y: hidden;
 }
 .header--colored{
 	background: $main-color-4;
@@ -349,6 +368,7 @@ $list-before-margin: 8px;
 	padding: $scrolled-nav-padding;
 	@include transition($standard-transition);
 	z-index: 10;
+	cursor: pointer;
 	*{
 		cursor: pointer;
 	}
@@ -526,6 +546,9 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	width: 100%;
 	background: $main-color-4;
 	color: $main-color-1;
+}
+.section--top-inset-shadow{
+	box-shadow: inset 0px 40px 60px -20px rgba(0,0,0,0.6);
 }
 .h-over-content{
 	margin-bottom: -70px;

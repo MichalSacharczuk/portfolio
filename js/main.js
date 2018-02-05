@@ -6,10 +6,6 @@ let colors = [
 	"#59D8E5"
 ];
 
-function windowScrollY(){
-	return document.body.scrollTop || document.documentElement.scrollTop;
-}
-
 function doMailAnimation(){
 	let sectionContact = document.querySelector('.section--contact');
 	window.scrollTo(0, windowScrollY() + sectionContact.getBoundingClientRect().y + sectionContact.clientHeight)	
@@ -57,12 +53,6 @@ function disableClickedFormButtonAndSubmitForm(formId){
 
 function showMailOkBox(){
 	document.querySelector('.mail-ok-box').classList.add('no-transform');
-}
-
-function foreach(array, callback){
-	for (let i = 0; i < array.length; i++) {
-		callback.call(array, array[i], i);
-	}
 }
 
 function startJumpingLetters() {
@@ -184,58 +174,23 @@ function addAnimationClass(className) {
 		foreach(elementsArray, (item) => {
 			if (item.getBoundingClientRect().y < window.innerHeight * 0.7 &&
 			item.getBoundingClientRect().y > 50){
-				item.classList.add(className + '-animation');
-				item.classList.remove(className + '-reverse-animation');
+				if (!item.above) {
+					item.above = true;
+					item.classList.add(className + '-animation');
+					item.classList.remove(className + '-reverse-animation');
+				}
 			}
 			else{
-				item.classList.add(className + '-reverse-animation');
-				item.classList.remove(className + '-animation');
+				if (item.above) {
+					item.above = false;
+					item.classList.add(className + '-reverse-animation');
+					item.classList.remove(className + '-animation');
+				}
 			}
 		});
 	}
 	this.runFunction(className);
 	document.addEventListener('scroll', () => {this.runFunction(className)});
-}
-
-function scrollToY(y, speed){
-	let currentY = windowScrollY();
-	let distanceToScroll = y - currentY;
-	let interval = Math.max(10, Math.round(speed / Math.abs(distanceToScroll)));
-	let dy = distanceToScroll / speed * interval;
-	dy = Math.round(distanceToScroll / speed * interval);
-// console.log("interval: " + speed / Math.abs(distanceToScroll));
-// console.log("interval max: " + interval);
-// console.log("dy: " + dy);
-// console.log("rounded dy: " + dy);
-	// let startTime = new Date().getTime();
-	
-	let previousY = currentY + 1; // just different from currentY
-	let scroll = setInterval( () => {
-		distanceToScroll = y - currentY;
-		if (Math.abs(distanceToScroll) <= Math.abs(dy / 2) || previousY == currentY){
-			clearInterval(scroll);
-
-			// let endTime = new Date().getTime();
-			// console.log("y: " + currentY);
-			// console.log("time: " + (endTime - startTime));
-			// console.log("");
-		}
-		previousY = currentY;
-		// console.log('prev: ',previousY);
-		window.scrollBy(0, dy);
-		currentY = windowScrollY();
-		// console.log('curr: ',currentY);
-	} ,interval);
-}
-
-function navigateByAnimation(speed) {
-	foreach(document.querySelectorAll('.href'), (item) => {
-		item.addEventListener('click', () => {
-			let href = item.getAttribute('href');
-			let destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().y + windowScrollY());
-			scrollToY(destinationElementY - 150, speed);
-		});
-	});
 }
 
 function setClassViewportHeight(){
@@ -299,15 +254,6 @@ function toggleNav(){
 // }
 
 
-function setBackgroundHeightToDocumentsHeight() {
-	document.querySelector('.background-document').style.height = document.body.scrollHeight;
-}
-
-window.addEventListener('resize', () => {
-	setBackgroundHeightToDocumentsHeight();
-});
-
-
 // **************************************************************************************************
 
 
@@ -332,7 +278,6 @@ window.onload = () => {
 
 	toggleNav();
 
-	setBackgroundHeightToDocumentsHeight();
 }
 
 // **************************************************************************************************

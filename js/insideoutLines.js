@@ -38,16 +38,6 @@ function insideout() {
 
 	initGlobalVariables();
 
-	function sign(x){
-		if (x > 0) return 1;
-		else if (x < 0) return -1;
-		else return 0;
-	}
-
-	function getRandomInt(x, y){
-		return Math.floor(Math.random() * (y - x)) + x;
-	}
-
 	function getAngleOfXYFromTheCenter(x, y, x0, y0){
 		let dx = x - x0;
 		let dy = y - y0;
