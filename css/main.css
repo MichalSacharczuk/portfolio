@@ -174,9 +174,6 @@ body {
 .box-shadow--around {
   box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.3); }
 
-.box-shadow--around-and-inset {
-  box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.3), inset 0px 0px 300px rgba(0, 0, 0, 0.6); }
-
 .box-shadow--emboss {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5), -3px -3px 2px rgba(255, 255, 255, 0.5); }
 
@@ -527,13 +524,17 @@ body {
 /* ********************************************************************************************* */
 /* ********************************************************************************************* */
 /* ********************************************************************************************* */
-.bottom-shadow {
+.bottom-shadow, .top-shadow {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 1px;
   box-shadow: 0px 0px 60px 20px black; }
+
+.top-shadow {
+  bottom: auto;
+  top: 0; }
 
 .button {
   padding: 10px 14px;
@@ -802,11 +803,12 @@ body {
 .main {
   margin: 0 auto;
   width: 100%;
-  max-width: 1600px;
+  max-width: none;
   position: relative; }
 
 .section {
   width: 80%;
+  max-width: 1280px;
   margin: 15% auto 15%; }
 
 .section--last {
@@ -871,10 +873,8 @@ body {
   position: relative;
   width: 100%;
   background: #2F3738;
-  color: #D5FBFF; }
-
-.section--top-inset-shadow {
-  box-shadow: inset 0px 40px 60px -20px rgba(0, 0, 0, 0.6); }
+  color: #D5FBFF;
+  overflow-y: hidden; }
 
 .h-over-content {
   margin-bottom: -70px; }
@@ -1377,37 +1377,37 @@ body {
 
 .perspective-text-shadow__shadow1 {
   position: absolute;
-  color: black;
+  color: #4d4d4d;
   transform: scaleX(0.995) translateY(-1px);
   z-index: -1; }
 
 .perspective-text-shadow__shadow2 {
   position: absolute;
-  color: black;
+  color: #666666;
   transform: scaleX(0.99) translateY(-2px);
   z-index: -1; }
 
 .perspective-text-shadow__shadow3 {
   position: absolute;
-  color: black;
+  color: gray;
   transform: scaleX(0.985) translateY(-3px);
   z-index: -1; }
 
 .perspective-text-shadow__shadow4 {
   position: absolute;
-  color: black;
+  color: #999999;
   transform: scaleX(0.98) translateY(-4px);
   z-index: -1; }
 
 .perspective-text-shadow__shadow5 {
   position: absolute;
-  color: black;
+  color: #b3b3b3;
   transform: scaleX(0.975) translateY(-5px);
   z-index: -1; }
 
 .perspective-text-shadow__shadow6 {
   position: absolute;
-  color: black;
+  color: #cccccc;
   transform: scaleX(0.97) translateY(-6px);
   z-index: -1; }
 
