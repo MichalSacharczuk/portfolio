@@ -19,6 +19,11 @@
 		@content;
 	}
 }
+@mixin media-gt-xs{
+	@media screen and (min-width: 768px){
+		@content;
+	}
+}
 @mixin font-size($size: 14px, $min-size: 12px){
 	font-size: $size;
 	@include media-md{
@@ -126,6 +131,15 @@
 	background: -o-linear-gradient($dir, $from, $to); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient($dir, $from, $to); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(to $dir, $from , $to); /* Standard syntax */
+}
+@mixin radial-gradient($from, $to) {
+	background: -moz-radial-gradient(center, circle cover, $from 0%, $to 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $from), color-stop(100%, $to));
+	background: -webkit-radial-gradient(center, circle cover, $from 0%, $to 100%);
+	background: -o-radial-gradient(center, circle cover, $from 0%, $to 100%);
+	background: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%);
+	background: radial-gradient(center, circle cover, $from 0%, $to 100%);
+	background-color: $from;
 }
 
 @mixin width-min-content{

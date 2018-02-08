@@ -241,17 +241,49 @@ function toggleNav(){
 	});
 }
 
-// function assignOrRemoveToggleNavFunction() {
-// 	// let lt768px;
-// 	// if (window.innerWidth < 768){
-// 	// 	lt768px = true;
-// 	// }
-// 	window.addEventListener('resize', () => {
-// 		if (window.innerWidth < 768){
+function CVLanguagesPlacementAndShowHide() {
+	var cvBtn = document.querySelector('#cv-img');
+	var cvLangBox = document.querySelector('#cv-lang-box');
+	var cvLang = document.querySelector('#cv-languages');
+	var cvLiAll = cvLang.querySelectorAll('li');
 
-// 		}
-// 	});
-// }
+	function CVLanguagesPlacement() {
+		cvLangBox.style.top = cvBtn.getBoundingClientRect().y;
+		cvLangBox.style.left = cvBtn.clientWidth;
+		cvLangBox.style.height = cvBtn.clientHeight;
+		cvLiAll.width = 0;
+		foreach(cvLiAll, (item) => {
+			item.style.height = cvBtn.clientHeight;
+			cvLiAll.width += item.clientWidth;
+		});
+		cvLang.style.width = cvLiAll.width;
+	}
+
+	function CVLanguagesShowHide() {
+		if (cvLangBox.style.width == 0 || cvLangBox.style.width == '0px'){
+			cvLangBox.style.width = cvLiAll.width;
+		}
+		else {
+			cvLangBox.style.width = 0;
+		}
+	}
+
+	cvBtn.addEventListener('click', (event) => {
+		CVLanguagesShowHide();
+	});
+
+	document.addEventListener('click', (event) => {
+		if (!(event.target == cvBtn || event.target == cvBtn.children[0])) {
+			cvLangBox.style.width = 0;
+		}
+	});
+	
+	CVLanguagesPlacement();
+
+	window.addEventListener('resize', () => {
+		CVLanguagesPlacement();
+	});
+}
 
 
 // **************************************************************************************************
@@ -278,6 +310,7 @@ window.onload = () => {
 
 	toggleNav();
 
+	CVLanguagesPlacementAndShowHide();
 }
 
 // **************************************************************************************************
