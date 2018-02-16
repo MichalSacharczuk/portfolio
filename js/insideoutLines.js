@@ -199,6 +199,7 @@ function insideout() {
 	let paused = false;
 
 	var bckgr = {};
+
 	bckgr.r = 12;
 	bckgr.g = 16;
 	bckgr.b = 16;
@@ -225,8 +226,8 @@ function insideout() {
 		c.fillStyle = 'rgba(' + bckgr.r + ',' + bckgr.g + ',' + bckgr.b + ',.5)';
 		c.fillRect(0,0,canvasWidth,canvasHeight);
 
-		// the same color as header background:
-		document.querySelector('.header--colored').style.background = 'rgb(' + bckgr.r + ',' + bckgr.g + ',' + bckgr.b + ')';
+		// // the same color as header background:
+		// document.querySelector('.header--colored').style.background = 'rgb(' + bckgr.r + ',' + bckgr.g + ',' + bckgr.b + ')';
 
 		totalSpinFactor -= sign(totalSpinFactor) * 0.00001;
 		totalSpinFactor *= 0.995;
@@ -281,4 +282,4 @@ function insideout() {
 	});
 }
 
-insideout();
+//insideout();

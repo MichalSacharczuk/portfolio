@@ -11,6 +11,7 @@ $main-color-4: #2F3738;
 // $main-color-4: rgb(12,16,16);
 $main-color-5: #59D8E5;
 $main-color-6: #9FBCBF;
+$main-color-7: rgb(12,16,16);
 
 // $main-color-1: #2F2D2F;
 // $main-color-2: #BEDBCB;
@@ -358,7 +359,7 @@ $list-before-margin: 8px;
 	overflow-y: hidden;
 }
 .header--colored{
-	background: $main-color-4;
+	background: $main-color-7;
 }
 .header__title{
 	color: $main-color-1;
@@ -372,7 +373,7 @@ $list-before-margin: 8px;
 	top: 0;
 	left: 0;
 	padding: $scrolled-nav-padding;
-	@include transition($standard-transition);
+	// @include transition($standard-transition);
 	z-index: 10;
 	cursor: pointer;
 	*{
@@ -443,7 +444,7 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	max-width: 60px;
 	// color: $main-color-1;
 	text-align: center;
-	@include transition($standard-transition);
+	// @include transition($standard-transition);
 	ul{
 		background: $main-color-1;
 		opacity: 0.9;
@@ -767,61 +768,99 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	}
 }
 
+.body-disable-scroll-on-xs{
+	@include media-xs{
+		overflow: hidden;
+		height: 100%;
+	}
+}
+.click-to-scroll{
+	position: absolute;
+	width: 34px;
+	height: 50px;
+	// background-color: $main-color-5;
+	background-image: url(../img/arrow-down.png);
+	background-size: 100%;
+	// border-radius: 50%;
+	// box-shadow: 0px 0px 20px rgba(255,255,255,0.4);
+	bottom: 10%;
+	left: 50%;
+	@include transform(translateX(-50%));
+	display: none;
+	@include media-xs{
+		display: block;
+	}
+	&:active{
+		// background-color: darken($main-color-5, 10%);
+		filter: brightness(0.5);
+	}
+}
+
 /* ******************************************************************************************************************** */
 
 
 /* ***************** animations ***************** */
 @include keyframes(behind-to-front-left-animation){
-	0%		{transform: translateX(0) rotate(0);
+	0%		{transform: translate(0) rotate(0);
 			 z-index: -1}
-	50%		{transform: translateX(0) rotate(0);
+	50%		{transform: translate(0) rotate(0);
 			 z-index: -1}
-	75%		{transform: translateX(-100%) rotate(90deg);
+	75%		{transform: translate(-20%) rotate(90deg);
+	// 75%		{transform: rotate(90deg);
 			 z-index: 0}
-	100%	{transform: translateX(0) rotate(0);
+	100%	{transform: translate(0) rotate(0);
 			 z-index: 0}
 }
 @include keyframes(behind-to-front-right-animation){
-	0%		{transform: translateX(0) rotate(0);
+	0%		{transform: translate(0) rotate(0);
 			 z-index: -1}
-	50%		{transform: translateX(0) rotate(0);
+	50%		{transform: translate(0) rotate(0);
 			 z-index: -1}
-	75%		{transform: translateX(100%) rotate(-90deg);
+	75%		{transform: translate(20%) rotate(-90deg);
+	// 75%		{transform: rotate(-90deg);
 			 z-index: 0}
-	100%	{transform: translateX(0) rotate(0);
+	100%	{transform: translate(0) rotate(0);
 			 z-index: 0}
 }
 @include keyframes(behind-to-front-left-reverse-animation){
-	0%		{transform: translateX(0) rotate(0);
+	0%		{transform: translate(0) rotate(0);
 			 z-index: 0}
-	50%		{transform: translateX(0) rotate(0);
+	50%		{transform: translate(0) rotate(0);
 			 z-index: 0}
-	75%		{transform: translateX(-100%) rotate(90deg);
+	75%		{transform: translate(-20%) rotate(90deg);
+	// 75%		{transform: rotate(90deg);
 			 z-index: -1}
-	100%	{transform: translateX(0) rotate(0);
+	100%	{transform: translate(0) rotate(0);
 			 z-index: -1}
 }
 @include keyframes(behind-to-front-right-reverse-animation){
-	0%		{transform: translateX(0) rotate(0);
+	0%		{transform: translate(0) rotate(0);
 			 z-index: 0}
-	50%		{transform: translateX(0) rotate(0);
+	50%		{transform: translate(0) rotate(0);
 			 z-index: 0}
-	75%		{transform: translateX(100%) rotate(-90deg);
+	75%		{transform: translate(20%) rotate(-90deg);
+	// 75%		{transform: rotate(-90deg);
 			 z-index: -1}
-	100%	{transform: translateX(0) rotate(0);
+	100%	{transform: translate(0) rotate(0);
 			 z-index: -1}
 }
 .behind-to-front{
 	position: relative;
 	z-index: -1;
 }
+.behind-to-front--left{
+	transform-origin: 0 0;
+}
+.behind-to-front--right{
+	transform-origin: 100% 0;
+}
 $sides: left right;
 @each $side in $sides{
 	.behind-to-front--#{$side}-animation{
-		@include animation(behind-to-front-#{$side}-animation)
+		@include animation(behind-to-front-#{$side}-animation, 1s);
 	}
 	.behind-to-front--#{$side}-reverse-animation{
-		@include animation(behind-to-front-#{$side}-reverse-animation)
+		@include animation(behind-to-front-#{$side}-reverse-animation, 1s);
 	}
 }
 

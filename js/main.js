@@ -109,6 +109,8 @@ function startJumpingLetters() {
 				clearInterval(makeLettersBounce);
 				// console.log("END");
 				launchHeaderSubtitle();
+				// odpal canvasa insideoutLines:
+				setTimeout(insideout, 1010);
 			}
 			element.h += element.dh;
 			element.style.bottom = element.h + 'px';
@@ -124,31 +126,40 @@ function launchHeaderSubtitle(){
 function decreaseNavOnScroll(){
 	let headerTitle = document.querySelector('.header__title');
 	let headerTitleTop = window.innerHeight / 2;
+	let scrolled;
 
 	function toggleNavClasses(){
 		let scrollTop = windowScrollY();
 		let windowScrollTopToMoveTitleToNav = window.innerHeight / 3;
 		if (scrollTop > windowScrollTopToMoveTitleToNav){
-			foreach(document.querySelectorAll('.nav--default'), (item) => {
-				item.classList.add('nav--scrolled');
-			});
-			// foreach(document.querySelectorAll('.nav'), (item) => {
-			// 	item.classList.add('nav--shadow');
-			// });
-			document.querySelector('.header__title').classList.add('header__title--scrolled');
-			document.querySelector('.header__title').classList.remove('centered');
-			headerTitle.style.top = 0 + 'px';
+			if (!scrolled){
+				scrolled = true;
+				// console.log('scrolled: ' + scrolled);
+				foreach(document.querySelectorAll('.nav--default'), (item) => {
+					item.classList.add('nav--scrolled');
+				});
+				// foreach(document.querySelectorAll('.nav'), (item) => {
+				// 	item.classList.add('nav--shadow');
+				// });
+				document.querySelector('.header__title').classList.add('header__title--scrolled');
+				document.querySelector('.header__title').classList.remove('centered');
+				// headerTitle.style.top = 0 + 'px';
+			}
 		}
 		else{
-			foreach(document.querySelectorAll('.nav--default'), (item) => {
-				item.classList.remove('nav--scrolled');
-			});
-			// foreach(document.querySelectorAll('.nav'), (item) => {
-			// 	item.classList.remove('nav--shadow');
-			// });
-			document.querySelector('.header__title').classList.remove('header__title--scrolled');
-			document.querySelector('.header__title').classList.add('centered');
-			headerTitle.style.top = headerTitleTop - scrollTop + 'px';
+			if (scrolled){
+				scrolled = false;
+				// console.log('scrolled: ' + scrolled);
+				foreach(document.querySelectorAll('.nav--default'), (item) => {
+					item.classList.remove('nav--scrolled');
+				});
+				// foreach(document.querySelectorAll('.nav'), (item) => {
+				// 	item.classList.remove('nav--shadow');
+				// });
+				document.querySelector('.header__title').classList.remove('header__title--scrolled');
+				document.querySelector('.header__title').classList.add('centered');
+			}
+			// headerTitle.style.top = headerTitleTop - scrollTop + 'px';
 		}
 	}
 
@@ -174,17 +185,24 @@ function addAnimationClass(className) {
 		foreach(elementsArray, (item) => {
 			if (item.getBoundingClientRect().y < window.innerHeight * 0.7 &&
 			item.getBoundingClientRect().y > 50){
-				if (!item.above) {
+				if (!item.above && !item.working) {
+					item.working = true;
 					item.above = true;
+					// console.log(item.working);
 					item.classList.add(className + '-animation');
 					item.classList.remove(className + '-reverse-animation');
+					setTimeout( () => {item.working = false;}, 1010);
 				}
 			}
 			else{
-				if (item.above) {
+				if (item.above && !item.working) {
+					item.working = true;
 					item.above = false;
+					// console.log(item.working);
+					// console.log(item, item.above);
 					item.classList.add(className + '-reverse-animation');
 					item.classList.remove(className + '-animation');
+					setTimeout( () => {item.working = false;}, 1010);
 				}
 			}
 		});
@@ -285,6 +303,39 @@ function CVLanguagesPlacementAndShowHide() {
 	});
 }
 
+function allowScrollingWhenXS() {
+	let body = document.querySelector('body');
+	let allowScrollBtn = document.querySelector('.click-to-scroll');
+	
+	function disableScrollIfNotScrolled() {
+		if (windowScrollY() == 0) {
+			body.classList.add('body-disable-scroll-on-xs');
+		}
+	}
+
+	function enableScroll() {
+		body.classList.remove('body-disable-scroll-on-xs');
+	}
+
+	disableScrollIfNotScrolled();
+
+	allowScrollBtn.addEventListener('click', () => {
+		enableScroll();
+		scrollToY(window.innerHeight - 50, 300);
+	});
+
+	foreach(document.querySelectorAll('.href'), (item) => {
+		item.addEventListener('click', () => {
+			enableScroll();
+		});
+	});
+
+	window.addEventListener('scroll', () => {
+		disableScrollIfNotScrolled();
+	});
+}
+
+
 
 // **************************************************************************************************
 
@@ -311,6 +362,8 @@ window.onload = () => {
 	toggleNav();
 
 	CVLanguagesPlacementAndShowHide();
+
+	allowScrollingWhenXS();
 }
 
 // **************************************************************************************************
