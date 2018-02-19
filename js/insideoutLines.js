@@ -285,7 +285,7 @@ function insideout() {
 
 
 	let lastWindowWidth = window.innerWidth;
-	addEventListener('resize', () => {
+	window.addEventListener('resize', () => {
 		if (lastWindowWidth != window.innerWidth) {
 			initGlobalVariables();
 			lastWindowWidth = window.innerWidth;

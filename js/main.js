@@ -337,27 +337,18 @@ function allowScrollingWhenXS() {
 
 function increaseHeadertHeightWhenXS() {
 	let header = document.querySelector('.header')
-	let normalHeaderHeight = window.getComputedStyle(header, null).getPropertyValue('height');
-	let numerOfPixels = normalHeaderHeight.split('px')[0];
 	let increaseOfHeight = 75; 
-	let lastWindowWidth = window.innerWidth;
 
 	function setHeight() {
 		if (window.innerWidth < 768) {
-		header.style.height = Number(numerOfPixels) + Number(increaseOfHeight);
+			header.style.height = Number(window.innerHeight) + Number(increaseOfHeight);
 		}
 		else {
-			header.style.height = normalHeaderHeight;
+			header.style.height = window.innerHeight;
 		}
 	}
 	setHeight();
-	window.addEventListener('resize', () => {
-		if (lastWindowWidth != window.innerWidth) {
-			setHeight();
-			lastWindowWidth = window.innerWidth;
-		}
-	});
-	// console.log(window.getComputedStyle(header, null).getPropertyValue('height'));
+	window.addEventListener('resize', setHeight);
 }
 
 
