@@ -16,6 +16,8 @@ function insideout() {
 	var totalSpinFactor;
 	var currentSpin;
 
+	let numberOfLines;
+
 	function initGlobalVariables(){
 		insideoutLines.width = insideoutLines.parentElement.clientWidth;
 		insideoutLines.height = insideoutLines.parentElement.clientHeight;
@@ -34,6 +36,8 @@ function insideout() {
 		mouseY = [];
 		totalSpinFactor = 0;
 		currentSpin = 0;
+
+		numberOfLines = Math.floor((window.innerWidth - 300) * 0.35) + 100;
 	}
 
 	initGlobalVariables();
@@ -212,11 +216,14 @@ function insideout() {
 		if (t == 0)
 			lines = [];
 
-		if (t < 500){
+		if (t < numberOfLines){
 			var radius = .2 + Math.random() * .2;
 			var x = Math.random() * x0 * 2;
 			var y = Math.random() * y0 * 2;
 			lines.push(new Line(x, y, radius));
+			if (t == numberOfLines - 1) {
+				console.log(lines.length);
+			}
 		}
 
 		// c.fillStyle = 'rgba(0,0,15,.3)';
@@ -277,8 +284,12 @@ function insideout() {
 	});
 
 
+	let lastWindowWidth = window.innerWidth;
 	addEventListener('resize', () => {
-		initGlobalVariables();
+		if (lastWindowWidth != window.innerWidth) {
+			initGlobalVariables();
+			lastWindowWidth = window.innerWidth;
+		}
 	});
 }
 
