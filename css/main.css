@@ -26,6 +26,9 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1; }
 
+html, body {
+  width: 100%; }
+
 ol, ul {
   list-style: none; }
 
@@ -198,7 +201,7 @@ body {
 
 .centered--lower {
   position: absolute;
-  top: 75%;
+  top: 70%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -490,9 +493,6 @@ body {
 .opacity0 {
   opacity: 0; }
 
-.overflow-x-hidden {
-  overflow-x: hidden; }
-
 .standard-content {
   width: 80%;
   margin: 0 auto;
@@ -558,7 +558,8 @@ body {
 .header {
   font-family: "Spectral SC", serif, Helvetica;
   font-weight: bold;
-  position: relative; }
+  position: relative;
+  width: 100%; }
 
 .header--overflow-y {
   overflow-y: hidden; }
@@ -614,6 +615,7 @@ body {
 
 .header__subtitle {
   color: #D5FBFF;
+  opacity: 0;
   font-size: 40px;
   -webkit-transition: opacity 1000ms ease-in;
   -moz-transition: opacity 1000ms ease-in;
@@ -1179,7 +1181,7 @@ body {
   height: 50px;
   background-image: url(../img/arrow-down.png);
   background-size: 100%;
-  bottom: 10%;
+  bottom: 15%;
   left: 50%;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -1191,6 +1193,10 @@ body {
       display: block; } }
   .click-to-scroll:active {
     filter: brightness(0.5); }
+
+@media screen and (max-width: 767px) {
+  .centered--xs-higher {
+    top: 45%; } }
 
 /* ******************************************************************************************************************** */
 /* ***************** animations ***************** */

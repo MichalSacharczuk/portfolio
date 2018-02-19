@@ -221,9 +221,9 @@ function insideout() {
 			var x = Math.random() * x0 * 2;
 			var y = Math.random() * y0 * 2;
 			lines.push(new Line(x, y, radius));
-			if (t == numberOfLines - 1) {
-				console.log(lines.length);
-			}
+			// if (t == numberOfLines - 1) {
+			// 	console.log(lines.length);
+			// }
 		}
 
 		// c.fillStyle = 'rgba(0,0,15,.3)';
