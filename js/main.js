@@ -229,7 +229,7 @@ function toggleNav(){
 	let ulItems = ul.querySelectorAll('li');
 	let lastXsUlHeight = 0;
 
-	function unwrapUl() {
+	function wrapUl() {
 		ul.style.height = 0;
 		btn.classList.remove('nav__button--unwrapped');
 		lastXsUlHeight = 0;
@@ -252,14 +252,15 @@ function toggleNav(){
 			lastXsUlHeight = ulHeight;
 		}
 		else {
-			unwrapUl();
+			wrapUl();
 		}
 		// console.log('lastXsUlHeight: ' + lastXsUlHeight);
 	});
 
 	document.addEventListener('click', (event) => {
-		if (event.target != btn) {
-			unwrapUl();
+		if (event.target != btn && window.innerWidth < 768) {
+			console.log('ul wrapped');
+			wrapUl();
 		}
 	});
 
