@@ -228,6 +228,13 @@ function toggleNav(){
 	// console.log(ul);
 	let ulItems = ul.querySelectorAll('li');
 	let lastXsUlHeight = 0;
+
+	function unwrapUl() {
+		ul.style.height = 0;
+		btn.classList.remove('nav__button--unwrapped');
+		lastXsUlHeight = 0;
+	}
+
 	btn.addEventListener('click', () => {
 		let ulHeight = 0;
 		foreach(ulItems, (item) => {
@@ -245,19 +252,27 @@ function toggleNav(){
 			lastXsUlHeight = ulHeight;
 		}
 		else {
-			ul.style.height = 0;
-			btn.classList.remove('nav__button--unwrapped');
-			lastXsUlHeight = 0;
+			unwrapUl();
 		}
 		// console.log('lastXsUlHeight: ' + lastXsUlHeight);
 	});
 
-	window.addEventListener('resize', () => {
-		if (window.innerWidth < 768){
-			ul.style.height = lastXsUlHeight;
+	document.addEventListener('click', (event) => {
+		if (event.target != btn) {
+			unwrapUl();
 		}
-		else{
-			ul.style.height = 'auto';
+	});
+
+	let lastWindowWidth = window.innerWidth;
+	window.addEventListener('resize', () => {
+		if (lastWindowWidth != window.innerWidth) {
+			if (window.innerWidth < 768){
+				ul.style.height = lastXsUlHeight;
+			}
+			else{
+				ul.style.height = 'auto';
+			}
+			lastWindowWidth = window.innerWidth;
 		}
 	});
 }
@@ -269,7 +284,7 @@ function CVLanguagesPlacementAndShowHide() {
 	var cvLiAll = cvLang.querySelectorAll('li');
 
 	function CVLanguagesPlacement() {
-		cvLangBox.style.top = cvBtn.getBoundingClientRect().y;
+		cvLangBox.style.bottom = window.innerHeight - cvBtn.getBoundingClientRect().bottom;
 		cvLangBox.style.left = cvBtn.clientWidth;
 		cvLangBox.style.height = cvBtn.clientHeight;
 		cvLiAll.width = 0;
