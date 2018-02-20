@@ -109,8 +109,11 @@ function startJumpingLetters() {
 				clearInterval(makeLettersBounce);
 				// console.log("END");
 				launchHeaderSubtitle();
-				// odpal canvasa insideoutLines:
-				setTimeout(insideout, 1010);
+				// odpal canvasa insideoutLines i pokaż .click-to-scroll:
+				setTimeout( () => {
+					insideout();
+					document.querySelector('.click-to-scroll').style.opacity = 1;
+				}, 1010);
 			}
 			element.h += element.dh;
 			element.style.bottom = element.h + 'px';

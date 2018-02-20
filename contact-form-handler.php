@@ -1,15 +1,12 @@
 <?php
 
 require __DIR__ . '\vendor\autoload.php';
-// require __DIR__ . '\vendor\phpmailer\phpmailer\PHPMailerAutoload.php';
 
 function sendEmail($config){
 	$mail = new PHPMailer();
 	try {
 		$mail->CharSet = 'UTF-8';
 		//Server settings
-		// $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-		// $mail->SMTPDebug = 3;                                 // Enable verbose debug output
 		$mail->isSMTP();                                      // Set mailer to use SMTP
 		$mail->Host = 'mailtrap.io';  // Specify main and backup SMTP servers
 		// $mail->Host = 'poczta.o2.pl';  // Specify main and backup SMTP servers
@@ -25,14 +22,7 @@ function sendEmail($config){
 		//Recipients
 		$mail->setFrom('michal_sachar@o2.pl', 'Michał Sacharczuk');
 		$mail->addAddress('michal_sachar@o2.pl', 'Michał Sacharczuk');     // Add a recipient
-		// $mail->addAddress('ellen@example.com');               // Name is optional
 		$mail->addReplyTo($config->from_email, $config->from_name);
-		// $mail->addCC('cc@example.com');
-		// $mail->addBCC('bcc@example.com');
-
-		//Attachments
-		// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-		// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 
 		//Content
 		$mail->isHTML(true);                                  // Set email format to HTML
@@ -51,7 +41,6 @@ function sendEmail($config){
 		</script>
 		<?php
 
-		// echo 'Message has been sent';
 	} catch (Exception $e) {
 
 		?>
@@ -60,8 +49,6 @@ function sendEmail($config){
 		</script>
 		<?php
 
-		// echo 'Message could not be sent.';
-		// echo 'Mailer Error: ' . $mail->ErrorInfo;
 	}
 }
 
@@ -74,7 +61,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	];
 
 	sendEmail($config);
-	// header('Location: index.html');
 
 	?>
 	<script>

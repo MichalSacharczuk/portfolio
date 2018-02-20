@@ -559,17 +559,16 @@ body {
   font-family: "Spectral SC", serif, Helvetica;
   font-weight: bold;
   position: relative;
-  width: 100%; }
-
-.header--overflow-y {
-  overflow-y: hidden; }
+  width: 100%;
+  overflow: hidden; }
 
 .header--colored {
   background: #0c1010; }
 
 .header__title {
   color: #D5FBFF;
-  font-size: 80px; }
+  font-size: 80px;
+  pointer-events: none; }
   @media (max-width: 1199px) {
     .header__title {
       font-size: 67.5px; } }
@@ -583,6 +582,10 @@ body {
     .header__title {
       font-size: 30px; } }
 
+@media screen and (max-width: 767px) {
+  .centered--xs-higher {
+    top: 45%; } }
+
 .header__title--scrolled {
   color: #2F3738;
   font-size: 16px;
@@ -592,6 +595,7 @@ body {
   left: 0;
   padding: 20px;
   z-index: 10;
+  pointer-events: auto;
   cursor: pointer; }
   @media (max-width: 1199px) {
     .header__title--scrolled {
@@ -611,11 +615,16 @@ body {
     color: #2F3738; }
   .header__title--scrolled:hover {
     letter-spacing: 1px;
-    left: -6px; }
+    left: -6px;
+    -webkit-transition: all 300ms ease-out;
+    -moz-transition: all 300ms ease-out;
+    -o-transition: all 300ms ease-out;
+    transition: all 300ms ease-out; }
 
 .header__subtitle {
   color: #D5FBFF;
   opacity: 0;
+  pointer-events: none;
   font-size: 40px;
   -webkit-transition: opacity 1000ms ease-in;
   -moz-transition: opacity 1000ms ease-in;
@@ -1177,12 +1186,18 @@ body {
 
 .click-to-scroll {
   position: absolute;
+  opacity: 0;
+  -webkit-transition: opacity 1000ms ease-in;
+  -moz-transition: opacity 1000ms ease-in;
+  -o-transition: opacity 1000ms ease-in;
+  transition: opacity 1000ms ease-in;
   width: 34px;
   height: 50px;
   background-image: url(../img/arrow-down.png);
   background-size: 100%;
   bottom: 15%;
   left: 50%;
+  cursor: pointer;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   -o-transform: translateX(-50%);
@@ -1191,12 +1206,10 @@ body {
   @media screen and (max-width: 767px) {
     .click-to-scroll {
       display: block; } }
+  .click-to-scroll:hover {
+    filter: brightness(0.8); }
   .click-to-scroll:active {
     filter: brightness(0.5); }
-
-@media screen and (max-width: 767px) {
-  .centered--xs-higher {
-    top: 45%; } }
 
 /* ******************************************************************************************************************** */
 /* ***************** animations ***************** */
