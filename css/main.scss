@@ -257,7 +257,7 @@ $list-before-margin: 8px;
 	font-weight: bold;
 }
 .text-bulge{
-	text-shadow: 3px 3px 0px rgba(0,0,0,0.8), -1px -1px 0px rgba(255,255,255,0.8);
+	text-shadow: -1px -1px 0px rgba(180,180,180,0.8), 3px 3px 0px rgba(0,0,0,0.8);
 }
 .text-color-1{
 	color: $main-color-1;
@@ -563,6 +563,9 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 .section__content--reversed{
 	margin: 10% auto auto 0;
 }
+.section__content--projects>div:nth-of-type(even){
+	flex-direction: row-reverse;
+}
 .section--contact{
 	position: relative;
 	width: 100%;
@@ -598,9 +601,6 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	width: 100%;
 	margin: 40px auto;
 	// margin: 20px 0 20px auto;
-}
-.project--reversed{
-	flex-direction: row-reverse;
 }
 .project__heading{
 	@include font-size(24px, 14px);
