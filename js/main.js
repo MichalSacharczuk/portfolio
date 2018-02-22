@@ -123,6 +123,11 @@ function startJumpingLetters() {
 }
 
 function launchHeaderSubtitle(){
+	// poniższe dwie linijki do poprawnego zrenderowania styli w firefoxie:
+	document.querySelector('.perspective-text-shadow__shadow1').style.position = 'relative';
+	setTimeout( () => {
+		document.querySelector('.perspective-text-shadow__shadow1').style.position = 'absolute';
+	}, 100);
 	document.querySelector('.header__subtitle').style.opacity = 1;
 }
 
