@@ -202,7 +202,8 @@ function addAnimationClass(className) {
 					setTimeout( () => {item.working = false;}, 1010);
 				}
 			}
-			else{
+			else if (item.getBoundingClientRect().y < -window.innerHeight ||
+			item.getBoundingClientRect().y > 2 * window.innerHeight) {
 				if (item.above && !item.working) {
 					item.working = true;
 					item.above = false;
