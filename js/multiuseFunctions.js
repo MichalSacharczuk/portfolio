@@ -37,9 +37,9 @@ function scrollToY(y, speed){
 }
 
 function navigateByAnimation(speed) {
-	foreach(document.querySelectorAll('.href'), (item) => {
+	foreach(document.querySelectorAll('.data-myref'), (item) => {
 		item.addEventListener('click', () => {
-			let href = item.getAttribute('href');
+			let href = item.getAttribute('data-myref');
 			let destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().y + windowScrollY());
 			scrollToY(destinationElementY - 150, speed);
 		});

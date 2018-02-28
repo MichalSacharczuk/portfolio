@@ -1,35 +1,24 @@
-﻿<html lang="pl-PL">
+﻿<!DOCTYPE html>
+<html lang="pl-PL">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="description" content="Michal Sacharczuk...">
-	<meta name="keywords" content="">
+	<meta name="description" content="Michał Sacharczuk otwarty na propozycje pracy na stanowisku Junior Front-end Developer">
+	<meta name="keywords" content="Michal, Sacharczuk, Junior, Front-End, Developer">
 	<!--FAVICONS-->
-<!-- 	<link rel="shortcut icon" type="image/x-icon" href="favicons/favicon-16x16.png">
-	<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-icon-57x57.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="favicons/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff"> -->
 	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png">
 	<title>Michal Sacharczuk - Junior Front-End Developer</title>
-	<!--OG TAGS-->
-	<meta property="og:title" content="Michal Sacharczuk portfolio">
-	<meta property="og:type" content="website/portfolio">
-	<!-- <meta property="og:url" content="http://introoz37.github.io/"> -->
-	<!-- <meta property="og:image" content="image.jpg"> -->
 	<!--STYLES-->
-	<link href="https://fonts.googleapis.com/css?family=Lato|Spectral+SC" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 
 </head>
 
 <body style="overflow-x: hidden;">
 
-<!-- <div class="background-body box-pulsing"><img src="img/clouds.jpg"></div> -->
-<!-- <div class="background-document"><img src="img/main-background3.png"></div> -->
 <div class="background-document">
 	<canvas id="background-balls">Your browser do not support Canvas</canvas>
 </div>
@@ -58,10 +47,14 @@
 	<div id="cv-lang-box">
 		<ul id="cv-languages">
 			<a href="pdf/CV-Michal_Sacharczuk-PL.pdf" target="blank">
-				<li>PL</li>
+				<li>
+					PL
+				</li>
 			</a>
 			<a href="pdf/CV-Michal_Sacharczuk-EN.pdf" target="blank">
-				<li>EN</li>
+				<li>
+					EN
+				</li>
 			</a>
 		</ul>
 	</div>
@@ -77,19 +70,18 @@
 			<span class="hamburger-bar"></span>
 		</button>
 		<ul>
-			<li class="href" href="#o-mnie">O mnie</li>
-			<li class="href" href="#doswiadczenie">Doświadczenie</li>
-			<li class="href" href="#umiejetnosci">Umiejętności</li>
-			<li class="href" href="#projekty">Projekty</li>
-			<li class="href" href="#kontakt">Kontakt</li>
+			<li class="data-myref" data-myref="#o-mnie">O mnie</li>
+			<li class="data-myref" data-myref="#doswiadczenie">Doświadczenie</li>
+			<li class="data-myref" data-myref="#umiejetnosci">Umiejętności</li>
+			<li class="data-myref" data-myref="#projekty">Projekty</li>
+			<li class="data-myref" data-myref="#kontakt">Kontakt</li>
 		</ul>
 	</nav>
-	<h1 class="header__title centered centered--xs-higher width-max-content text-bulge href" href="#start">
-		<div class="bouncing-letters">Michał Sacharczuk</div>
-	</h1>
+	<div class="header__title centered centered--xs-higher width-max-content text-bulge data-myref" data-myref="#start">
+		<h1 class="bouncing-letters">Michał Sacharczuk</h1>
+	</div>
 	<h2 class="header__subtitle centered--lower width-max-content">
 		<span class="perspective-text-shadow">
-			<!-- <span class="perspective-text-shadow__shadow4">Junior front-end developer</span> -->
 			<span class="perspective-text-shadow__shadow3">Junior front-end developer</span>
 			<span class="perspective-text-shadow__shadow2">Junior front-end developer</span>
 			<span class="perspective-text-shadow__shadow1">Junior front-end developer</span>
@@ -99,9 +91,9 @@
 </header>
 <main class="main">
 	<section class="section">
-		<h1 id="o-mnie" class="section__h behind-to-front behind-to-front--left first-letter-big-color">
-			<div class="section__h-fill box-shadow--around">O mnie</div>
-		</h1>
+		<div id="o-mnie" class="section__h behind-to-front behind-to-front--left first-letter-big-color">
+			<h2 class="section__h-fill box-shadow--around">O mnie</h2>
+		</div>
 		<div class="section__content box-shadow--around">
 			<p class="content__p content__p--heading">Przepis na <span class="text-color-5">sukces zawodowy</span>?</p>
 			<p class="content__p">Odpowiedzi mogą być różne, jednak konieczny do spełnienia jest zawsze <span class="text-bold letter-spacing-1">jeden warunek:</span></p> 
@@ -112,12 +104,12 @@
 		</div>
 	</section>
 	<section class="section">
-		<h1 id="doswiadczenie" class="section__h section__h--reversed behind-to-front behind-to-front--right first-letter-big-color">
-			<div class="section__h-fill box-shadow--around">Doświadczenie</div>
-		</h1>
+		<div id="doswiadczenie" class="section__h section__h--reversed behind-to-front behind-to-front--right first-letter-big-color">
+			<h2 class="section__h-fill box-shadow--around">Doświadczenie</h2>
+		</div>
 		<div class="section__content section__content--reversed box-shadow--around">
-			<h2 class="heading heading--date">04.2017 - 10.2017</h2>
-			<h3 class="heading heading--additional">Staż w firmie dimundi (dimundi.pl)</h3>
+			<h3 class="heading heading--date">04.2017 - 10.2017</h3>
+			<h4 class="heading heading--additional">Staż w firmie dimundi (dimundi.pl)</h4>
 			<ul class="list-pointed left-margin-text">
 				<li>Praca z frameworkiem Django (API, bazy danych, powtarzalne bloki kodu HTML)</li>
 				<li>Tworzenie i modernizowanie kodu Javascript + jQuery </li>
@@ -127,9 +119,9 @@
 		</div>
 	</section>
 	<section class="section">
-		<h1 id="umiejetnosci" class="section__h h-over-content behind-to-front behind-to-front--left first-letter-big-color">
-			<div class="section__h-fill box-shadow--around">Umiejętności</div>
-		</h1>
+		<div id="umiejetnosci" class="section__h h-over-content behind-to-front behind-to-front--left first-letter-big-color">
+			<h2 class="section__h-fill box-shadow--around">Umiejętności</h2>
+		</div>
 		<div class="section__content content-below-h box-shadow--around">
 			<ul>
 				<li class="font-l li-big">
@@ -164,9 +156,9 @@
 		</div>
 	</section>
 	<section class="section section--last">
-		<h1 id="projekty" class="section__h section__h--reversed behind-to-front behind-to-front--right first-letter-big-color">
-			<div class="section__h-fill box-shadow--around">Projekty</div>
-		</h1>
+		<div id="projekty" class="section__h section__h--reversed behind-to-front behind-to-front--right first-letter-big-color">
+			<h2 class="section__h-fill box-shadow--around">Projekty</h2>
+		</div>
 		<div class="section__content section__content--projects section__content--reversed box-shadow--around">
 			<div class="project display-flex display-flex--center">
 				<div class="project__photo flex-item-xs-1">
@@ -175,8 +167,8 @@
 					</a>
 				</div>
 				<div class="project__content flex-item-xs-1">
-					<h2 class="project__heading text-centered">ekranywszkole.pl</h2>
-					<h3 class="project__subheading text-centered">(udział w tworzeniu aplikacji)</h3>
+					<h3 class="project__heading text-centered">ekranywszkole.pl</h3>
+					<h4 class="project__subheading text-centered">(udział w tworzeniu aplikacji)</h4>
 					<div class="display-flex display-flex--center">
 						<a href="https://ekranywszkole.pl" target="blank" class="button button--standard">Live</a>
 					</div>
@@ -189,8 +181,8 @@
 					</a>
 				</div>
 				<div class="project__content flex-item-xs-1">
-					<h2 class="project__heading text-centered">sudoku</h2>
-					<h3 class="project__subheading text-centered">(wfp)</h3>
+					<h3 class="project__heading text-centered">sudoku</h3>
+					<h4 class="project__subheading text-centered">(wfp)</h4>
 					<div class="display-flex display-flex--center">
 						<a class="button button--standard" href="https://github.com/MichalSacharczuk/sudoku_Csharp-WPF" target="blank">Github</a>
 					</div>
@@ -203,8 +195,8 @@
 					</a>
 				</div>
 				<div class="project__content flex-item-xs-1">
-					<h2 class="project__heading text-centered">portfolio</h2>
-					<h3 class="project__subheading text-centered">(własny JavaScript, bez wtyczek i bibliotek)</h3>
+					<h3 class="project__heading text-centered">portfolio</h3>
+					<h4 class="project__subheading text-centered">(własny JavaScript, bez wtyczek i bibliotek)</h4>
 					<div class="display-flex display-flex--center">
 						<a href="https://github.com/MichalSacharczuk/portfolio" class="button button--standard">Github</a>
 					</div>
@@ -215,7 +207,7 @@
 	<section id="section-contact" class="section--contact">
 		<div class="top-shadow"></div>
 		<div class="standard-content">
-			<h1 id="kontakt" class="heading heading--main text-centered first-letter-big-color">Kontakt</h1>
+			<h2 id="kontakt" class="heading heading--main text-centered first-letter-big-color">Kontakt</h2>
 			<div class="display-flex">
 				<div class="flex-item-3 flex-item-xs-1 flex-item--margin">
 					<form id="my-form" class="form" action="contact-form-handler.php" method="POST" novalidate>
@@ -230,24 +222,24 @@
 				<div class="flex-item-3 flex-item-xs-2 flex-item--margin position-relative">
 					<div class="envelope">
 						<div id="envelope-imgs">
-							<img id="envelope-top" src="img/mail-top.png">
-							<img src="img/mail-open.png">
+							<img id="envelope-top" src="img/mail-top.png" alt="mail-top">
+							<img src="img/mail-open.png" alt="mail-open">
 						</div>
 						<div class="mail-ok-box">
-							<img src="img/ok-sign-color.png">
+							<img src="img/ok-sign-color.png" alt="ok-sign-color">
 						</div>
 					</div>
 					<p id="envelope-info"></p>
 				</div>
 				<div class="flex-item-3 flex-item-xs-2 flex-item--margin">
-					<h2 class="heading heading--lg text-centered">Michał Sacharczuk</h2>
-					<h3 class="heading heading--md text-centered">michal_sachar@o2.pl</h3>
+					<h3 class="heading heading--lg text-centered">Michał Sacharczuk</h3>
+					<h4 class="heading heading--md text-centered">michal_sachar@o2.pl</h4>
 					<p class="heading heading--md text-centered">tel. 501 949 635</p>
 				</div>
 			</div>
 		</div>
 		<footer class="footer">
-			
+			&copy; 2018 Michał Sacharczuk
 		</footer>
 	</section>
 </main>

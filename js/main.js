@@ -253,7 +253,7 @@ function toggleNav(){
 			});
 		});
 		if (ul.offsetHeight == 0) {
-			ul.style.height = ulHeight;
+			ul.style.height = ulHeight + 'px';
 			btn.classList.add('nav__button--unwrapped');
 			lastXsUlHeight = ulHeight;
 		}
@@ -265,7 +265,7 @@ function toggleNav(){
 
 	document.addEventListener('click', (event) => {
 		if (event.target != btn && window.innerWidth < 768) {
-			console.log('ul wrapped');
+			// console.log('ul wrapped');
 			wrapUl();
 		}
 	});
@@ -274,7 +274,7 @@ function toggleNav(){
 	window.addEventListener('resize', () => {
 		if (lastWindowWidth != window.innerWidth) {
 			if (window.innerWidth < 768){
-				ul.style.height = lastXsUlHeight;
+				ul.style.height = lastXsUlHeight + 'px';
 			}
 			else{
 				ul.style.height = 'auto';
@@ -291,20 +291,21 @@ function CVLanguagesPlacementAndShowHide() {
 	var cvLiAll = cvLang.querySelectorAll('li');
 
 	function CVLanguagesPlacement() {
-		cvLangBox.style.bottom = window.innerHeight - cvBtn.getBoundingClientRect().bottom;
-		cvLangBox.style.left = cvBtn.clientWidth;
-		cvLangBox.style.height = cvBtn.clientHeight;
+		cvLangBox.style.bottom = (window.innerHeight - cvBtn.getBoundingClientRect().bottom) + 'px';
+		// console.log(window.getComputedStyle(cvLangBox,null).getPropertyValue('bottom'));
+		cvLangBox.style.left = cvBtn.clientWidth + 'px';
+		cvLangBox.style.height = cvBtn.clientHeight + 'px';
 		cvLiAll.width = 0;
 		foreach(cvLiAll, (item) => {
-			item.style.height = cvBtn.clientHeight;
+			item.style.height = cvBtn.clientHeight + 'px';
 			cvLiAll.width += item.clientWidth;
 		});
-		cvLang.style.width = cvLiAll.width;
+		cvLang.style.width = cvLiAll.width + 'px';
 	}
 
 	function CVLanguagesShowHide() {
 		if (cvLangBox.style.width == 0 || cvLangBox.style.width == '0px'){
-			cvLangBox.style.width = cvLiAll.width;
+			cvLangBox.style.width = cvLiAll.width + 'px';
 		}
 		else {
 			cvLangBox.style.width = 0;
@@ -376,6 +377,19 @@ function increaseHeadertHeightWhenXS() {
 	window.addEventListener('resize', setHeight);
 }
 
+function triggerAnchorElementWhenListItemClicked() {
+	// let allListItems = document.querySelectorAll('li,dt');
+	// foreach(allListItems, (li) => {
+	// 	let a = li.querySelectorAll('a');
+	// 	console.log(a, a.length);
+	// 	if (a.length == 1) {
+	// 		li.addEventListener('click', () => {
+	// 			window.location = a[0].getAttribute('href');
+	// 		});
+	// 	}
+	// });
+}
+
 
 // **************************************************************************************************
 
@@ -406,6 +420,8 @@ window.onload = () => {
 	allowScrollingWhenXS();
 
 	increaseHeadertHeightWhenXS();
+
+	triggerAnchorElementWhenListItemClicked();
 }
 
 // **************************************************************************************************

@@ -900,6 +900,10 @@ body {
   color: #D5FBFF;
   overflow-y: hidden; }
 
+.footer {
+  color: #647678;
+  text-align: center; }
+
 .h-over-content {
   margin-bottom: -70px; }
 
