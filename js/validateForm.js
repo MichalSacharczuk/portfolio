@@ -1,5 +1,5 @@
 function validateForm(formId, validateNow){
-	let everythingOk = false;
+	let everythingOk = true;
 
 	function isStringEmpty(string){
 		if (string.replace(/\s+/g,'') == ''){
@@ -13,11 +13,11 @@ function validateForm(formId, validateNow){
 	function checkIfEmpty(item){
 		if (isStringEmpty(item.value)){
 			showMessage(item,'Proszę uzupełnić poniższe pole.');
-			everythingOk = false;
+			item.checks.notEmptyOk = false;
 		}
 		else{
 			hideMessage(item);
-			everythingOk = true;
+			item.checks.notEmptyOk = true;
 		}
 	}
 
@@ -25,11 +25,11 @@ function validateForm(formId, validateNow){
 		if(!isStringEmpty(item.value)){
 			if (/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,3}$/i.test(item.value)){
 				hideMessage(item);
-				everythingOk = true;
+				item.checks.mailOk = true;
 			}
 			else{
 				showMessage(item,'Proszę podać poprawny adres e-mail');
-				everythingOk = false;
+				item.checks.mailOk = false;
 			}
 		}
 	}
@@ -58,6 +58,7 @@ function validateForm(formId, validateNow){
 	function doAllChecks(item){
 		checkIfEmpty(item);
 		if(item.getAttribute('type') == 'email'){
+			item.checks.mailOk = false;
 			checkEmail(item);
 		}
 	}
@@ -73,10 +74,10 @@ function validateForm(formId, validateNow){
 	for (var i = 0; i < formTextareas.length; i++) {
 		allFormInputs.push(formTextareas[i]);
 	}
-	//console.log(allFormInputs);
 
 	foreach(allFormInputs, (item, i) => {
 		item.i = i;
+		item.checks = {notEmptyOk: false};
 		item.addEventListener('focusout', () => {
 			doAllChecks(item);
 		});
@@ -85,6 +86,13 @@ function validateForm(formId, validateNow){
 		});
 		if(validateNow){
 			doAllChecks(item);
+
+			for (var check in item.checks) {
+				if (item.checks[check] == false) {
+					// console.log(i, ':', check, ': ' , item.checks[check]);
+					everythingOk = false;
+				}
+			};
 		}
 	});
 
