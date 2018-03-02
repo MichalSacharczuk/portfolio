@@ -1,11 +1,3 @@
-let colors = [
-	"#D5FBFF",
-	"#9FBCBF",
-	"#647678",
-	"#2F3738",
-	"#59D8E5"
-];
-
 function doMailAnimation(){
 	let sectionContact = document.querySelector('.section--contact');
 	window.scrollTo(0, windowScrollY() + sectionContact.getBoundingClientRect().y + sectionContact.clientHeight)	
@@ -37,9 +29,6 @@ function chechIfMailIsSentAndDoMailAnimation(){
 	}
 }
 
-// do testowania:
-// document.querySelector('.centered-vertically li:first-of-type').onclick = doMailAnimation;
-
 function disableClickedFormButtonAndSubmitForm(formId){
 	let item = document.querySelector('#' + formId + ' .form__button');
 	item.addEventListener('click', () => {
@@ -57,13 +46,10 @@ function showMailOkBox(){
 
 function startJumpingLetters() {
 
-	// let textContents = [];
 	foreach(document.getElementsByClassName('bouncing-letters'), (element) => {
 		element.style.opacity = 1;
-		// textContents.push(element.textContent);
 		let letters = element.textContent.split("");
 		element.innerHTML = "";
-		// console.log(letters);
 		let lastLetterWasSpace = 0;
 		for (i in letters){
 			if (i == 0){
@@ -89,7 +75,6 @@ function startJumpingLetters() {
 		element.style.bottom = Math.random() * 100 + window.innerHeight / 2 + 'px';
 		element.dh = 0;
 		element.h = Number(element.style.bottom.split('px')[0]);
-		// console.log(element.h);
 	});
 
 	let t = 0;
@@ -98,7 +83,6 @@ function startJumpingLetters() {
 	const scalingH = 150;
 	let makeLettersBounce = setInterval(function(){
 		foreach(document.getElementsByClassName('bouncing-letter'), (element) => {
-			// console.log(element.dh);
 			if (element.h + element.dh > 0){
 				element.dh += a;
 			}
@@ -107,12 +91,11 @@ function startJumpingLetters() {
 			}
 			else{
 				clearInterval(makeLettersBounce);
-				// console.log("END");
 				launchHeaderSubtitle();
 				// odpal canvasa insideoutLines i pokaż .click-to-scroll:
 				setTimeout( () => {
 					insideout();
-					document.querySelector('.click-to-scroll').style.opacity = 1;
+					document.querySelector('.click-to-scroll').classList.add('visible-xs-only');
 				}, 1010);
 			}
 			element.h += element.dh;
@@ -128,6 +111,7 @@ function launchHeaderSubtitle(){
 	setTimeout( () => {
 		document.querySelector('.perspective-text-shadow__shadow1').style.position = 'absolute';
 	}, 100);
+	document.querySelector('.header__subtitle').style.visibility = 'visible';
 	document.querySelector('.header__subtitle').style.opacity = 1;
 }
 
@@ -142,32 +126,22 @@ function decreaseNavOnScroll(){
 		if (scrollTop > windowScrollTopToMoveTitleToNav){
 			if (!scrolled){
 				scrolled = true;
-				// console.log('scrolled: ' + scrolled);
 				foreach(document.querySelectorAll('.nav--default'), (item) => {
 					item.classList.add('nav--scrolled');
 				});
-				// foreach(document.querySelectorAll('.nav'), (item) => {
-				// 	item.classList.add('nav--shadow');
-				// });
 				document.querySelector('.header__title').classList.add('header__title--scrolled');
 				document.querySelector('.header__title').classList.remove('centered');
-				// headerTitle.style.top = 0 + 'px';
 			}
 		}
 		else{
 			if (scrolled){
 				scrolled = false;
-				// console.log('scrolled: ' + scrolled);
 				foreach(document.querySelectorAll('.nav--default'), (item) => {
 					item.classList.remove('nav--scrolled');
 				});
-				// foreach(document.querySelectorAll('.nav'), (item) => {
-				// 	item.classList.remove('nav--shadow');
-				// });
 				document.querySelector('.header__title').classList.remove('header__title--scrolled');
 				document.querySelector('.header__title').classList.add('centered');
 			}
-			// headerTitle.style.top = headerTitleTop - scrollTop + 'px';
 		}
 	}
 
@@ -175,17 +149,13 @@ function decreaseNavOnScroll(){
 
 	document.addEventListener('scroll', () => {
 		toggleNavClasses();
-		// console.log(windowScrollY());
-		// console.log(document.querySelector('body').getBoundingClientRect().y);
-		// console.log("");
 	});
 
-	addEventListener('resize', () => {
+	window.addEventListener('resize', () => {
 		headerTitleTop = window.innerHeight / 2;
 		toggleNavClasses();
 	});
 }
-
 
 function addAnimationClass(className) {
 	this.runFunction = (className) => {
@@ -196,7 +166,6 @@ function addAnimationClass(className) {
 				if (!item.above && !item.working) {
 					item.working = true;
 					item.above = true;
-					// console.log(item.working);
 					item.classList.add(className + '-animation');
 					item.classList.remove(className + '-reverse-animation');
 					setTimeout( () => {item.working = false;}, 1010);
@@ -207,8 +176,6 @@ function addAnimationClass(className) {
 				if (item.above && !item.working) {
 					item.working = true;
 					item.above = false;
-					// console.log(item.working);
-					// console.log(item, item.above);
 					item.classList.add(className + '-reverse-animation');
 					item.classList.remove(className + '-animation');
 					setTimeout( () => {item.working = false;}, 1010);
@@ -221,51 +188,79 @@ function addAnimationClass(className) {
 }
 
 function setClassViewportHeight(){
-	foreach(document.querySelectorAll('.viewport-height'), (item) => {
-		item.style.height = window.innerHeight + "px";
+	function setViewportHeight(){
+		foreach(document.querySelectorAll('.viewport-height'), (item) => {
+			item.style.height = window.innerHeight + "px";
+		});
+	}
+	setViewportHeight();
+
+	window.addEventListener('resize', () => {
+		if (!detectTouchDevice()){
+			setViewportHeight();
+		}
 	});
 }
-addEventListener('resize', setClassViewportHeight);
 
 function toggleNav(){
 	let btn = document.querySelector('.nav__button');
-	let parent = btn.parentElement;
-	let ul = parent.querySelector('ul');
-	// console.log(ul);
-	let ulItems = ul.querySelectorAll('li');
+	let ul = btn.parentElement.querySelector('.list');
+	let ulItems = ul.querySelectorAll('.list__item');
 	let lastXsUlHeight = 0;
+	let ulHeight = 0;
+	let firstClick = true;
 
 	function wrapUl() {
 		ul.style.height = 0;
 		btn.classList.remove('nav__button--unwrapped');
 		lastXsUlHeight = 0;
+		// if (window.innerWidth < 768){
+			foreach(ulItems, (item) => {
+				item.style.height = 0;
+				item.lastHeight = 0;
+			});
+		// }
 	}
 
-	btn.addEventListener('click', () => {
-		let ulHeight = 0;
+	function setInitialHeightsAndEvents() {
 		foreach(ulItems, (item) => {
-			ulHeight += item.offsetHeight;
+			item.style.height = 'auto';
+			item.fullHeight = item.offsetHeight;
+			item.lastHeight = 0;
+			if (window.innerWidth < 768){
+				item.style.height = 0;
+			}
+			ulHeight += item.fullHeight;
 			item.addEventListener('click', () => {
 				if (window.innerWidth < 768){
-					ul.style.height = 0;
-					btn.classList.remove('nav__button--unwrapped');
+					wrapUl();
 				}
 			});
 		});
+	}
+
+	btn.addEventListener('click', () => {
+		if (firstClick) {
+			setInitialHeightsAndEvents();
+			firstClick = false;
+		}
+		
 		if (ul.offsetHeight == 0) {
 			ul.style.height = ulHeight + 'px';
 			btn.classList.add('nav__button--unwrapped');
 			lastXsUlHeight = ulHeight;
+			foreach(ulItems, (item) => {
+				item.style.height = item.fullHeight + 'px';
+				item.lastHeight = item.fullHeight;
+			});
 		}
 		else {
 			wrapUl();
 		}
-		// console.log('lastXsUlHeight: ' + lastXsUlHeight);
 	});
 
 	document.addEventListener('click', (event) => {
 		if (event.target != btn && window.innerWidth < 768) {
-			// console.log('ul wrapped');
 			wrapUl();
 		}
 	});
@@ -275,9 +270,15 @@ function toggleNav(){
 		if (lastWindowWidth != window.innerWidth) {
 			if (window.innerWidth < 768){
 				ul.style.height = lastXsUlHeight + 'px';
+				foreach(ulItems, (item) => {
+					item.style.height = item.lastHeight + 'px';
+				});
 			}
 			else{
 				ul.style.height = 'auto';
+				foreach(ulItems, (item) => {
+					item.style.height = 'auto';
+				});
 			}
 			lastWindowWidth = window.innerWidth;
 		}
@@ -285,47 +286,66 @@ function toggleNav(){
 }
 
 function CVLanguagesPlacementAndShowHide() {
-	var cvBtn = document.querySelector('#cv-img');
-	var cvLangBox = document.querySelector('#cv-lang-box');
-	var cvLang = document.querySelector('#cv-languages');
-	var cvLiAll = cvLang.querySelectorAll('li');
+	let cvBtn = document.querySelector('#cv-img');
+	let cvLangBox = document.querySelector('#cv-lang-box');
+	let cvLang = document.querySelector('#cv-languages');
+	let cvLiAll = cvLang.querySelectorAll('.list__item');
+	let cvImg = document.querySelector('#cv-img>img');
+	let firstClick = true;
 
 	function CVLanguagesPlacement() {
 		cvLangBox.style.bottom = (window.innerHeight - cvBtn.getBoundingClientRect().bottom) + 'px';
-		// console.log(window.getComputedStyle(cvLangBox,null).getPropertyValue('bottom'));
 		cvLangBox.style.left = cvBtn.clientWidth + 'px';
 		cvLangBox.style.height = cvBtn.clientHeight + 'px';
 		cvLiAll.width = 0;
 		foreach(cvLiAll, (item) => {
+			item.style.width = 'auto';
 			item.style.height = cvBtn.clientHeight + 'px';
 			cvLiAll.width += item.clientWidth;
+			item.fullWidth = item.clientWidth;
+			item.style.width = 0;
 		});
-		cvLang.style.width = cvLiAll.width + 'px';
+	}
+
+	function wrapUl() {
+		cvLangBox.style.width = 0;
+		foreach(cvLiAll, (item) => {
+			item.style.width = 0;
+		});
+		cvImg.classList.remove('img-rotate360');
 	}
 
 	function CVLanguagesShowHide() {
 		if (cvLangBox.style.width == 0 || cvLangBox.style.width == '0px'){
 			cvLangBox.style.width = cvLiAll.width + 'px';
+			foreach(cvLiAll, (item) => {
+				item.style.width = item.fullWidth + 'px';
+			});
+			cvImg.classList.add('img-rotate360');
 		}
 		else {
-			cvLangBox.style.width = 0;
+			wrapUl();
 		}
 	}
 
 	cvBtn.addEventListener('click', (event) => {
+		if (firstClick) {
+			CVLanguagesPlacement();
+			firstClick = false;
+		}
 		CVLanguagesShowHide();
 	});
 
 	document.addEventListener('click', (event) => {
 		if (!(event.target == cvBtn || event.target == cvBtn.children[0])) {
-			cvLangBox.style.width = 0;
+			wrapUl();
 		}
 	});
 	
-	CVLanguagesPlacement();
-
 	window.addEventListener('resize', () => {
-		CVLanguagesPlacement();
+		if(!detectTouchDevice()){
+			CVLanguagesPlacement();
+		}
 	});
 }
 
@@ -350,7 +370,7 @@ function allowScrollingWhenXS() {
 		scrollToY(window.innerHeight - 50, 300);
 	});
 
-	foreach(document.querySelectorAll('.href'), (item) => {
+	foreach(document.querySelectorAll('.data-myref'), (item) => {
 		item.addEventListener('click', () => {
 			enableScroll();
 		});
@@ -366,28 +386,14 @@ function increaseHeadertHeightWhenXS() {
 	let increaseOfHeight = 75; 
 
 	function setHeight() {
-		if (window.innerWidth < 768) {
-			header.style.height = Number(window.innerHeight) + Number(increaseOfHeight);
+		if (detectTouchDevice()) {
+			header.style.height = Number(window.innerHeight) + Number(increaseOfHeight) + 'px';
 		}
 		else {
-			header.style.height = window.innerHeight;
+			header.style.height = window.innerHeight + 'px';
 		}
 	}
 	setHeight();
-	window.addEventListener('resize', setHeight);
-}
-
-function triggerAnchorElementWhenListItemClicked() {
-	// let allListItems = document.querySelectorAll('li,dt');
-	// foreach(allListItems, (li) => {
-	// 	let a = li.querySelectorAll('a');
-	// 	console.log(a, a.length);
-	// 	if (a.length == 1) {
-	// 		li.addEventListener('click', () => {
-	// 			window.location = a[0].getAttribute('href');
-	// 		});
-	// 	}
-	// });
 }
 
 
@@ -398,47 +404,26 @@ window.onload = () => {
 
 	chechIfMailIsSentAndDoMailAnimation();
 
-	setTimeout(startJumpingLetters, 500);
-
 	decreaseNavOnScroll();
-
-	addAnimationClass('behind-to-front--left');
-	addAnimationClass('behind-to-front--right');
-
-	navigateByAnimation(300);
 
 	setClassViewportHeight();
 
-	disableClickedFormButtonAndSubmitForm('my-form');
-
-	validateForm('my-form', false);
+	CVLanguagesPlacementAndShowHide();
 
 	toggleNav();
-
-	CVLanguagesPlacementAndShowHide();
 
 	allowScrollingWhenXS();
 
 	increaseHeadertHeightWhenXS();
 
-	triggerAnchorElementWhenListItemClicked();
+	addAnimationClass('behind-to-front--left');
+	addAnimationClass('behind-to-front--right');
+
+	setTimeout(startJumpingLetters, 500);
+
+	navigateByAnimation(300);
+	
+	disableClickedFormButtonAndSubmitForm('my-form');
+	
+	validateForm('my-form', false);
 }
-
-// **************************************************************************************************
-// **************************************************************************************************
-
-// ZROBIĆ FUNKCJE ZARZĄDZAJĄCE CSSAMI W JEDNEJ DUŻEJ FUNKCJI I UŻYĆ JEJ W "window.resize"
-
-// **************************************************************************************************
-// **************************************************************************************************
-
-
-
-
-// **************************************************************************************************
-// **************************************************************************************************
-
-// ZROBIĆ FUNKCJE OBROTU CANVASA NA SMARTFONY (mousemove z clickiem)
-
-// **************************************************************************************************
-// **************************************************************************************************

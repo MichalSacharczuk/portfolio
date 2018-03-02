@@ -46,3 +46,6 @@ function navigateByAnimation(speed) {
 	});
 }
 
+function detectTouchDevice() {
+	return 'ontouchstart' in window || navigator.maxTouchPoints;
+}

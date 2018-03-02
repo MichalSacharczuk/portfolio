@@ -92,11 +92,11 @@
 	-o-justify-content: $value;
 	justify-content: $value;
 }
-@mixin transition($value: all 500ms ease-out){
-	-webkit-transition: $value;
-	-moz-transition: $value;
-	-o-transition: $value;
-	transition: $value;
+@mixin transition($value: all 500ms ease-out, $value2: $value){
+	-webkit-transition: $value, $value2;
+	-moz-transition: $value, $value2;
+	-o-transition: $value, $value2;
+	transition: $value, $value2;
 }
 @mixin transform($value){
 	-webkit-transform: $value;

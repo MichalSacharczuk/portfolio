@@ -27,7 +27,12 @@ $scrolled-nav-padding: 20px;
 $standard-transition: all 300ms ease-out;
 $slow-transition: all 1000ms ease-out;
 $slow-show-opacity-transition: opacity 1000ms ease-in;
+$nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
+$nav-toggle-height-transition: height 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
+$nav-toggle-width-transition: width 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 $standard-btn-color: darken($main-color-5, 30%);
+$heading-max-font-size: 30px;
+$heading-min-font-size: 18px;
 
 /* global styles */
 /* ... */
@@ -192,7 +197,7 @@ body{
 .heading--main{
 	font-family: $header-font-name, Helvetica;
 	font-weight: bold;
-	@include font-size(30px, 18px);
+	@include font-size($heading-max-font-size, $heading-min-font-size);
 	@include media-xs{
 		margin-bottom: 20px
 	}
@@ -395,10 +400,11 @@ $list-before-margin: 8px;
 }
 .header__subtitle{
 	color: $main-color-1;
+	visibility: hidden;
 	opacity: 0;
 	pointer-events: none;
 	// color: $main-color-5;
-	@include font-size(40px, 20px);
+	@include font-size(40px, 18px);
 	@include transition($slow-show-opacity-transition);
 }
 .nav{
@@ -408,27 +414,26 @@ $list-before-margin: 8px;
 	top: 0;
 	left: 0;
 }
-$nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 .nav--default{
 	width: 100%;
 	background: $main-color-1;
 	@include transition($standard-transition);
-	ul{
+	.list{
 		@include width-max-content;
 		margin: 0 0 auto auto;
 		@include media-xs{
 			height: 0;
 			width: auto;
-			@include transition($nav-toggle-transition);
+			@include transition($nav-toggle-height-transition);
 			overflow: hidden;
 		}
 	}
-	li{
+	.list__item{
 		display: inline-block;
 		@include font-size($scrolled-nav-font-size * 1.3, $scrolled-nav-min-font-size);
 		padding: 25px;
 		margin: 0 -2px;
-		@include transition($standard-transition);
+		@include transition($standard-transition, $nav-toggle-height-transition);
 		cursor: pointer;
 		&:hover{
 			background: $main-color-5;
@@ -453,12 +458,13 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	// color: $main-color-1;
 	text-align: center;
 	// @include transition($standard-transition);
-	ul{
+	.list{
 		background: $main-color-1;
 		opacity: 0.9;
 		box-shadow: 3px 3px 3px rgba(0,0,0,0.4);
 	}
-	li{
+	.list__item{
+		display: block;
 		margin: -1px 0;
 		padding: 25px 15px;
 		@include transition($standard-transition);
@@ -477,7 +483,7 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 .nav--scrolled{
 	box-shadow: 0px 3px 3px rgba(0,0,0,0.4);
 	opacity: 0.9;
-	li{
+	.list__item{
 		@include font-size($scrolled-nav-font-size, $scrolled-nav-min-font-size);
 		padding: $scrolled-nav-padding;
 	}
@@ -536,7 +542,7 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	font-weight: bold;
 	margin-top: -7%;
 	padding: 0 30px 20px 0;
-	@include font-size(30px, 18px);
+	@include font-size($heading-max-font-size, $heading-min-font-size);
 	float: left;
 }
 .section__h--reversed{
@@ -759,20 +765,25 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	@include transform(scale(0));
 	@include transition(all 600ms cubic-bezier(0.64, 0.53, 0.27, 1.55));
 }
+#cv-img>img{
+	@include transition($nav-toggle-transition);
+}
+.img-rotate360{
+	@include transform(rotate(360deg));
+}
 #cv-lang-box{
 	position: absolute;
 	width: 0;
 	font-size: 0;
 	overflow: hidden;
 	box-shadow: 3px 3px 3px rgba(0,0,0,0.4);
-	@include transition($standard-transition);
-}
-#cv-languages{
-	a{
-		display: inline-block;
+	@include transition($standard-transition, $nav-toggle-width-transition);
+	.list{
+		display: table;
 	}
-	li{
+	.list__item{
 		@include font-size(16px,12px);
+		@include transition($standard-transition, $nav-toggle-width-transition);
 		padding-right: 15px;
 		padding-left: 15px;
 		font-weight: bold;
@@ -789,6 +800,7 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 }
 .click-to-scroll{
 	position: absolute;
+	visibility: hidden;
 	opacity: 0;
 	@include transition($slow-show-opacity-transition);
 	width: 34px;
@@ -799,15 +811,19 @@ $nav-toggle-transition: all 400ms cubic-bezier(0.64, 0.53, 0.27, 1.55);
 	left: 50%;
 	cursor: pointer;
 	@include transform(translateX(-50%));
-	display: none;
-	@include media-xs{
-		display: block;
-	}
 	&:hover{
 		filter: brightness(0.8);
 	}
 	&:active{
 		filter: brightness(0.5);
+	}
+}
+.visible-xs-only{
+	visibility: hidden;
+	opacity: 0;
+	@include media-xs{
+		visibility: visible;
+		opacity: 1;
 	}
 }
 
