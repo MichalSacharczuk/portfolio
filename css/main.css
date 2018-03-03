@@ -51,8 +51,6 @@ a, a:hover, a:visited, a:active {
   text-decoration: none;
   color: inherit; }
 
-/* global styles */
-/* ... */
 body {
   color: #2F3738;
   font-family: "Lato", sans-serif, Helvetica; }

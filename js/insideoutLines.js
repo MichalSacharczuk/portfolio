@@ -1,3 +1,5 @@
+'use strict';
+
 function insideout() {
 	var insideoutLines = document.getElementById('insideoutLines');
 
@@ -16,9 +18,9 @@ function insideout() {
 	var totalSpinFactor;
 	var currentSpin;
 
-	let numberOfLines;
+	var numberOfLines = void 0;
 
-	function initGlobalVariables(){
+	function initGlobalVariables() {
 		insideoutLines.width = insideoutLines.parentElement.clientWidth;
 		insideoutLines.height = insideoutLines.parentElement.clientHeight;
 
@@ -31,7 +33,7 @@ function insideout() {
 
 		t = 0;
 
-		mouse = {angle1: 0, angle2: 0, angleChange: 0, spinFactor: 0};
+		mouse = { angle1: 0, angle2: 0, angleChange: 0, spinFactor: 0 };
 		mouseX = [];
 		mouseY = [];
 		totalSpinFactor = 0;
@@ -42,34 +44,29 @@ function insideout() {
 
 	initGlobalVariables();
 
-	function getAngleOfXYFromTheCenter(x, y, x0, y0){
-		let dx = x - x0;
-		let dy = y - y0;
-		if (dx > 0)
-			return Math.atan(dy / dx);
-		else
-			return Math.PI + Math.atan(dy / dx);
+	function getAngleOfXYFromTheCenter(x, y, x0, y0) {
+		var dx = x - x0;
+		var dy = y - y0;
+		if (dx > 0) return Math.atan(dy / dx);else return Math.PI + Math.atan(dy / dx);
 	}
 
 	var spinSpeed = 1;
 	function calculateTotalSpinFactor(event) {
-		if (event.touches == undefined){
+		if (event.touches == undefined) {
 			mouseX.push(event.clientX);
 			mouseY.push(event.clientY);
-		}
-		else {
+		} else {
 			mouseX.push(event.touches[0].clientX);
 			mouseY.push(event.touches[0].clientY);
 			spinSpeed = 2;
 		}
-		if (mouseX.length > 1){
+		if (mouseX.length > 1) {
 			mouse.angle1 = getAngleOfXYFromTheCenter(mouseX[0], mouseY[0], x0, y0);
 			mouse.angle2 = getAngleOfXYFromTheCenter(mouseX[1], mouseY[1], x0, y0);
 
 			mouse.angleChange = mouse.angle2 - mouse.angle1;
-			mouse.spinFactor = Math.sin(mouse.angleChange) ;
-			if (Math.abs(mouse.spinFactor) > 0.01) 
-				mouse.spinFactor = 0.01 * sign(mouse.spinFactor);
+			mouse.spinFactor = Math.sin(mouse.angleChange);
+			if (Math.abs(mouse.spinFactor) > 0.01) mouse.spinFactor = 0.01 * sign(mouse.spinFactor);
 
 			mouseX = [];
 			mouseY = [];
@@ -78,84 +75,75 @@ function insideout() {
 		}
 	}
 
-	addEventListener('mousemove', function(event) {
-		if(windowScrollY() == 0){
+	addEventListener('mousemove', function (event) {
+		if (windowScrollY() == 0) {
 			calculateTotalSpinFactor(event);
 		}
 	});
 
 	// for screens:
 	function detectSwipe(evt) {
-	    evt = evt || window.event;
-	    if ("buttons" in evt) {
-	        return evt.buttons == 0;
-	    }
-	    // var button = evt.which || evt.button;
-	    var button = evt.which;
-	    return button == 0;
+		evt = evt || window.event;
+		if ("buttons" in evt) {
+			return evt.buttons == 0;
+		}
+		var button = evt.which;
+		return button == 0;
 	}
-	window.addEventListener('touchmove', function(e) {	
+	window.addEventListener('touchmove', function (e) {
 		if (windowScrollY() < window.innerHeight / 2 && window.innerWidth < 768) {
-				if (detectSwipe(e)){
-					// console.log("WORKS!");
-					calculateTotalSpinFactor(e);
-			    }
+			if (detectSwipe(e)) {
+				calculateTotalSpinFactor(e);
+			}
 		}
 	});
 
-
-	function Line(x, y, radius){
+	function Line(x, y, radius) {
 		this.x = x;
 		this.y = y;
 		this.t = 0;
-		
+
 		this.radius = radius;
 		this.startAngle = getAngleOfXYFromTheCenter(x, y, x0, y0);
 
 		this.rndx = Math.random();
 		this.rndy = Math.random();
 
-		let colors = [
-			'#D5FBFF',
-			'#9FBCBF',
-			'#647678',
-			'#59D8E5',
-			// '#2F3738'
-		];
+		var colors = ['#D5FBFF', '#9FBCBF', '#647678', '#59D8E5'];
 		this.ballColor = colors[getRandomInt(0, colors.length)];
 
-		var r = Math.pow((Math.pow((x - x0),2) + Math.pow((y - y0),2)), .5);
+		var r = Math.pow(Math.pow(x - x0, 2) + Math.pow(y - y0, 2), .5);
 		var dx = .05 * x / r;
 		var dy = .05 * y / r;
 		this.dx = dx;
 		this.dy = dy;
 		this.dxdyPower = 1;
-		
+
 		this.lastXYwasSet = false;
 		this.spinFactor = 0;
 
-		this.draw = function(){
+		this.draw = function () {
 			c.beginPath();
 			c.moveTo(this.lastX, this.lastY);
-			c.lineTo(this.x,this.y);
+			c.lineTo(this.x, this.y);
 			c.lineWidth = this.radius * 2;
 			c.fillStyle = this.ballColor;
 			c.strokeStyle = this.ballColor;
 			c.stroke();
-		}
+		};
 
-		this.setLastXYifNotSet = function(){
+		this.setLastXYifNotSet = function () {
 			if (!this.lastXYwasSet) {
 				this.lastX = this.x;
 				this.lastY = this.y;
 				this.lastXYwasSet = true;
 			}
-		}
+		};
 
-		this.update = function(){
+		this.update = function () {
 			this.setLastXYifNotSet();
 
-			if (this.x > canvasWidth - radius || this.x < radius || this.y > canvasHeight - radius || this.y < radius){
+			if (this.x > canvasWidth - radius || this.x < radius || this.y > canvasHeight - radius || this.y < radius) {
 				this.lastX = x;
 				this.lastY = y;
 				this.x = x;
@@ -173,20 +161,14 @@ function insideout() {
 			this.dy *= 1.03;
 			this.dxdyPower *= 1.03;
 			this.radius *= 1.01;
-		}
+		};
 
-		// this.changeColor = function(t){
-		// 	this.ballColor = 'rgb(' + (Math.floor(rColor - 100 * Math.sin(t * 0.05 + this.rndx * 10))) 
-		// 				  + ',' + (Math.floor(gColor - 100 * Math.sin(t * 0.05 + this.rndy * 10))) 
-		// 				  + ',' + (Math.floor(bColor - 100 * Math.sin(t * 0.05))) + ')';
-		// }
-
-		this.rotateAroundTheCenter = function(t){
+		this.rotateAroundTheCenter = function (t) {
 			this.setLastXYifNotSet();
 
 			this.spinFactor = currentSpin;
 
-			var x0y0distance = Math.pow((Math.pow(this.x - x0, 2) + Math.pow(this.y - y0, 2)),0.5);
+			var x0y0distance = Math.pow(Math.pow(this.x - x0, 2) + Math.pow(this.y - y0, 2), 0.5);
 
 			dx = .05 * (this.x - x0) / x0y0distance * this.dxdyPower;
 			dy = .05 * (this.y - y0) / x0y0distance * this.dxdyPower;
@@ -195,12 +177,12 @@ function insideout() {
 
 			this.x = x0y0distance * Math.cos(this.t * this.spinFactor + this.startAngle) + x0;
 			this.y = x0y0distance * Math.sin(this.t * this.spinFactor + this.startAngle) + y0;
-		}
+		};
 	}
 
 	var lines = [];
 
-	let paused = false;
+	var paused = false;
 
 	var bckgr = {};
 
@@ -212,29 +194,18 @@ function insideout() {
 		if (paused) return;
 
 		requestAnimationFrame(animation);
-		
-		if (t == 0)
-			lines = [];
 
-		if (t < numberOfLines){
+		if (t == 0) lines = [];
+
+		if (t < numberOfLines) {
 			var radius = .2 + Math.random() * .2;
 			var x = Math.random() * x0 * 2;
 			var y = Math.random() * y0 * 2;
 			lines.push(new Line(x, y, radius));
-			// if (t == numberOfLines - 1) {
-			// 	console.log(lines.length);
-			// }
 		}
 
-		// c.fillStyle = 'rgba(0,0,15,.3)';
-		// c.fillStyle = 'rgba(89,216,229,.3)';
-		// c.fillStyle = 'rgba(47,55,56,.3)';
-		// c.fillStyle = 'rgba(47,55,56,.5)';
 		c.fillStyle = 'rgba(' + bckgr.r + ',' + bckgr.g + ',' + bckgr.b + ',.5)';
-		c.fillRect(0,0,canvasWidth,canvasHeight);
-
-		// // the same color as header background:
-		// document.querySelector('.header--colored').style.background = 'rgb(' + bckgr.r + ',' + bckgr.g + ',' + bckgr.b + ')';
+		c.fillRect(0, 0, canvasWidth, canvasHeight);
 
 		totalSpinFactor -= sign(totalSpinFactor) * 0.00001;
 		totalSpinFactor *= 0.995;
@@ -243,35 +214,30 @@ function insideout() {
 		for (var i = lines.length - 1; i >= 0; i--) {
 			lines[i].rotateAroundTheCenter(t);
 			lines[i].update();
-			// lines[i].changeColor(t);
 			lines[i].draw();
 			lines[i].lastXYwasSet = false;
 		}
-		
+
 		t++;
 
-		if (t == Infinity) 
-			t = 0;
+		if (t == Infinity) t = 0;
 	}
-	
-	let animationWorking;
-	let animationWasWorking;
+
+	var animationWorking = void 0;
+	var animationWasWorking = void 0;
 
 	function startStopAnimation() {
 		if (document.body.scrollTop > insideoutLines.height || document.documentElement.scrollTop > insideoutLines.height) {
 			animationWorking = false;
 			if (animationWorking !== animationWasWorking) {
 				paused = true;
-				// console.log('stopped');
 				animationWasWorking = animationWorking;
 			}
-		}
-		else {
+		} else {
 			animationWorking = true;
 			if (animationWorking !== animationWasWorking) {
 				paused = false;
 				animation();
-				// console.log('working');
 				animationWasWorking = animationWorking;
 			}
 		}
@@ -279,18 +245,15 @@ function insideout() {
 
 	startStopAnimation();
 
-	document.addEventListener('scroll', () => {
+	document.addEventListener('scroll', function () {
 		startStopAnimation();
 	});
 
-
-	let lastWindowWidth = window.innerWidth;
-	window.addEventListener('resize', () => {
+	var lastWindowWidth = window.innerWidth;
+	window.addEventListener('resize', function () {
 		if (lastWindowWidth != window.innerWidth) {
 			initGlobalVariables();
 			lastWindowWidth = window.innerWidth;
 		}
 	});
 }
-
-//insideout();
