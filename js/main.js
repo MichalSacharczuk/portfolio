@@ -1,48 +1,68 @@
 'use strict';
 
-function doMailAnimation() {
-	var sectionContact = document.querySelector('.section--contact');
-	window.scrollTo(0, windowScrollY() + sectionContact.getBoundingClientRect().y + sectionContact.clientHeight);
-	setTimeout(function () {
-		var mailInfo = void 0;
-		if (sessionStorage.mailSuccess == "true") {
-			document.querySelector('#envelope-top').classList.add('closed-envelope');
-			mailInfo = '<span style="color:#2cd538">Wiadomość wysłana pomyślnie!</span>';
-			setTimeout(function () {
-				document.querySelector('#envelope-imgs').classList.add('thrown-envelope');
-				setTimeout(showMailOkBox, 1000);
-			}, 500);
-		} else mailInfo = '<span style="color:#d42">Nie udało się wysłać wiadomości</span>';
-
+function doMailAnimation(response) {
+	var mailInfo = void 0;
+	document.querySelector('.mail-ok-box').classList.remove('mail-ok-box--fullsize');
+	document.querySelector('#envelope-top').classList.remove('closed-envelope');
+	document.querySelector('#envelope-imgs').classList.remove('thrown-envelope');
+	if (response == 1) {
+		document.querySelector('#envelope-top').classList.add('closed-envelope');
+		mailInfo = '<span style="color:#2cd538">Wiadomość wysłana pomyślnie!</span>';
 		setTimeout(function () {
-			document.querySelector('#envelope-info').innerHTML = mailInfo;
-			setTimeout(function () {
-				document.querySelector('#envelope-info').innerHTML = '';
-			}, 3000);
-		}, 800);
-	}, 500);
-}
+			document.querySelector('#envelope-imgs').classList.add('thrown-envelope');
+			setTimeout(function(){
+				document.querySelector('.mail-ok-box').classList.add('mail-ok-box--fullsize');
+			}, 1000);
+		}, 500);
+	} else mailInfo = '<span style="color:#d42">Nie udało się wysłać wiadomości</span>';
 
-function chechIfMailIsSentAndDoMailAnimation() {
-	if (sessionStorage.mailSent == "true") {
-		doMailAnimation();
-		sessionStorage.mailSent = false;
-	}
+	setTimeout(function () {
+		document.querySelector('#envelope-info').innerHTML = mailInfo;
+		setTimeout(function () {
+			document.querySelector('#envelope-info').innerHTML = '';
+		}, 3000);
+	}, 800);
 }
 
 function disableClickedFormButtonAndSubmitForm(formId) {
 	var item = document.querySelector('#' + formId + ' .form__button');
+	var form = document.querySelector('#' + formId);
 	item.addEventListener('click', function () {
 		if (validateForm('my-form', true)) {
 			item.classList.add('form__button--disabled');
 			item.setAttributeNode(document.createAttribute("disabled"));
-			document.getElementById(formId).submit();
+
+			var email = form.querySelector('#input-email').value;
+			var name = form.querySelector('#input-name').value;
+			var message = form.querySelector('#input-message').value;
+
+			var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4) {
+                	if (xmlhttp.status == 200) {
+						console.log('state: ', xmlhttp.readyState);
+	            		console.log('status: ', xmlhttp.status);
+	            		console.log('response: ', xmlhttp.responseText);
+	            		console.log('');
+	                    doMailAnimation(xmlhttp.responseText);
+                	}
+                	else {
+						console.log('state: ', xmlhttp.readyState);
+	            		console.log('status: ', xmlhttp.status);
+	            		console.log('response: ', xmlhttp.responseText);
+	            		console.log('');
+	                    doMailAnimation(xmlhttp.responseText);
+                	}
+                	item.classList.remove('form__button--disabled');
+					item.removeAttribute("disabled");
+                }
+            }
+
+            xmlhttp.open("POST", "contact-form-handler.php", true);
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xmlhttp.send("input-email=" + email + "&input-name=" + name + "&input-message=" + message);
 		}
 	});
-}
-
-function showMailOkBox() {
-	document.querySelector('.mail-ok-box').classList.add('no-transform');
 }
 
 function startJumpingLetters() {
@@ -391,8 +411,6 @@ function increaseHeadertHeightWhenXS() {
 
 
 window.onload = function () {
-
-	chechIfMailIsSentAndDoMailAnimation();
 
 	decreaseNavOnScroll();
 

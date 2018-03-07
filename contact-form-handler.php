@@ -11,7 +11,7 @@ function sendEmail($config){
 		$mail->Host = 'poczta.o2.pl';  						// Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
 		$mail->Username = 'michal_sachar@o2.pl';                 // SMTP username
-		$mail->Password = '######';                           // SMTP password
+		$mail->Password = '***';                           // SMTP password
 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 587;  
 
@@ -31,19 +31,9 @@ function sendEmail($config){
 
 		$mail->send();
 
-		?>
-		<script>
-			sessionStorage.mailSuccess = true;
-		</script>
-		<?php
-
 	} catch (Exception $e) {
 
-		?>
-		<script>
-			sessionStorage.mailSuccess = false;
-		</script>
-		<?php
+		echo 0;
 
 	}
 }
@@ -58,12 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 	sendEmail($config);
 
-	?>
-	<script>
-		sessionStorage.mailSent = true;
-		window.location = 'index.html';
-	</script>
-	<?php
+	echo 1;
 
 }
 
