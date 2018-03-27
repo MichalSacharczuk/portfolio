@@ -175,7 +175,7 @@ function addAnimationClass(className) {
 	var runFunction = function (className) {
 		var elementsArray = document.getElementsByClassName(className);
 		foreach(elementsArray, function (item) {
-			if (item.getBoundingClientRect().y < window.innerHeight * 0.7 && item.getBoundingClientRect().y > 50) {
+			if (item.getBoundingClientRect().top < window.innerHeight * 0.7 && item.getBoundingClientRect().top > 50) {
 				if (!item.above && !item.working) {
 					item.working = true;
 					item.above = true;
@@ -185,7 +185,7 @@ function addAnimationClass(className) {
 						item.working = false;
 					}, 1010);
 				}
-			} else if (item.getBoundingClientRect().y < -window.innerHeight || item.getBoundingClientRect().y > 2 * window.innerHeight) {
+			} else if (item.getBoundingClientRect().top < -window.innerHeight || item.getBoundingClientRect().top > 2 * window.innerHeight) {
 				if (item.above && !item.working) {
 					item.working = true;
 					item.above = false;

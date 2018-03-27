@@ -7,7 +7,7 @@ window.addEventListener('load', function () {
 
 	function setCanvasWidthAndHeight() {
 		myCanvas.width = myCanvas.parentElement.clientWidth;
-		myCanvas.height = windowScrollY() + contact.getBoundingClientRect().y + 10;
+		myCanvas.height = windowScrollY() + contact.getBoundingClientRect().top + 10;
 	}
 
 	function chechIfCanvasIsNotOverflowingDocumentContent() {
@@ -98,4 +98,15 @@ window.addEventListener('load', function () {
 		chechIfCanvasIsNotOverflowingDocumentContent();
 		drawLines();
 	});
+
+	// nie wiadomo czemu nie ładuje się za pierwszym razem na IE, dlatego:
+	if (detectIE()) {
+		if (!sessionStorage.reloaded) {
+			sessionStorage.reloaded = true;
+			window.location.reload();
+		}
+		else {
+			console.log('reloaded');
+		}
+	}
 });

@@ -39,8 +39,12 @@ function scrollToY(y, speed) {
 function navigateByAnimation(speed) {
 	foreach(document.querySelectorAll('.data-myref'), function (item) {
 		item.addEventListener('click', function () {
+			console.log('clicked');
 			var href = item.getAttribute('data-myref');
-			var destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().y + windowScrollY());
+			console.log(href);
+			var destinationElementY = Math.floor(document.querySelector(href).getBoundingClientRect().top + windowScrollY());
+			console.log(destinationElementY);
+			console.log(speed);
 			scrollToY(destinationElementY - 150, speed);
 		});
 	});
@@ -48,4 +52,30 @@ function navigateByAnimation(speed) {
 
 function detectTouchDevice() {
 	return 'ontouchstart' in window || navigator.maxTouchPoints;
+}
+
+function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    var edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+       // Edge (IE 12+) => return version number
+       return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
 }

@@ -31,17 +31,6 @@ body{
 	color: $main-color-4;
 	font-family: $main-font-name, Helvetica;
 }
-.background-body{
-	position: fixed;
-	height: 100%;
-	width: max-content;
-	z-index: -1;
-	opacity: 0.4;
-	filter: hue-rotate(-30deg);
-	img{
-		height: 100%;
-	}
-}
 .background-document{
 	position: absolute;
 	width: 100%;
@@ -114,8 +103,9 @@ body{
 	@include transform(translate(0,50%));
 }
 .centered-horizontally{
-	@include width-max-content;
-	margin: 0 auto;
+	position: absolute;
+	left: 50%;
+	@include transform(translate(-50%,0));
 }
 .display-inline-block{
 	display: inline-block;
@@ -291,6 +281,10 @@ $list-before-margin: 8px;
 .width-max-content{
 	@include width-max-content;
 }
+.text-full-width-center{
+	width: 100%;
+	text-align: center;
+}
 .z-index-1{
 	position: relative;
 	z-index: 1;
@@ -348,6 +342,8 @@ $list-before-margin: 8px;
 	color: $main-color-1;
 	@include font-size(80px, 30px);
 	pointer-events: none;
+	width: 100%;
+	text-align: center;
 }
 .centered--xs-higher{
 	@include media-xs{
@@ -355,6 +351,7 @@ $list-before-margin: 8px;
 	}
 }
 .header__title--scrolled{
+	width: auto;
 	color: $main-color-4;
 	@include font-size($scrolled-nav-font-size, $scrolled-nav-min-font-size);
 	text-shadow: none;
@@ -398,11 +395,10 @@ $list-before-margin: 8px;
 	background: $main-color-1;
 	@include transition($standard-transition);
 	.list{
-		@include width-max-content;
-		margin: 0 0 auto auto;
+		float: right;
 		@include media-xs{
 			height: 0;
-			width: auto;
+			float: none;
 			@include transition($nav-toggle-height-transition);
 			overflow: hidden;
 		}
@@ -562,7 +558,6 @@ $list-before-margin: 8px;
 	margin-bottom: -70px;
 }
 .content-below-h{
-	clear: both;
     padding-top: 70px;
     line-height: 1.5;
     @include media-xs{
@@ -632,6 +627,7 @@ $list-before-margin: 8px;
 	font-family: $main-font-name, Helvetica;
 	margin: 0 auto;
 	max-width: 500px;
+	position: relative;
 }
 .form--left{
 	width: 50%;
@@ -888,6 +884,7 @@ $sides: left right;
 		color: hsl(0,0,40% - 10% * $i);
 		transform: scaleX(1 - $i * 0.005) translateY(- $i * 1px);
 		z-index: -1;
+		width: 100%;
 	}
 }
 
